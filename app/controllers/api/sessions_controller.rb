@@ -3,6 +3,7 @@ class Api::SessionsController < ApplicationController
   # before_action :require_logged_in, only: [:show]
 
   def show
+    debugger
     if logged_in?
       @user = current_user
       render :show
