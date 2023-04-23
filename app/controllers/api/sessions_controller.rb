@@ -3,10 +3,11 @@ class Api::SessionsController < ApplicationController
   # before_action :require_logged_in, only: [:show]
 
   def show
-    debugger
+    # debugger
+    # ban
     if logged_in?
       @user = current_user
-      render :show
+      render 'api/users/show'
     else
       render json: {user: nil}
     end
