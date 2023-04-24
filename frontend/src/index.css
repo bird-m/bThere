@@ -1,4 +1,13 @@
 /* TODO Add site wide styles */
 
-@import 'reset.css'
+@import 'reset.css';
 
+:root {
+    --r-purple: #45286b;
+    --auth-label-font: font
+}
+
+/* body {
+    width: 100vw;
+    height: 100vh
+} */

@@ -35,7 +35,7 @@ const renderApp = () => {
 };
 
 if (sessionStorage.getItem("X-CSRF-Token") === null || sessionStorage.getItem("currentUser") === null) {
-  console.log("restoring in index");
+  // console.log("restoring in index");
   store.dispatch(sessionActions.restoreSession()).then(renderApp)
 } else {
   renderApp();

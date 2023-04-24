@@ -39,7 +39,7 @@ export function login(email, password) {
             method: 'POST',
             body: JSON.stringify({email, password})
         });
-
+        debugger
         const data = await response.json();
         storeCurrentUser(data);
         dispatch(createSession(data));
@@ -53,7 +53,7 @@ export function restoreSession() {
         storeCSRFToken(response);
         const data = await response.json();
         //store current user
-        console.log(data, "restoration data");
+        // console.log(data, "restoration data");
         dispatch(createSession(data));
         return response;
     }
@@ -98,7 +98,7 @@ const initialState = JSON.parse(sessionStorage.getItem('currentUser'));
 
 export default function sessionReducer (state = initialState, action) {
     let nextState = {...state};
-    console.log("in session reducer");
+    // console.log("in session reducer");
     switch(action.type) {
         case CREATE_SESSION:
             // debugger;

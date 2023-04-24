@@ -36,7 +36,7 @@ export async function restoreCSRF() {
 
 export function storeCSRFToken(response) {
     const csrfToken = response.headers.get('X-CSRF-Token');
-    logIt(csrfToken, "CSRF!");
+    // logIt(csrfToken, "CSRF!");
     if (csrfToken) {
         sessionStorage.setItem('X-CSRF-Token', csrfToken);
     }

@@ -2,6 +2,7 @@ import { inDevelopment } from "..";
 
 export function logIt(object,desc="") {
     if (inDevelopment) {
+        // debugger;
         console.log(`${object} --desc`);
     }
 }
