@@ -8,6 +8,8 @@ import configureStore from './store/store';
 import { createRoot } from 'react-dom/client';
 import csrfFetch, { restoreCSRF } from './store/csrf';
 import { debug } from './util/util';
+import { fetchSession } from './store/session';
+import * as sessionActions from './store/session';
 
 const store = configureStore();
 export let inDevelopment = false;
@@ -16,14 +18,12 @@ if (process.env.NODE_ENV !== 'production') {
   inDevelopment = true;
   window.store = store;
   window.csrfFetch = csrfFetch;
-  let x = csrfFetch
+  window.sessionActions = sessionActions;
 }
 
 const root = createRoot(document.getElementById('root'));
 
 const renderApp = () => {
-  debugger;
-  debug();
   root.render(
     <React.StrictMode>
       <Provider store={store}>

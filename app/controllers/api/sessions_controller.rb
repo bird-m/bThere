@@ -14,7 +14,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    # debugger
+    debugger
     email = params[:email]
     password = params[:password]
 
@@ -22,7 +22,7 @@ class Api::SessionsController < ApplicationController
 
     if(@user)
       login!(@user)
-      render :show
+      render 'api/users/show'
     else
       print "this is the else"
       render json: { errors: ['The provided credentials were invalid.'] }, status: :unauthorized

@@ -2,11 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 // import reportsReducer from './reports';
 import logger from 'redux-logger'
+import sessionReducer from './session';
 
 // export function rootReduc
 
 export const rootReducer = combineReducers({
-    plug: () => ({})
+    session: sessionReducer
 })
 
 let enhancer;
