@@ -59,12 +59,13 @@ export function restoreSession() {
     }
 }
 
-export function deleteSession() {
+export function logout() {
     return async function (dispatch) {
         const response = await csrfFetch('/api/session', {
             method: 'DELETE'
         });
         dispatch(removeSession());
+        storeCurrentUser(null);
         return response;
     }
 }
