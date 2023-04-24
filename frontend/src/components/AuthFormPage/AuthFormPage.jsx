@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
+import './AuthFormPage.css'
 import { useEffect, useState } from 'react';
 import {isValidEmail, logIt} from '../../util/util'
-import {signup } from '../../store/session';
+import { login, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 // import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
-export default function SignupFormPage (props) {
+export default function AuthFormPage (props) {
 
+    const {mode} = props;
+    // console.log(mode, "MODE");
 
     // debugger;
     const sessionUser = useSelector((state) => (state.session.user))
@@ -27,7 +30,13 @@ export default function SignupFormPage (props) {
         setErrors([]);
         
         if (validEmail && validPassword) {
-            dispatch(signup(email, password));
+            if (mode === "login") {
+                dispatch(login(email, password));
+            } else if (mode === "signup") {
+                dispatch(signup(email, password));
+            } else {
+                throw "invalid mode";
+            }
         } else if (!validEmail && !validPassword) {
             console.log("seconds");
             setErrors(['Please retry with a valid email and a password longer than 6 characters.']);
@@ -56,7 +65,7 @@ export default function SignupFormPage (props) {
     
     return (
         <>
-            <div className='signin-modal'>
+            <div className='login-modal'>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor='email'>Email:</label>
                     <input type='text' id='email' value={email} onChange={(e)=> setEmail(e.target.value)}/>

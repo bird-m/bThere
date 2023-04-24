@@ -64,8 +64,8 @@ export function logout() {
         const response = await csrfFetch('/api/session', {
             method: 'DELETE'
         });
-        dispatch(removeSession());
         storeCurrentUser(null);
+        dispatch(removeSession());
         return response;
     }
 }
