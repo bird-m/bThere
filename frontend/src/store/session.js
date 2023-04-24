@@ -1,7 +1,11 @@
 import { debug, logIt } from "../util/util";
-import csrfFetch from "./csrf";
+import csrfFetch, { storeCSRFToken } from "./csrf";
 
+
+// action constants and functions
 export const CREATE_SESSION = 'session/CREATE_SESSION';
+
+export const currentUser = 'currentUser';
 
 export function createSession(user) {
     return {
@@ -18,37 +22,85 @@ export function removeSession() {
     }
 }
 
-export function login(email, password) {
-    return function (dispatch) {
+export const CREATE_SIGNUP = 'CREATE_SIGNUP'
 
-        csrfFetch('/api/session',{
+export function createSignup(user) {
+    return {
+        type: CREATE_SIGNUP
+    }
+}
+
+// thunk actions
+
+export function login(email, password) {
+    return async function (dispatch) {
+
+        const response = await csrfFetch('/api/session',{
             method: 'POST',
             body: JSON.stringify({email, password})
-        }).then ((data) => {
-            return data.json();
-        }).then((user) => {
-            return dispatch(createSession(user));
-        })
+        });
+
+        const data = await response.json();
+        storeCurrentUser(data);
+        dispatch(createSession(data));
+        return response;
+    }
+}
+
+export function restoreSession() {
+    return async function (dispatch) {
+        const response = await csrfFetch('/api/session')
+        storeCSRFToken(response);
+        const data = await response.json();
+        //store current user
+        console.log(data, "restoration data");
+        dispatch(createSession(data));
+        return response;
     }
 }
 
 export function deleteSession() {
-    return function (dispatch) {
-        csrfFetch('/api/session', {
+    return async function (dispatch) {
+        const response = await csrfFetch('/api/session', {
             method: 'DELETE'
-        }).then ((response) => {
-            return dispatch(deleteSession());
-        })
+        });
+        dispatch(removeSession());
+        return response;
     }
 }
 
+export function storeCurrentUser(user) {
+    if (user) {
+        sessionStorage.setItem('currentUser', JSON.stringify(user)); 
+    } else {
+        sessionStorage.removeItem('currentUser');
+    }
+}
 
-export default function sessionReducer (state = {user: null}, action) {
+export function signup (email, password) {
+    return async function (dispatch) {
+        const response = await csrfFetch('/api/users',{
+            method: 'POST',
+            body: JSON.stringify({email, password})
+        });
+
+        const data = await response.json();
+        storeCurrentUser(data);
+        dispatch(createSession(data));
+        return response;
+    }
+}
+
+// Reducer
+
+const initialState = JSON.parse(sessionStorage.getItem('currentUser'));
+
+export default function sessionReducer (state = initialState, action) {
     let nextState = {...state};
-    
+    console.log("in session reducer");
     switch(action.type) {
         case CREATE_SESSION:
-            debugger;
+            // debugger;
             return action.session;
         case REMOVE_SESSION:
             return {user: null};
@@ -56,3 +108,25 @@ export default function sessionReducer (state = {user: null}, action) {
             return state;
     }
 }
+
+
+// export function restoreSession() {
+//     return async function (dispatch) {
+//         const response = await csrfFetch('/api/session');
+//         console.log("restoring session");
+//         storeCSRFToken(response);
+//         const user = await response.json();
+//         storeCurrentUser(user);
+//         dispatch(createSession(user));
+//         return response;
+//     }
+// }
+
+// function storeCurrentUser (user) {
+//     if (user) {
+//         sessionStorage.setItem('currentUser', JSON.stringify(user));
+//     } else {
+//         sessionStorage.removeItem('currentUser')
+//     }
+    
+// }

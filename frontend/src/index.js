@@ -34,8 +34,8 @@ const renderApp = () => {
     </React.StrictMode>)
 };
 
-if (sessionStorage.getItem("X-CSRF-Token") === null) {
-  restoreCSRF().then(renderApp)
+if (sessionStorage.getItem("X-CSRF-Token") === null || sessionStorage.getItem("currentUser")) {
+  store.dispatch(sessionActions.restoreSession()).then(renderApp)
 } else {
   renderApp();
 }

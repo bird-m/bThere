@@ -3,10 +3,12 @@ import './LoginFormPage.css'
 import { useEffect, useState } from 'react';
 import {isValidEmail, logIt} from '../../util/util'
 import { login } from '../../store/session';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function LoginFormPage (props) {
 
+    // debugger;
     const sessionUser = useSelector((state) => (state.session.user))
 
     const [email, setEmail] = useState('');
@@ -15,12 +17,7 @@ export default function LoginFormPage (props) {
 
     const dispatch = useDispatch();
 
-    if(sessionUser) {
-        return <Redirect to="/"/>;
-    }
-
-
-    
+    if (sessionUser) return <Redirect to="/" />;
 
     function handleSubmit (e) {
         e.preventDefault();
