@@ -4,6 +4,9 @@ import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import AuthFormPage from "./components/AuthFormPage/AuthFormPage";
 import { useSelector } from "react-redux";
 import LogoutButton from "./components/LogoutButton/LogoutButton";
+import NavBar from "./components/NavBar/NavBar";
+import { SplashPage } from "./components/SplashPage/SplashPage";
+import SplashFooter from "./components/SplashFooter/SplashFooter";
 
 function App() {
   
@@ -21,9 +24,13 @@ function App() {
         <AuthFormPage mode='signup'/>
       </Route>
 
-      <Route exact path="/">
-        <h1>Hello World</h1>
+      <Route path="/">
+        <NavBar/>
+        <SplashPage/>
+        <SplashFooter/>
       </Route>
+
+
       
     </Switch>
     </>

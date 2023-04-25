@@ -16,7 +16,7 @@ class Api::SessionsController < ApplicationController
   def create
     print params
     puts
-    debugger
+    # debugger
     email = params[:email]
     password = params[:password]
 

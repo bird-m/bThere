@@ -57,8 +57,10 @@ export default function AuthFormPage (props) {
                <div className="auth-pane">
                     <div className="auth-header">
                         <img className='logo' src={logo}/>
-                        <span className='cta'>Sign in to your account</span> <br/>
-                        <a href='/signup'>Or sign up free</a>
+                        <span className='cta'>
+                            {mode === "login" ? "Sign in to your account" : "Sign up to create your event."}
+                        </span> <br/>
+                            {mode === "login" ? <a href='/signup'>Or sign up free</a> : ""}
                     </div>
                     <div className="auth-form">
                         <form onSubmit={handleSubmit} >

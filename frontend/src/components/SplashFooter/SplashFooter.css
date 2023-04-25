@@ -1,0 +1,23 @@
+.s-foooter-wraper {
+    width: 100vw;
+    background-color: #121134;    
+}
+
+.s-foooter-wraper h1 {
+    color: #FFFFFF; 
+}
+
+.s-foooter-wraper li {
+    color: #677293;
+    padding-top: 5px;
+}
+
+.footer-contents {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+
+/* white text: FFFFFF 
+other text: 677293
+*/
