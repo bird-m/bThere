@@ -30,7 +30,7 @@ export default function AuthFormPage (props) {
         console.log(mode, "MODE!");
         if(!e) {
             console.log("fake login");
-            dispatch(login('test@gmail.com', '1234567'));
+            dispatch(login('demo@user.io', 'password'));
         }
         else if(mode === 'login') {
             e.preventDefault(); 

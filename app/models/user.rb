@@ -19,6 +19,12 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: {minimum: 7}, allow_nil: true
 
+  has_many :forms,
+    foreign_key: :user_id,
+    class_name: :Form,
+    inverse_of: :user,
+    dependent: :destroy
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     
