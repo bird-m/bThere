@@ -17,17 +17,27 @@ ApplicationRecord.transaction do
   
     puts "Creating users..."
     # Create one user with an easy to remember email, and password:
-    User.create!(
+    user = User.create!(
       email: 'demo@user.io', 
       password: 'password'
     )
   
     # More users
-    10.times do 
-      User.create!({
-        email: Faker::Internet.unique.email,
-        password: 'password'
-      }) 
+    # 10.times do 
+    #   User.create!({
+    #     email: Faker::Internet.unique.email,
+    #     password: 'password'
+    #   }) 
+    # end
+
+    puts "Creating forms..."
+    5.times do |i|
+      form = Form.create!(
+        title: "Form #{i+1}: #{Faker::Commerce.product_name}",
+        description: "#{Faker::Company.catch_phrase} #{Faker::Company.bs}. #{Faker::Company.bs}.",
+        status: 'active',
+        user_id: user.id
+      )
     end
   
     puts "Done!"
