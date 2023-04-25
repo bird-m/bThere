@@ -19,63 +19,72 @@ export default function AuthFormPage (props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
-
-
-    
     
     const dispatch = useDispatch();
 
     if (sessionUser) return <Redirect to="/" />;
 
     function handleSubmit (e) {
+        setErrors([]);
         // e.preventDefault(); 
         console.log(mode, "MODE!");
-        // try {
-            if(!e) {
-                console.log("fake login");
-                dispatch(login('test@gmail.com', '1234567'));
-            }
-            else if(mode === 'login') {
-                e.preventDefault(); 
-                console.log("attempting login");
-                dispatch(login(email, password)).catch((res) => res.json()).then((data) => {console.log(data)});
-            } else if (mode === 'signup') {
-                e.preventDefault(); 
-                console.log("attempting signup");
-                dispatch(signup(email, password));
-            }
+        if(!e) {
+            console.log("fake login");
+            dispatch(login('test@gmail.com', '1234567'));
+        }
+        else if(mode === 'login') {
+            e.preventDefault(); 
+            console.log("attempting login");
+            dispatch(login(email, password)).catch(errorHandle)
+            // .catch((res) => res.json()).then((data) => {console.log(data)});
+        } else if (mode === 'signup') {
+            e.preventDefault(); 
+            console.log("attempting signup");
+            dispatch(signup(email, password)).catch(errorHandle);
+        }
    
     }
+
+    function errorHandle(res) {
+        res.json().then(data => {
+            setErrors(data.errors);
+        })
+    }
+
     return (
         <div className="wrapper">
             <div className='auth-body'>
                <div className="auth-pane">
                     <div className="auth-header">
                         <img className='logo' src={logo}/>
-                        Sign in to your account <br/>
-                        Or sign up free
+                        <span className='cta'>Sign in to your account</span> <br/>
+                        <a href='/signup'>Or sign up free</a>
                     </div>
                     <div className="auth-form">
-                    <form onSubmit={handleSubmit} >
-                        <div className="form-fields">
-                            <span className='auth-element'>
-                                <label htmlFor='email'>EMAIL ADDRESS</label>
-                                <input type='text' id='email' value={email} onChange={(e)=> setEmail(e.target.value)}/>
-                            </span>
-                            <span className='auth-element'>
-                                <label htmlFor='password'>PASSWORD</label>
-                                <input type='password' id='password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
-                            </span>
-                            <span className='auth-element'>
-                                <input className='auth-button' type='submit' value='Login'/>
-                            </span>
-                        </div>
-                    </form>
-                    <span className='auth-element'>
-                        <button className='auth-button' onClick={() => (handleSubmit(false))}>Demo User Login</button>
-                    </span>
+                        <form onSubmit={handleSubmit} >
+                            <div className="form-fields">
+                                <span className='auth-element'>
+                                    <label htmlFor='email'>EMAIL ADDRESS</label>
+                                    <input type='text' id='email' value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                                </span>
+                                <span className='auth-element'>
+                                    <label htmlFor='password'>PASSWORD</label>
+                                    <input type='password' id='password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                                </span>
+                                <span className='auth-element'>
+                                    <button className='auth-button'>{mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
+                                </span>
+                            </div>
+                        </form>
+                        <span className='auth-element'>
+                            <button className='auth-button' onClick={() => (handleSubmit(false))}>DEMO USER {mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
+                        </span>
+                        <span className='error-msg auth-element'>
+                            {errors.map((e, ix) => {
+                                return (<span key={ix}>{e}</span>)
+                            })}
+                        </span>
                     </div>
-                    <span className='error-msg'>Errors</span>
                </div>
             </div>
         </div>
