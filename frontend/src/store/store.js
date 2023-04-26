@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 // import reportsReducer from './reports';
 import logger from 'redux-logger'
 import sessionReducer from './session';
+import formReducer from './formReducer';
 
 // export function rootReduc
 
 export const rootReducer = combineReducers({
-    session: sessionReducer
+    session: sessionReducer,
+    forms: formReducer
 })
 
 let enhancer;

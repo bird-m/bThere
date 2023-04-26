@@ -7,6 +7,8 @@ import LogoutButton from "./components/LogoutButton/LogoutButton";
 import NavBar from "./components/NavBar/NavBar";
 import { SplashPage } from "./components/SplashPage/SplashPage";
 import SplashFooter from "./components/SplashFooter/SplashFooter";
+import FormsPage from "./components/FormsPage/FormsPage";
+import FormDetails from "./components/FormDetails/FormDetail";
 
 function App() {
   
@@ -16,6 +18,10 @@ function App() {
     <LogoutButton/>
     <Switch>
 
+      <Route path="/deets">
+        <FormDetails/>
+      </Route>
+
       <Route exact path="/login">
         <AuthFormPage mode='login'/>
       </Route>
@@ -24,14 +30,16 @@ function App() {
         <AuthFormPage mode='signup'/>
       </Route>
 
+      <Route path="/forms">
+        <FormsPage/>
+      </Route>
+
       <Route path="/">
         <NavBar/>
         <SplashPage/>
         <SplashFooter/>
       </Route>
 
-
-      
     </Switch>
     </>
   );

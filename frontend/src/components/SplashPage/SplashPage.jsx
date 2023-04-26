@@ -20,7 +20,7 @@ export function SplashPage (props) {
                 <Link to="/signup"><button>Get started for free</button></Link>
             </div>
             <div className="vid-pane splash-pane">
-                <video ref={vidRef} className='video' autoPlay loop src={demoVideo}/>
+                <video ref={vidRef} className='video' autoPlay loop muted src={demoVideo}/>
             </div>
             <div className="logo-pane splash-pane">
                 <span>Trusted by thousands of the world's leading companies and organizations.</span>

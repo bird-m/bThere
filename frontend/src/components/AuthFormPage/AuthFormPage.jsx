@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './AuthFormPage.css'
 import { useEffect, useState } from 'react';
 import {isValidEmail, logIt} from '../../util/util'
-import { login, signup } from '../../store/session';
+import { loggedInUser, login, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -14,7 +14,8 @@ export default function AuthFormPage (props) {
     // console.log(mode, "MODE");
 
     // debugger;
-    const sessionUser = useSelector((state) => (state.session.user))
+    // const sessionUser = useSelector((state) => (state.session.user))
+    const sessionUser = useSelector(loggedInUser);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +23,7 @@ export default function AuthFormPage (props) {
     
     const dispatch = useDispatch();
 
-    if (sessionUser) return <Redirect to="/" />;
+    if (sessionUser) return <Redirect to="/forms" />;
 
     function handleSubmit (e) {
         setErrors([]);
@@ -56,7 +57,7 @@ export default function AuthFormPage (props) {
             <div className='auth-body'>
                <div className="auth-pane">
                     <div className="auth-header">
-                        <img className='logo' src={logo}/>
+                        <Link className="auth-header" to="/"><img className='logo' src={logo}/></Link>
                         <span className='cta'>
                             {mode === "login" ? "Sign in to your account" : "Sign up to create your event."}
                         </span> <br/>

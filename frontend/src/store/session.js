@@ -30,6 +30,16 @@ export function createSignup(user) {
     }
 }
 
+// selectors
+
+export function loggedInUser(state) {
+    if (state && state.session) {
+        return state.session.user
+    } else {
+        return null
+    }
+}
+
 // thunk actions
 
 export function login(email, password) {
@@ -39,7 +49,7 @@ export function login(email, password) {
             method: 'POST',
             body: JSON.stringify({email, password})
         });
-        debugger
+        // debugger
         const data = await response.json();
         storeCurrentUser(data);
         dispatch(createSession(data));

@@ -5,6 +5,7 @@
 :root {
     --r-purple: #45286b;
     --auth-label-font: font
+    --rad: 0.375rem;
 }
 
 button, a {

@@ -10,6 +10,7 @@ import csrfFetch, { restoreCSRF } from './store/csrf';
 import { debug } from './util/util';
 import { fetchSession } from './store/session';
 import * as sessionActions from './store/session';
+import { fetchForms } from './store/formReducer';
 
 const store = configureStore();
 export let inDevelopment = false;
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.csrfFetch = csrfFetch;
   window.sessionActions = sessionActions;
+  window.fetchForms = fetchForms;
 }
 
 const root = createRoot(document.getElementById('root'));
