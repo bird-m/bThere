@@ -1,5 +1,46 @@
-
-
-.create-page-wrapper {
+.create-forms-page-wrapper {
     width: 100vw;
+    height: 100vh;
+    align-items: center;
+}
+
+.create-pane-wrapper {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    border: 3px solid green;
+    margin-top: 10%;
+}
+
+.create-forms-page-wrapper div {
+    border: 1px solid red;
+}
+
+.fc-input-pane button {
+    width: 175px;
+}
+
+.fc-input-pane input {
+    width: 175px;
+    margin-top: 10px;
+    height: 20px;
+}
+
+.fc-input-pane {
+    color: #4b5563;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.fc-large {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.fc-large, .fc-small {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
 }

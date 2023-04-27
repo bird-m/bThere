@@ -3,13 +3,17 @@ import { useDispatch } from "react-redux";
 import { postForm } from "../../store/formReducer";
 import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import './FormCreatePage.css'
 
 export default function FormCreatePage (props) {
 
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
+    const [customUrl, setCustomUrl] = useState('');
+
+
     const dispatch = useDispatch();
     const history = useHistory();
     // const [successfulSubmit, setSuccessfulSubmit] = useState(false);
@@ -17,7 +21,8 @@ export default function FormCreatePage (props) {
     function handleSubmit() {
         let form = {form : {
             title,
-            description
+            description,
+            customUrl
         }}
         // debugger;
         // console.log("here!")
@@ -27,6 +32,7 @@ export default function FormCreatePage (props) {
             })
             .catch((res) => {
                 res.json().then((data) => {
+                    debugger;
                     setErrors(data.errors);
                 })
             })
@@ -37,16 +43,34 @@ export default function FormCreatePage (props) {
     // }
 
     return (
-        <div className="create-page-wrapper">
-            <label htmlFor="title">Title: </label>
-            <input id="title" type='text' value = {title} onChange={(e) => {setTitle(e.target.value)}}/>
-            <label htmlFor="description">Description: </label>
-            <input id="description" type='text' value = {description} onChange={(e) => {setDescription(e.target.value)}}/>
-            <button onClick={handleSubmit}>Create Form</button>
-            <div className="form-create-errors">
-                {errors.map((e, ix) => {
-                    return (<><span key={ix}>{e}</span><br/></>)
-                })}
+        <div className="create-forms-page-wrapper">
+            <div className="create-pane-wrapper">
+                <div className="fc-input-pane">
+                    <span className="fc-large">Create A New Form.</span><br/>
+                    <span className="fc-small">It's quick and easy.</span>
+                </div>
+                <div className="fc-input-pane">
+                    <label htmlFor="title">TITLE </label><br/>
+                    <input id="title" type='text' value = {title} onChange={(e) => {setTitle(e.target.value)}}/>
+                </div>
+                <div className="fc-input-pane">
+                    <label htmlFor="description">DESCRIPTION </label><br/>
+                    <input id="description" type='text' value = {description} onChange={(e) => {setDescription(e.target.value)}}/>
+                </div>
+                <div className="fc-input-pane">
+                    <label htmlFor="custom-url">CUSTOM URL </label><br/>
+                    <input id="custom-url" type='text' value = {customUrl} onChange={(e) => {setCustomUrl(e.target.value)}}/>
+                </div>
+                <div className="fc-input-pane">
+                    <button onClick={handleSubmit}>CREATE FORM</button>
+                </div>
+                <div className="fc-input-pane">
+                    <div className="form-create-errors">
+                        {errors.map((e, ix) => {
+                            return (<><span key={ix}>{e}</span><br/></>)
+                        })}
+                    </div>
+                </div>
             </div>
         </div>
     )

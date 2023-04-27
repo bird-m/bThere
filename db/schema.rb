@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_25_215540) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_044551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,8 +21,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_215540) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "custom_url", null: false
+    t.index ["custom_url"], name: "index_forms_on_custom_url", unique: true
     t.index ["title"], name: "index_forms_on_title", unique: true
     t.index ["user_id"], name: "index_forms_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "prompt", null: false
+    t.string "description"
+    t.boolean "required", default: false, null: false
+    t.bigint "form_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id"], name: "index_questions_on_form_id"
+    t.index ["prompt"], name: "index_questions_on_prompt", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_215540) do
   end
 
   add_foreign_key "forms", "users"
+  add_foreign_key "questions", "forms"
 end

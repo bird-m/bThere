@@ -9,7 +9,7 @@ export default function FormDetail (props) {
     return (
         <div className="detail-wrapper">
             <div className="detail-title">
-                {form ? form.title : "loading..."}
+                <span>{form ? form.title : "loading..."}</span>
             </div>
             <div className="detail-bar">
                     <span className='a-count'> <span className='attending'>15</span> <br/>ATTENDING</span>
@@ -17,7 +17,7 @@ export default function FormDetail (props) {
                     <span className='a-count'><span className='declined'>15</span> <br/>DECLINED</span>
             </div>
             <div className="form-status">
-                RSVP open
+                {form ? form.status : "loading..."}
             </div>
         </div>
     )

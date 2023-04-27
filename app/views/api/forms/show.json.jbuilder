@@ -1,1 +1,1 @@
-json.extract! @form, :id, :title, :description, :status
+json.extract! @form, :id, :title, :description, :status, :custom_url

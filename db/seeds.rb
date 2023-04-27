@@ -32,14 +32,47 @@ ApplicationRecord.transaction do
     # end
 
     puts "Creating forms..."
-    5.times do |i|
-      form = Form.create!(
-        title: "Form #{i+1}: #{Faker::Commerce.product_name}",
-        description: "#{Faker::Company.catch_phrase} #{Faker::Company.bs}. #{Faker::Company.bs}.",
-        status: 'active',
-        user_id: user.id
-      )
-    end
+    # user = User.first
+
+  Form.create(
+    title: 'Customer Feedback',
+    description: 'A form to collect feedback from customers',
+    status: 'active',
+    user_id: user.id,
+    custom_url: 'customer-feedback'
+  )
+
+  Form.create(
+    title: 'Job Application',
+    description: 'A form for job applicants to apply',
+    status: 'inactive',
+    user_id: user.id,
+    custom_url: 'job-application'
+  )
+
+  Form.create(
+    title: 'Newsletter Subscription',
+    description: 'A form for users to subscribe to our newsletter',
+    status: 'active',
+    user_id: user.id,
+    custom_url: 'newsletter-subscription'
+  )
+
+  Form.create(
+    title: 'Contact Us',
+    description: 'A form for contacting our support team',
+    status: 'active',
+    user_id: user.id,
+    custom_url: 'contact-us'
+  )
+
+  Form.create(
+    title: 'Product Feedback',
+    description: 'A form to collect feedback on our products',
+    status: 'active',
+    user_id: user.id,
+    custom_url: 'product-feedback'
+  )
   
     puts "Done!"
   end

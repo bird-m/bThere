@@ -1,6 +1,6 @@
 @forms.each do |form|
     json.set! form.id do
-        json.extract! form, :id, :title, :description, :status, :user_id
+        json.extract! form, :id, :title, :description, :status, :user_id, :custom_url
     end
 end
 

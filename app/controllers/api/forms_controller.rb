@@ -12,7 +12,7 @@ class Api::FormsController < ApplicationController
   end
 
   def create
-    # debugger
+    debugger
     if !logged_in?
       render json: { errors: ['You must log in to view this page'] }, status: :unauthorized
     end
@@ -31,7 +31,7 @@ class Api::FormsController < ApplicationController
   private
 
   def form_params
-    params.require(:form).permit(:title, :description)
+    params.require(:form).permit(:title, :description, :custom_url)
   end
 
 end
