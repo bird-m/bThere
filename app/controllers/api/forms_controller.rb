@@ -1,6 +1,5 @@
 class Api::FormsController < ApplicationController
   def index
-
     if logged_in?
       puts "****I AM HERE****"
       @forms = current_user.forms
@@ -23,6 +22,17 @@ class Api::FormsController < ApplicationController
     if(@form.save)
       # debugger
       render 'api/forms/show'
+    else
+      render json: {errors: @form.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    debugger
+    @form = Form.find_by(id: params[:id]);
+
+    if (@form && @form.destroy)
+      head :no_content
     else
       render json: {errors: @form.errors.full_messages}, status: :unprocessable_entity
     end

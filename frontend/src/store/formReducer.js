@@ -3,6 +3,7 @@ import csrfFetch from "./csrf";
 // action constants and methods
 export const RECEIVE_FORMS = 'RECEIVE_FORMS';
 export const RECEIVE_FORM = 'RECEIVE_FORM'
+export const REMOVE_FORM = 'REMOVE_FORM'
 
 export function receiveForms(forms) {
     return {
@@ -15,6 +16,13 @@ export function receiveForm(form) {
     return {
         type: RECEIVE_FORM,
         form
+    }
+}
+
+export function removeForm(formId) {
+    return {
+        type: REMOVE_FORM,
+        formId
     }
 }
 
@@ -51,6 +59,16 @@ export function postForm(form) {
     }
 }
 
+export function deleteForm(formId) {
+    return async function (dispatch) {
+        const response = await csrfFetch(`/api/forms/${formId}`, {
+            method: 'DELETE'
+        })
+        dispatch(removeForm(formId));
+        return response;
+    }
+}
+
 export default function formReducer(state = {}, action) {
     let nextState = {...state}
     
@@ -59,6 +77,9 @@ export default function formReducer(state = {}, action) {
             return action.forms;
         case RECEIVE_FORM:
             nextState[action.form.id] = action.form;
+            return nextState;
+        case REMOVE_FORM:
+            delete nextState[action.formId]
             return nextState;
         default:
             return state;

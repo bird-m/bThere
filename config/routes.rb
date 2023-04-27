@@ -7,15 +7,15 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: :create
     resource :session, only: [:show, :create, :destroy]
-    resources :forms, only: [:index, :create] do
-      resources :question, only: [:create]
+    resources :forms, only: [:index, :create, :destroy] do
+      resources :questions, only: [:create]
     end
     get '/forms/:custom_url', to: 'forms#show'
   end
 
   # post 'api/test', to: 'application#test'
 
-  get '*path', to: "static_pages#frontend_index"
+  # get '*path', to: "static_pages#frontend_index"
 end
 
 

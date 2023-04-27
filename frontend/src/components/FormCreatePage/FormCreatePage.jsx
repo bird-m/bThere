@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './FormCreatePage.css'
 
+
+
 export default function FormCreatePage (props) {
 
 
@@ -44,6 +46,7 @@ export default function FormCreatePage (props) {
 
     return (
         <div className="create-forms-page-wrapper">
+
             <div className="create-pane-wrapper">
                 <div className="fc-input-pane">
                     <span className="fc-large">Create A New Form.</span><br/>

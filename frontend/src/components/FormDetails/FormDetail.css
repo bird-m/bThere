@@ -57,4 +57,15 @@
 
 .form-status {
     color: #1F2937;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-status > span {
+    /* border: black solid 1px; */
+    width: 30%
+}
+
+.form-delete-icon {
+    color: #1F2937;
 }
