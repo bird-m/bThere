@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     get '/forms/:custom_url', to: 'forms#show'
   end
 
-  post 'api/test', to: 'application#test'
+  # post 'api/test', to: 'application#test'
+
+  get '*path', to: "static_pages#frontend_index"
 end
 
 
