@@ -27,9 +27,9 @@ export default function AuthFormPage (props) {
     function handleSubmit (e) {
         setErrors([]);
         // e.preventDefault(); 
-        console.log(mode, "MODE!");
+        // console.log(mode, "MODE!");
         if(!e) {
-            console.log("fake login");
+            // console.log("fake login");
             dispatch(login('demo@user.io', 'password'));
         }
         else if(mode === 'login') {
