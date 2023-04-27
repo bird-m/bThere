@@ -34,12 +34,12 @@ export default function AuthFormPage (props) {
         }
         else if(mode === 'login') {
             e.preventDefault(); 
-            console.log("attempting login");
+            // console.log("attempting login");
             dispatch(login(email, password)).catch(errorHandle)
             // .catch((res) => res.json()).then((data) => {console.log(data)});
         } else if (mode === 'signup') {
             e.preventDefault(); 
-            console.log("attempting signup");
+            // console.log("attempting signup");
             dispatch(signup(email, password)).catch(errorHandle);
         }
    
