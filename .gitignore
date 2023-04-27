@@ -32,4 +32,4 @@
 .DS_Store
 
 # ignore public
-/public
+public
