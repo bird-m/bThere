@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min"
+import { Link, useHistory } from 'react-router-dom';
 import "./NavBar.css"
 import logo from '../../images/logo.png'
 import { logout } from "../../store/session"
@@ -8,7 +8,15 @@ export default function NavBar (props) {
 
     const sessionUser = useSelector((state) => (state.session.user));
     const dispatch = useDispatch();
-    // console.log(sessionUser, "SU");
+    const history = useHistory();
+    
+    function handleClick(e) {
+        if(sessionUser) {
+            dispatch(logout())
+        } else {
+            history.push("/login");
+        }
+    }
 
     return (
         <div className="nav-wrapper">
@@ -22,7 +30,7 @@ export default function NavBar (props) {
                 <Link to="#">Sales</Link>
                 <Link to="#">Support</Link>
                 <Link to="#">Blog</Link>
-                <Link to="/login">Login</Link>
+                <Link to="#" onClick ={handleClick}>{sessionUser ? "Logout" : "Login"}</Link>
                 <Link to="/login"><button className="nav-button">Create My Event</button></Link>
             </div>
         </div>

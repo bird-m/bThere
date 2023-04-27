@@ -1,22 +1,88 @@
 .form-page-wrapper {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
-    background-color: #F3F4F6;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
+    padding-bottom: 10vh;
 }
 
 .form-grid {
-    height: 90%;
-    width: 80%;
-    display: flex;
+    height: 100%;
+    width: 90%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 10%;
+
+    /* display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+}
+
+.form-page-item {
+    width: 90%;
+    height: 100%;
 }
 
 
 
-.form-page-item {
-    width: 33%;
+.fp-account {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.fp-logo {
+    height: 80%;
+    padding-left: 20px;
+}
+
+.form-button {
+    padding-right: 20px;
+}
+
+.form-nav {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 50px;
+    padding-left: 50px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+} 
+
+.form-page-nav {
+    display: flex;
+    justify-content: space-between;
+    color: #FFFFFF;
+    background-color: #0E0A1E;
+}
+
+.form-nav button {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    width: 100px;
+    /* margin-right: 10px; */
+}
+
+@media screen and (max-width: 1000px) {
+    .form-grid {
+        height: 100%;
+        width: 90%;
+    
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 10%;
+    
+        /* display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap; */
+    }
 }

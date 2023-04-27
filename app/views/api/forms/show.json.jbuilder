@@ -1,0 +1,1 @@
+json.extract! @form, :id, :title, :description, :status

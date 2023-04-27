@@ -4,7 +4,7 @@ import './FormDetail.css'
 export default function FormDetail (props) {
 
     const {form} = props;
-    console.log(form);
+    // console.log(form);
 
     return (
         <div className="detail-wrapper">

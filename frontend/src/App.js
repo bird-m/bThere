@@ -9,17 +9,22 @@ import { SplashPage } from "./components/SplashPage/SplashPage";
 import SplashFooter from "./components/SplashFooter/SplashFooter";
 import FormsPage from "./components/FormsPage/FormsPage";
 import FormDetails from "./components/FormDetails/FormDetail";
+import FormCreatePage from "./components/FormCreatePage/FormCreatePage";
 
 function App() {
   
 
   return (
     <>
-    <LogoutButton/>
+    
     <Switch>
 
       <Route path="/deets">
-        <FormDetails/>
+        <FormCreatePage/>
+      </Route>
+
+      <Route path="/new-form">
+        <FormCreatePage/>
       </Route>
 
       <Route exact path="/login">

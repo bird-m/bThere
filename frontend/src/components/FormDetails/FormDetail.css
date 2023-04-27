@@ -18,6 +18,9 @@
     color: #1F2937;
     font-size: 20px;
     width: 90%;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 /* .detail-wrapper div {

@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchForms, selectAllForms } from "../../store/formReducer";
 import { FormSummary } from "../FormSummary/FormSummary";
 import './FormsPage.css'
+import { loggedInUser } from "../../store/session";
+import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import checkLogo from '../../images/check-logo.png'
 
 export default function FormsPage (props) {
 
@@ -13,12 +17,27 @@ export default function FormsPage (props) {
         dispatch(fetchForms())
     },[dispatch])
 
+    // debugger;
+
+    const sessionUser = useSelector(loggedInUser);
+    if (!sessionUser) {
+        // debugger;
+        return (<Redirect to="/login" />);
+    }
+
     return (
         <div className="form-page-wrapper">
+            <div className="form-nav form-page-nav">
+                <img src={checkLogo} className="fp-logo"/>
+                <div className="fp-account">{sessionUser.email}</div>
+            </div>
+            <div className="form-nav">
+                <Link to="/new-form" className="form-button"><button>Create Form</button></Link>
+            </div>
             <div className="form-grid">
                 {forms.map((form) => {
                     return (
-                        <div className="form-page-item">
+                        <div key={form.id} className="form-page-item">
                             <FormSummary form={form}/>
                         </div>
                     )

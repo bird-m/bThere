@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import {isValidEmail, logIt} from '../../util/util'
 import { loggedInUser, login, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
 

@@ -10,11 +10,11 @@ export function FormSummary (props) {
 
     const {form} = props;
 
-    const sessionUser = useSelector(loggedInUser);
+    // const sessionUser = useSelector(loggedInUser);
 
-    if(!sessionUser) {
-        return <Redirect to="/login" />
-    }
+    // if(!sessionUser) {
+    //     return <Redirect to="/login" />
+    // }
 
     
 
