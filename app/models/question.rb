@@ -11,8 +11,10 @@
 #  updated_at  :datetime         not null
 #
 class Question < ApplicationRecord
-    validates :prompt, :required, presence: true
+    validates :prompt, presence: true
+    validates :required, inclusion: {in: [true, false]}
     validates :prompt, uniqueness: true
+
 
     belongs_to :form,
         class_name: :Form,

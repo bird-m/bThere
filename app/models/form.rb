@@ -25,6 +25,7 @@ class Form < ApplicationRecord
     has_many :questions,
         class_name: :Question,
         foreign_key: :form_id,
-        inverse_of: :form
+        inverse_of: :form,
+        dependent: :destroy
 
 end
