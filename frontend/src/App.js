@@ -23,7 +23,7 @@ function App() {
         <FormCreatePage/>
       </Route>
 
-      <Route path="/new-form">
+      <Route path="/form/:formId?">
         <FormCreatePage/>
       </Route>
 

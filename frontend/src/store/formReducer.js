@@ -36,6 +36,18 @@ export function selectAllForms (state) {
     }
 }
 
+export function selectForm(formId) {
+
+    return function(state) {
+        // debugger
+        if(state && state.forms && state.forms[formId]) {
+            return state.forms[formId];
+        } else {
+            return null;
+        }
+    }
+}
+
 // thunk actions
 
 export function fetchForms() {
@@ -47,10 +59,19 @@ export function fetchForms() {
     }
 }
 
-export function postForm(form) {
+export function postForm(form, formId = "") {
     return async function(dispatch) {
-        const response = await csrfFetch('api/forms', {
-            method: 'POST',
+
+        let path = '/api/forms'
+        let verb = 'POST'
+        
+        if(formId) {
+            path = path + `/${formId}`;
+            verb = 'PATCH';
+        }
+
+        const response = await csrfFetch(path, {
+            method: verb,
             body: JSON.stringify(form)
         })
         const data = await response.json();
@@ -65,6 +86,15 @@ export function deleteForm(formId) {
             method: 'DELETE'
         })
         dispatch(removeForm(formId));
+        return response;
+    }
+}
+
+export function fetchForm(formId) {
+    return async function (dispatch) {
+        const response = await csrfFetch(`/api/forms/${formId}`)
+        const data = await response.json()
+        dispatch(receiveForm(data));
         return response;
     }
 }

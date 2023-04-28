@@ -19,13 +19,18 @@
 } */
 
 .fc-input-pane button {
-    width: 175px;
+    width: 250px;
 }
 
 .fc-input-pane input {
-    width: 175px;
+    width: 250px;
     margin-top: 10px;
     height: 20px;
+}
+
+.fc-input-pane textarea {
+    width: 250px;
+    margin-top: 10px;
 }
 
 .fc-input-pane {

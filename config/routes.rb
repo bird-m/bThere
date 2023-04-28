@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: :create
     resource :session, only: [:show, :create, :destroy]
-    resources :forms, only: [:index, :create, :destroy] do
+    resources :forms, only: [:index, :create, :destroy, :update, :show] do
       resources :questions, only: [:create]
     end
     get '/forms/:custom_url', to: 'forms#show'

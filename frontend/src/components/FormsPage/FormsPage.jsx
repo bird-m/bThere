@@ -32,7 +32,7 @@ export default function FormsPage (props) {
                 <div className="fp-account">{sessionUser.email}</div>
             </div>
             <div className="form-nav">
-                <Link to="/new-form" className="form-button"><button>Create Form</button></Link>
+                <Link to="/form" className="form-button"><button>Create Form</button></Link>
             </div>
             <div className="form-grid">
                 {forms.map((form) => {

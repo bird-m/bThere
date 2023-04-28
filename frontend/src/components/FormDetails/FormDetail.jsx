@@ -2,8 +2,11 @@
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './FormDetail.css'
 import {AiFillDelete} from 'react-icons/ai'
+import {MdModeEdit} from 'react-icons/md'
 import { useDispatch } from 'react-redux';
 import { deleteForm } from '../../store/formReducer';
+
+// MdModeEdit
 
 export default function FormDetail (props) {
 
@@ -23,7 +26,11 @@ export default function FormDetail (props) {
             </div>
             <div className="form-status">
                 <span>
-
+                <Link to={`/form/${form.id}`}>
+                    <span className='form-edit-icon'>
+                        <MdModeEdit/>
+                    </span>
+                    </Link>
                 </span>
                 <span>
                     {form ? form.status : "loading..."}
