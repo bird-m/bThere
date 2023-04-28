@@ -7,6 +7,7 @@ import { loggedInUser } from "../../store/session";
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import checkLogo from '../../images/check-logo.png'
+import { LoggedInBanner } from "../LoggedInBanner/LoggedInBanner";
 
 export default function FormsPage (props) {
 
@@ -27,10 +28,7 @@ export default function FormsPage (props) {
 
     return (
         <div className="form-page-wrapper">
-            <div className="form-nav form-page-nav">
-                <img src={checkLogo} className="fp-logo"/>
-                <div className="fp-account">{sessionUser.email}</div>
-            </div>
+            <LoggedInBanner/>
             <div className="form-nav">
                 <Link to="/form" className="form-button"><button>Create Form</button></Link>
             </div>

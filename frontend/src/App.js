@@ -10,6 +10,7 @@ import SplashFooter from "./components/SplashFooter/SplashFooter";
 import FormsPage from "./components/FormsPage/FormsPage";
 import FormDetails from "./components/FormDetails/FormDetail";
 import FormCreatePage from "./components/FormCreatePage/FormCreatePage";
+import { LoggedInBanner } from "./components/LoggedInBanner/LoggedInBanner";
 
 function App() {
   
@@ -20,7 +21,7 @@ function App() {
     <Switch>
 
       <Route path="/deets">
-        <FormCreatePage/>
+        <LoggedInBanner/>
       </Route>
 
       <Route path="/form/:formId?">

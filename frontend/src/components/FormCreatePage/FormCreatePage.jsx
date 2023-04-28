@@ -5,7 +5,10 @@ import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './FormCreatePage.css'
 import { useParams } from "react-router-dom";
-
+import { LoggedInBanner } from "../LoggedInBanner/LoggedInBanner";
+import {AiOutlineClose} from 'react-icons/ai'
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+// import {IoCloseSharp} from 'react-icons/io'
 
 
 export default function FormCreatePage (props) {
@@ -88,7 +91,12 @@ export default function FormCreatePage (props) {
 
     return (
         <div className="create-forms-page-wrapper">
-
+                <LoggedInBanner/>
+                <div className="fc-x">
+                    <Link to="/forms">
+                        <AiOutlineClose/>
+                    </Link>
+                </div>
             <div className="create-pane-wrapper">
                 <div className="fc-input-pane">
                     <span className="fc-large">{cta}</span><br/>
