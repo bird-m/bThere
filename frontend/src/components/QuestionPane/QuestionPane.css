@@ -1,0 +1,24 @@
+.qp-wrapper {
+    width: 400px;
+}
+
+.qp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.qp-wrapper div {
+    border: solid 1px black;
+}
+
+.qp-ele {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#description, #prompt {
+    width: 70%;
+}

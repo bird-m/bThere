@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     resources :forms, only: [:index, :create, :destroy, :update, :show] do
       resources :questions, only: [:create]
     end
+
     get '/forms/:custom_url', to: 'forms#show'
+    get '/:form_id/questions', to: 'questions#index'
+    get '/questions/:id', to: 'questions#show'
   end
 
   # post 'api/test', to: 'application#test'

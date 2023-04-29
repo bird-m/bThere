@@ -4,12 +4,14 @@ import thunk from 'redux-thunk';
 // import logger from 'redux-logger'
 import sessionReducer from './session';
 import formReducer from './formReducer';
+import questionReducer from './questionReducer';
 
 // export function rootReduc
 
 export const rootReducer = combineReducers({
     session: sessionReducer,
-    forms: formReducer
+    forms: formReducer,
+    questions: questionReducer
 })
 
 let enhancer;

@@ -17,7 +17,7 @@ export default function FormDetail (props) {
     return (
         <div className="detail-wrapper">
             <div className="detail-title">
-                <span>{form ? form.title : "loading..."}</span>
+                <Link to={`/form/configure/${form.id}`}>{form ? form.title : "loading..."}</Link>
             </div>
             <div className="detail-bar">
                     <span className='a-count'> <span className='attending'>15</span> <br/>ATTENDING</span>

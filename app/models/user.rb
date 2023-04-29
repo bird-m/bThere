@@ -25,6 +25,10 @@ class User < ApplicationRecord
     inverse_of: :user,
     dependent: :destroy
 
+  has_many :questions,
+    through: :forms,
+    source: :questions
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     

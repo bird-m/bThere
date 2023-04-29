@@ -28,4 +28,5 @@ class Form < ApplicationRecord
         inverse_of: :form,
         dependent: :destroy
 
+
 end

@@ -1,0 +1,26 @@
+.fc-wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
+.fc-banner {
+    height: 8%;
+}
+
+.fc-side-panel {
+    height: 100%;
+    width: 15%;
+}
+
+.fc-sub-header {
+    display: flex;
+    /* border: black solid 1px; */
+    height: 92%;
+}
+
+.fc-question-list {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 150px;
+}

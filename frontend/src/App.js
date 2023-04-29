@@ -11,6 +11,11 @@ import FormsPage from "./components/FormsPage/FormsPage";
 import FormDetails from "./components/FormDetails/FormDetail";
 import FormCreatePage from "./components/FormCreatePage/FormCreatePage";
 import { LoggedInBanner } from "./components/LoggedInBanner/LoggedInBanner";
+import QuestionPane from "./components/QuestionPane/QuestionPane";
+import { QuestionList } from "./components/QuestionList/QuestionList";
+import FormConfigurator from "./components/FormConfigurator/FormConfigurator";
+import FormConfigSidePanel from "./components/FormConfigSidePanel/FormConfigSidePanel";
+
 
 function App() {
   
@@ -20,8 +25,12 @@ function App() {
     
     <Switch>
 
-      <Route path="/deets">
-        <LoggedInBanner/>
+      <Route path="/test">
+        <FormConfigSidePanel/>
+      </Route>
+
+      <Route path="/form/configure/:formId">
+        <FormConfigurator/>
       </Route>
 
       <Route path="/form/:formId?">

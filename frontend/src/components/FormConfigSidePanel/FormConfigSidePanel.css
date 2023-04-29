@@ -1,0 +1,11 @@
+.form-config-panel-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #0E0A1E;
+    color: #D1D5DB;
+    /* padding-left: 20px;
+    padding-top: 20px; */
+}

@@ -20,4 +20,12 @@ class Question < ApplicationRecord
         class_name: :Form,
         foreign_key: :form_id,
         inverse_of: :questions
+
+    has_one :user,
+        through: :form,
+        source: :user
 end
+    
+    # belongs_to :user,
+    #     through: :form,
+    #     source: :user
