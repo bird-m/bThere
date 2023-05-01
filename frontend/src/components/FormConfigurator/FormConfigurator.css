@@ -8,14 +8,14 @@
 }
 
 .fc-side-panel {
-    height: 100%;
     width: 15%;
+    min-height: 100%;
 }
 
 .fc-sub-header {
     display: flex;
     /* border: black solid 1px; */
-    height: 92%;
+    height: fit-content;
 }
 
 .fc-question-list {

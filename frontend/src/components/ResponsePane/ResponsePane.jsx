@@ -21,7 +21,8 @@ export default function ResponsePane ({question, setRefs, refs}) {
             {question.prompt} <br/>
             {question.description} <br/>
             <label htmlFor={question.id}>Response: </label>
-            <textarea ref={inputRef} id={question.id} value={response} onChange={(e) => {setResponse(e.target.value)}}/>
+            <textarea ref={inputRef} id={question.id} data-question-id={question.id}
+            value={response} onChange={(e) => {setResponse(e.target.value)}}/>
         </>
     );
 }

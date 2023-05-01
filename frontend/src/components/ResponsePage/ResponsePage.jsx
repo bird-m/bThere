@@ -25,7 +25,32 @@ export default function ResponsePage (props) {
     }
 
     async function postResponse() {
-        const response = await csrfFetch('/')
+
+        const keys = Object.keys(refs);
+
+        const submission = { submission: 
+            {
+                formId,
+                responses: []
+            }
+        }
+
+        keys.forEach(key => {
+            const ref = refs[key];
+            console.log("START")
+            console.log(ref.current.value, "val")
+            console.log(ref.current.id, "ID")
+            console.log("END")
+            debugger
+            submission['submission']['responses'].push({id: ref.current.id, answer: ref.current.value})
+        });
+
+        console.log(submission);
+
+        const response = await csrfFetch('/api/submissions',{
+            method: 'POST',
+            body: JSON.stringify(submission)
+        })
     }
 
     // if(Object.values(refs).length >=2) {
@@ -38,7 +63,7 @@ export default function ResponsePage (props) {
                 return(
                 <ResponsePane key={q.id} question={q} setRefs={setRefs} refs={refs}/>
                 )})}
-            <button onClick={() => {debugger}}>Submit</button>
+            <button onClick={postResponse}>Submit</button>
         </div>
     )
 }

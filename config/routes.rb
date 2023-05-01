@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     delete '/questions/:id', to: 'questions#destroy'
     post '/questions', to: 'questions#create'
     patch '/questions/:id', to: 'questions#update'
+    post '/submissions', to: 'submissions#create'
   end
 
   # post 'api/test', to: 'application#test'
