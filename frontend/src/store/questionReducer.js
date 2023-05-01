@@ -19,6 +19,15 @@ export function receiveQuestion(question) {
     }
 }
 
+export const REMOVE_QUESTION = 'REMOVE_QUESTION'
+
+export function removeQuestion(questionId) {
+    return {
+        type: REMOVE_QUESTION,
+        questionId
+    }
+}
+
 //selector
 
 export function selectQuestion(questionId) {
@@ -52,6 +61,47 @@ export function selectQuestions(formId) {
 
 // thunk actions
 
+// need to put in the right path
+// export function postQuestion() {
+//     return async function (dispatch) {
+//         const response = await csrfFetch('')
+//     }
+// }
+
+export function postQuestion(question, questionId = "") {
+    return async function (dispatch) {
+
+        let path = '/api/questions';
+        let verb = 'POST'
+
+        // debugger;
+
+        if(questionId) {
+            path = path + `/${questionId}`;
+            verb = 'PATCH';
+        }
+
+        const response = await csrfFetch(path,{
+            method: verb,
+            body: JSON.stringify(question)
+        });
+        const data = await response.json();
+        dispatch(receiveQuestion(data));
+        return response;
+    }
+}
+
+export function deleteQuestion(questionId) {
+    return async function (dispatch) {
+        let response = await csrfFetch(`/api/questions/${questionId}`,{
+            method: 'DELETE'
+        });
+        // let data = await response.json();
+        dispatch(removeQuestion(questionId));
+        return response;
+    }
+}
+
 export function fetchQuestions(formId) {
     return async function(dispatch) {
         const response = await csrfFetch(`/api/${formId}/questions`);
@@ -79,6 +129,9 @@ export default function questionReducer(state = {}, action) {
             return action.questions;
         case RECEIVE_QUESTION:
             nextState[action.question.id] = action.question;
+            return nextState;
+        case REMOVE_QUESTION:
+            delete nextState[action.questionId];
             return nextState;
         default:
             return state;

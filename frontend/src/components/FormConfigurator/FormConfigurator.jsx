@@ -17,9 +17,9 @@ export default function FormConfigurator () {
         dispatch(fetchQuestions(formId))
     }, [dispatch])
     
-    console.log(formId, "FORM ID");
+    // console.log(formId, "FORM ID");
     const questions = useSelector(selectQuestions(formId));
-    console.log(questions, "QUESTIONS");
+    // console.log(questions, "QUESTIONS");
 
     return (
     <div className="fc-wrapper">

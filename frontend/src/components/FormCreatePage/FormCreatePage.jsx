@@ -91,7 +91,9 @@ export default function FormCreatePage (props) {
 
     return (
         <div className="create-forms-page-wrapper">
-                <LoggedInBanner/>
+                <div className="fc-banner-wrapper">
+                    <LoggedInBanner/>
+                </div>
                 <div className="fc-x">
                     <Link to="/forms">
                         <AiOutlineClose/>
@@ -107,9 +109,9 @@ export default function FormCreatePage (props) {
                     <input id="title" type='text' value = {title} onChange={(e) => {setTitle(e.target.value)}}/>
                 </div>
                 <div className="fc-input-pane">
-                    <label htmlFor="description">DESCRIPTION </label><br/>
+                    <label htmlFor="fc-description">DESCRIPTION </label><br/>
 
-                    <textarea id="description" value={description} onChange={(e) => {setDescription(e.target.value)}}/>
+                    <textarea id="fc-description" value={description} onChange={(e) => {setDescription(e.target.value)}}/>
                 </div>
                 <div className="fc-input-pane">
                     <label htmlFor="custom-url">CUSTOM URL </label><br/>

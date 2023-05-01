@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
     get '/forms/:custom_url', to: 'forms#show'
     get '/:form_id/questions', to: 'questions#index'
+    
     get '/questions/:id', to: 'questions#show'
+    delete '/questions/:id', to: 'questions#destroy'
+    post '/questions', to: 'questions#create'
+    patch '/questions/:id', to: 'questions#update'
   end
 
   # post 'api/test', to: 'application#test'

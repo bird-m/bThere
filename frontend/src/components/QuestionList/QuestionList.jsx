@@ -5,7 +5,7 @@ import QuestionPane from "../QuestionPane/QuestionPane";
 import './QuestionList.css'
 
 export function QuestionList({questions}) {
-
+    // console.log(formId, "QuestionList");
     // const dispatch = useDispatch();
 
     // useEffect(() => {

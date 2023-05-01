@@ -22,3 +22,11 @@
 #description, #prompt {
     width: 70%;
 }
+
+.qp-ele input {
+    width: 100%;
+}
+
+.qp-ele textarea {
+    width: 100%;
+}

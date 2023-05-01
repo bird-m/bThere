@@ -4,6 +4,11 @@
     /* align-items: center; */
 }
 
+.fc-banner-wrapper {
+    height :50px;
+    align-items: center;
+}
+
 .create-pane-wrapper {
     height: 50%;
     display: flex;
@@ -20,7 +25,7 @@
 } */
 
 .fc-input-pane button {
-    width: 250px;
+    width: 256px;
 }
 
 .fc-input-pane input {
