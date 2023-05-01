@@ -3,10 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteQuestion, fetchQuestion, postQuestion, selectQuestion } from "../../store/questionReducer";
 import './QuestionPane.css'
 
-export default function QuestionPane ({question}) {
-    // console.log(formId, "QuestionPane");
+export default function QuestionPane ({question, createMode, formId}) {
+    // console.log(formId, "FORM ID IN QP")
 
-    // debugger;
+    if(createMode) {
+        question = {
+            prompt: "",
+            description: ""
+        }
+    }
 
     const [editMode, setEditMode] = useState(false);
     const [prompt, setPrompt] = useState(question.prompt);
@@ -20,9 +25,29 @@ export default function QuestionPane ({question}) {
             prompt,
             description
         }}
-        debugger
-        dispatch(postQuestion(updatedQuestion, question.id))
-        setEditMode(false);
+        // debugger
+
+        if (createMode) {
+            updatedQuestion.question.formId = formId
+            debugger;
+            dispatch(postQuestion(updatedQuestion));
+            setDescription("");
+            setPrompt("");
+        } else {
+            dispatch(postQuestion(updatedQuestion, question.id))
+            setEditMode(false);
+        }
+    }
+
+    function actionButton() {
+        if (editMode || createMode) {
+            return <button onClick={updateQuestion}>Save</button>
+        } else {
+            return (<>
+                <button onClick={() => setEditMode(true)}>Edit</button>
+                <button onClick={() => {dispatch(deleteQuestion(question.id))}}>Delete</button>
+            </>)
+        }
     }
 
     // let a = {question: {formId: 1, prompt: "updated another",required: true, description: "hd"}}
@@ -31,16 +56,19 @@ export default function QuestionPane ({question}) {
     return (<div className="qp-wrapper">
         <div className="qp">
             <div className="qp-ele">
-                {editMode ? <input type="text" value={prompt} onChange={(e) => {setPrompt(e.target.value)}}/> : <h2>{prompt}</h2>}
+                {(editMode || createMode) ? <input type="text" value={prompt} onChange={(e) => {setPrompt(e.target.value)}}/> : <h2>{prompt}</h2>}
                 
             </div>
             <div className="qp-ele">
-                {editMode ? <textarea onChange={(e) => {setDescription(e.target.value)}}>{description}</textarea> : <h2>{description}</h2>}
+                {(editMode || createMode) ? <textarea value={description} onChange={(e) => {setDescription(e.target.value)}}/> : <h2>{description}</h2>}
                 
             </div>
-            <button onClick={() => {dispatch(deleteQuestion(question.id))}}>Delete</button>
+
+            {actionButton()}
+
+            {/* <button onClick={() => {dispatch(deleteQuestion(question.id))}}>Delete</button>
             <button onClick={() => setEditMode(true)}>Edit</button>
-            {editMode ? <button onClick={updateQuestion}>Save</button> : ""}
+            {editMode ? <button onClick={updateQuestion}>Save</button> : ""} */}
             
         </div>
     </div>);

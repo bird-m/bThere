@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { QuestionList } from '../QuestionList/QuestionList';
 import FormConfigSidePanel from '../FormConfigSidePanel/FormConfigSidePanel';
 import { LoggedInBanner } from '../LoggedInBanner/LoggedInBanner';
+import QuestionPane from '../QuestionPane/QuestionPane';
 
 export default function FormConfigurator () {
 
@@ -31,7 +32,7 @@ export default function FormConfigurator () {
                 <FormConfigSidePanel/>
             </div>
             <div className="fc-question-list">
-                <QuestionList questions={questions}/>    
+                <QuestionList questions={questions} formId={formId}/>
             </div>
         </div>
     </div>)
