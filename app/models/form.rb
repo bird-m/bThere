@@ -14,7 +14,7 @@
 class Form < ApplicationRecord
 
     validates :title, :status, presence: true
-    validates :title, uniqueness: true
+    validates :title, uniqueness: {scope: :user_id}
     validates :custom_url, uniqueness: true, allow_nil: true
 
     belongs_to :user,
@@ -28,5 +28,9 @@ class Form < ApplicationRecord
         inverse_of: :form,
         dependent: :destroy
 
-
+    has_many :submissions,
+        class_name: :Submission,
+        foreign_key: :form_id,
+        inverse_of: :form,
+        dependent: :destroy
 end

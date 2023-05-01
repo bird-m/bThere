@@ -11,7 +11,7 @@ import QuestionPane from '../QuestionPane/QuestionPane';
 export default function FormConfigurator () {
 
     const {formId} = useParams();
-    console.log("FormConfigurator");
+    // console.log("FormConfigurator");
     const dispatch = useDispatch();
 
     useEffect(() => {

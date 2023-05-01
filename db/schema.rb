@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_044551) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_211903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_044551) do
     t.datetime "updated_at", null: false
     t.string "custom_url", null: false
     t.index ["custom_url"], name: "index_forms_on_custom_url", unique: true
-    t.index ["title"], name: "index_forms_on_title", unique: true
+    t.index ["user_id", "title"], name: "index_forms_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_forms_on_user_id"
   end
 
@@ -34,8 +34,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_044551) do
     t.bigint "form_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["form_id", "prompt"], name: "index_questions_on_form_id_and_prompt", unique: true
     t.index ["form_id"], name: "index_questions_on_form_id"
-    t.index ["prompt"], name: "index_questions_on_prompt", unique: true
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.text "answer", null: false
+    t.bigint "question_id", null: false
+    t.bigint "submission_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_responses_on_question_id"
+    t.index ["submission_id"], name: "index_responses_on_submission_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.bigint "form_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id"], name: "index_submissions_on_form_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_044551) do
 
   add_foreign_key "forms", "users"
   add_foreign_key "questions", "forms"
+  add_foreign_key "responses", "questions"
+  add_foreign_key "responses", "submissions"
+  add_foreign_key "submissions", "forms"
 end

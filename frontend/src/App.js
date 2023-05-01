@@ -15,6 +15,7 @@ import QuestionPane from "./components/QuestionPane/QuestionPane";
 import { QuestionList } from "./components/QuestionList/QuestionList";
 import FormConfigurator from "./components/FormConfigurator/FormConfigurator";
 import FormConfigSidePanel from "./components/FormConfigSidePanel/FormConfigSidePanel";
+import ResponsePage from "./components/ResponsePage/ResponsePage";
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
     
     <Switch>
 
-      <Route path="/test">
-        <FormConfigSidePanel/>
+      <Route path="/test/:formId">
+        <ResponsePage/>
       </Route>
 
       <Route path="/form/configure/:formId">
