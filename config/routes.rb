@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     post '/submissions', to: 'submissions#create'
 
     get '/:form_id/submissions', to: 'submissions#index'
+    get '/photos', to: 'forms#test'
   end
 
   # post 'api/test', to: 'application#test'

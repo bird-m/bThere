@@ -36,7 +36,7 @@ export function FormSummary (props) {
 
     return (<div className="form-summary-wrapper">
         
-        <img className='form-image' src={sample}/>
+        <img className='form-image' src={form.photo ? form.photo : sample}/>
         <FormDetail form={form}/>
     </div> );
 }

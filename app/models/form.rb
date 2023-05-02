@@ -17,6 +17,8 @@ class Form < ApplicationRecord
     validates :title, uniqueness: {scope: :user_id}
     validates :custom_url, uniqueness: true, allow_nil: true
 
+    has_one_attached :photo
+
     belongs_to :user,
         class_name: :User,
         foreign_key: :user_id,

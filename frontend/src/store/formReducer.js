@@ -64,15 +64,21 @@ export function postForm(form, formId = "") {
 
         let path = '/api/forms'
         let verb = 'POST'
+        let formPackage = form;
         
         if(formId) {
             path = path + `/${formId}`;
             verb = 'PATCH';
         }
 
+        if (!(form instanceof FormData)) {
+            formPackage = JSON.stringify(form);
+        }
+
+        // debugger;
         const response = await csrfFetch(path, {
             method: verb,
-            body: JSON.stringify(form)
+            body: formPackage
         })
         const data = await response.json();
         dispatch(receiveForm(data));

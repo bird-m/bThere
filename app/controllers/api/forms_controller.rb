@@ -50,6 +50,7 @@ class Api::FormsController < ApplicationController
     puts "LIFTOFF"
     @form = Form.find_by(id: params[:id])
 
+    debugger
     if(@form.update(form_params))
       render 'api/forms/show'
     else
@@ -57,10 +58,15 @@ class Api::FormsController < ApplicationController
     end
   end
 
+  # def test
+  #   @forms = Form.all
+  #   render 'api/forms/photo'
+  # end
+
   private
 
   def form_params
-    params.require(:form).permit(:title, :description, :custom_url)
+    params.require(:form).permit(:title, :description, :custom_url, :photo)
   end
 
 end

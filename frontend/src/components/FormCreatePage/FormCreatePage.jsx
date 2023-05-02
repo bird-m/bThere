@@ -34,6 +34,7 @@ export default function FormCreatePage (props) {
     const [description, setDescription] = useState('');
     const [errors, setErrors] = useState([]);
     const [customUrl, setCustomUrl] = useState('');
+    const [photoFile, setPhotoFile] = useState(null);
 
     // console.log(formId, "FORMID");
     const editForm = useSelector(selectForm(formId));
@@ -64,6 +65,43 @@ export default function FormCreatePage (props) {
     
     // const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
+    function handlePhotoTest() {
+        // let form = {form: {
+        //     title,
+        //     description,
+        //     customUrl
+        // }}
+
+        const formData = new FormData();
+
+        formData.append('form[title]', title)
+        formData.append('form[description]', description)
+        formData.append('form[customUrl]', customUrl)
+
+        if (photoFile) {
+            formData.append('form[photo]', photoFile);
+        }
+
+
+        // debugger;
+        // console.log(formId, "FORMID")
+        dispatch(postForm(formData, formId || ""))
+            .then((res) => {
+                history.push("/forms");
+            })
+            .catch((res) => {
+                res.json().then((data) => {
+                    // debugger;
+                    setErrors(data.errors);
+                })
+            })
+    }
+
+    function handleFile ({currentTarget}) {
+        const file = currentTarget.files[0];
+        setPhotoFile(file);
+    }
+
     function handleSubmit() {
         let form = {form: {
             title,
@@ -89,6 +127,8 @@ export default function FormCreatePage (props) {
     //     return <Redirect to="/forms" />;
     // }
 
+    console.log(photoFile)
+
     return (
         <div className="create-forms-page-wrapper">
                 <div className="fc-banner-wrapper">
@@ -105,6 +145,9 @@ export default function FormCreatePage (props) {
                     <span className="fc-small">{tagline}</span>
                 </div>
                 <div className="fc-input-pane">
+                    
+                </div>
+                <div className="fc-input-pane">
                     <label htmlFor="title">TITLE </label><br/>
                     <input id="title" type='text' value = {title} onChange={(e) => {setTitle(e.target.value)}}/>
                 </div>
@@ -118,7 +161,11 @@ export default function FormCreatePage (props) {
                     <input id="custom-url" type='text' value = {customUrl} onChange={(e) => {setCustomUrl(e.target.value)}}/>
                 </div>
                 <div className="fc-input-pane">
-                    <button onClick={handleSubmit}>{buttonText}</button>
+                    <label htmlFor="photo">PHOTO</label><br/>
+                    <input id="photo" type="file" onChange={handleFile}/>
+                </div>
+                <div className="fc-input-pane">
+                    <button onClick={handlePhotoTest}>{buttonText}</button>
                 </div>
                 <div className="fc-input-pane">
                     <div className="form-create-errors">
