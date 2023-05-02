@@ -15,12 +15,13 @@
 .fc-sub-header {
     display: flex;
     /* border: black solid 1px; */
+    min-height: 100%;
     height: fit-content;
 }
 
 .fc-question-list {
     display: flex;
     justify-content: center;
-    width: 100%;
-    padding-top: 150px;
+    width: 85%;
+    padding-top: 50px;
 }

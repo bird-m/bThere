@@ -22,4 +22,8 @@ class Response < ApplicationRecord
         foreign_key: :question_id,
         class_name: :Question,
         inverse_of: :responses
+
+    has_one :form,
+        through: :submission,
+        source: :form
 end

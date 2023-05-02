@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     post '/questions', to: 'questions#create'
     patch '/questions/:id', to: 'questions#update'
     post '/submissions', to: 'submissions#create'
+
+    get '/:form_id/submissions', to: 'submissions#index'
   end
 
   # post 'api/test', to: 'application#test'

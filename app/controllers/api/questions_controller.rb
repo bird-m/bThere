@@ -5,7 +5,7 @@ class Api::QuestionsController < ApplicationController
       render json: { errors: ['Only logged in users may access this type of data'] }, status: :unauthorized
       return
     end
-    debugger;
+    # debugger;
     @question = Question.new(new_question_params)
     form = Form.find_by(id: @question.form_id)
 

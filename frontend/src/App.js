@@ -25,8 +25,7 @@ function App() {
     <>
     
     <Switch>
-
-      <Route path="/test/:formId">
+      <Route path="/submit/:formId">
         <ResponsePage/>
       </Route>
 

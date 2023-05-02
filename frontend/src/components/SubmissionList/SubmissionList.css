@@ -1,0 +1,21 @@
+.sl-wrapper {
+    text-align: left;
+}
+
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 80%;
+    border-spacing: 0px;
+    height: 85vh;
+    overflow-y: scroll;
+  }
+
+  td {
+    height: 16px;
+  }

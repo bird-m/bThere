@@ -33,4 +33,8 @@ class Form < ApplicationRecord
         foreign_key: :form_id,
         inverse_of: :form,
         dependent: :destroy
+
+    has_many :responses,
+        through: :submissions,
+        source: :responses
 end

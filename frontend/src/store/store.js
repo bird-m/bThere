@@ -5,13 +5,17 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import formReducer from './formReducer';
 import questionReducer from './questionReducer';
+import submissionReducer from './submissionReducer';
+import responseReducer from './responseReducer';
 
 // export function rootReduc
 
 export const rootReducer = combineReducers({
     session: sessionReducer,
     forms: formReducer,
-    questions: questionReducer
+    questions: questionReducer,
+    submissions: submissionReducer,
+    responses: responseReducer
 })
 
 let enhancer;

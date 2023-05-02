@@ -17,14 +17,11 @@ export default function ResponsePage (props) {
     },[dispatch])
 
     const [refs, setRefs] = useState({});
+    const [submitted, setSubmitted] = useState(false);
 
     const questions = useSelector(selectQuestions(formId));
 
-    function submitResponse() {
-
-    }
-
-    async function postResponse() {
+    function postResponse() {
 
         const keys = Object.keys(refs);
 
@@ -37,25 +34,30 @@ export default function ResponsePage (props) {
 
         keys.forEach(key => {
             const ref = refs[key];
-            console.log("START")
-            console.log(ref.current.value, "val")
-            console.log(ref.current.id, "ID")
-            console.log("END")
-            debugger
-            submission['submission']['responses'].push({id: ref.current.id, answer: ref.current.value})
+            // console.log("START")
+            // console.log(ref.current.value, "val")
+            // console.log(ref.current.id, "ID")
+            // debugger
+            submission['submission']['responses'].push({questionId: ref.current.dataset.questionId, answer: ref.current.value})
         });
 
-        console.log(submission);
+        // console.log(submission);
 
-        const response = await csrfFetch('/api/submissions',{
+        csrfFetch('/api/submissions',{
             method: 'POST',
             body: JSON.stringify(submission)
+        }).then((data) => {
+            setSubmitted(true);
         })
     }
 
     // if(Object.values(refs).length >=2) {
     //     debugger;
     // }
+
+    if(submitted) {
+        return <h1>Thank you for your submission!</h1>
+    }
 
     return (
         <div className="response-wrapper">
