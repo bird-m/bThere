@@ -29,7 +29,7 @@ export default function QuestionPane ({question, createMode, formId}) {
 
         if (createMode) {
             updatedQuestion.question.formId = formId
-            debugger;
+            // debugger;
             dispatch(postQuestion(updatedQuestion));
             setDescription("");
             setPrompt("");
@@ -40,9 +40,12 @@ export default function QuestionPane ({question, createMode, formId}) {
     }
 
     function actionButton() {
-        if (editMode || createMode) {
+        if (editMode) {
             return <button onClick={updateQuestion}>Save</button>
-        } else {
+        } else if (createMode) {
+            return null
+        }
+        else {
             return (<>
                 <button onClick={() => setEditMode(true)}>Edit</button>
                 <button onClick={() => {dispatch(deleteQuestion(question.id))}}>Delete</button>
@@ -66,26 +69,6 @@ export default function QuestionPane ({question, createMode, formId}) {
 
             {actionButton()}
 
-            {/* <button onClick={() => {dispatch(deleteQuestion(question.id))}}>Delete</button>
-            <button onClick={() => setEditMode(true)}>Edit</button>
-            {editMode ? <button onClick={updateQuestion}>Save</button> : ""} */}
-            
         </div>
     </div>);
 }
-
-// useEffect(() => {
-//     if(question) {
-//         setPrompt(question.prompt);
-//         setDescription(question.description);
-//     }
-// }, [question])
-
-{/* <div className="qp-ele">
-<label htmlFor="prompt">Question:</label>
-<input id="prompt" type="text" placeholder="enter question here"/>
-</div>
-<div className="qp-ele">
-<label htmlFor="description">Description:</label>
-<input id="description" type="text" placeholder="enter description here"/>
-</div> */}

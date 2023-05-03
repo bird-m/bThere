@@ -2,4 +2,43 @@
     display: flex;
     gap: 20px;
     flex-direction: column;
+    width: 80%;
+    /* justify-content: center; */
+    max-width: 500px;
+}
+
+.ql-header {
+    text-align: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.ql-added-questions {
+    background-color: #FFFFFF;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 0.375rem;
+}
+
+.qp-wrapper {
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+    border-bottom: 0.5px solid lightgray;
+}
+
+.ql-create {
+    width: 80%;
+    margin: 25px 0px;
+}
+
+.ql-added-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.ql-added-questions .qp-wrapper:first-of-type {
+    padding-top: 20px;
 }
