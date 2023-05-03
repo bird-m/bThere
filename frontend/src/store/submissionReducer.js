@@ -46,7 +46,8 @@ export default function submissionReducer(state = {}, action) {
 
     switch (action.type) {
         case RECEIVE_SUBMISSIONS:
-            return action.submissions;
+            // the || accounts for when we attempt to grab submissions but there aren't any there
+            return (action.submissions || state);
         default:
             return state;
     }

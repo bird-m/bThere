@@ -6,8 +6,16 @@
 #  form_id    :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  status     :string           not null
+#  name       :string           not null
+#  email      :string           not null
 #
 class Submission < ApplicationRecord
+
+    ALLOWED_STATUS = ['accept','decline','maybe'].freeze
+
+    validates :status, :name, :email, presence: true
+    validates :status, inclusion: {in: ALLOWED_STATUS}
 
     belongs_to :form,
         class_name: :Form,

@@ -50,7 +50,7 @@ class Api::FormsController < ApplicationController
     puts "LIFTOFF"
     @form = Form.find_by(id: params[:id])
 
-    debugger
+    # debugger
     if(@form.update(form_params))
       render 'api/forms/show'
     else

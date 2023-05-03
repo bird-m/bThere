@@ -1,7 +1,7 @@
 json.submissions do
     @form.submissions.each do |sub|
         json.set! sub.id do
-            json.extract! sub, :id, :form_id, :created_at
+            json.extract! sub, :id, :form_id, :created_at, :name, :email, :status
         end
     end
 end

@@ -25,63 +25,99 @@ ApplicationRecord.transaction do
   
     puts "Creating users..."
     # Create one user with an easy to remember email, and password:
-    user1 = User.create!(
+    user = User.create!(
       email: 'demo@user.io', 
       password: 'password'
     )
 
-    user2 = User.create!(
-      email: 'test@user.io', 
-      password: '1111111'
-    )
-  
-    # More users
-    # 10.times do 
-    #   User.create!({
-    #     email: Faker::Internet.unique.email,
-    #     password: 'password'
-    #   }) 
-    # end
+    form1 = Form.create(title: "Customer Satisfaction Survey", description: "Please take a moment to share your thoughts on our products and services.", status: "published", user: user, custom_url: "customer-satisfaction-survey")
 
-    i = 0
+    # create questions for the form
+    question1 = Question.create(prompt: "How satisfied are you with our products?", required: true, form: form1)
+    question2 = Question.create(prompt: "How satisfied are you with our customer service?", required: true, form: form1)
 
-    User.all.each do |user|
-      5.times do |n|
-        puts "form#{n+1}"
-        form = user.forms.create!(
-          title: "Form #{n+1}",
-          description: "This is form #{n+1}",
-          status: "active",
-          custom_url: "form#{i}"
-        )
+    # create another form
+    form2 = Form.create(title: "Job Application", description: "Please fill out this form if you are interested in applying for a job at our company.", status: "published", user: user, custom_url: "job-application")
+
+    # create questions for the second form
+    question3 = Question.create(prompt: "What is your previous work experience?", required: true, form: form2)
+    question4 = Question.create(prompt: "Why do you want to work for our company?", required: true, form: form2)
+
+    # create submissions for the first form
+    submission1 = Submission.create(form: form1, name: "Jane Doe", email: "jane@example.com", status: "accept")
+    submission2 = Submission.create(form: form1, name: "John Smith", email: "john@example.com", status: "decline")
+
+    # create responses for the submissions
+    response1 = Response.create(answer: "Very satisfied", question: question1, submission: submission1)
+    response2 = Response.create(answer: "Somewhat satisfied", question: question2, submission: submission1)
+    response3 = Response.create(answer: "Not satisfied", question: question1, submission: submission2)
+    response4 = Response.create(answer: "Very satisfied", question: question2, submission: submission2)
+
+    # create a submission for the second form
+    submission3 = Submission.create(form: form2, name: "Bob Johnson", email: "bob@example.com", status: "accept")
+
+    # create responses for the submission
+    response5 = Response.create(answer: "I have 5 years of experience in a similar role", question: question3, submission: submission3)
+    response6 = Response.create(answer: "I think your company is doing great work and I want to be a part of that", question: question4, submission: submission3)
+
     
-        question1 = form.questions.create!(
-          prompt: "Question 1",
-          description: "This is question 1",
-          required: true
-        )
-        
-        question2 = form.questions.create!(
-          prompt: "Question 2",
-          description: "This is question 2",
-          required: false
-        )
-
-        sub1 = Submission.create!(form_id: form.id)
-
-        question1.responses.create!(answer: "Response 1", submission_id: sub1.id)
-        question2.responses.create!(answer: "Response 2", submission_id: sub1.id)
-
-        sub2 = Submission.create!(form_id: form.id)
-
-        question1.responses.create!(answer: "Response 1", submission_id: sub2.id)
-        question2.responses.create!(answer: "Response 2", submission_id: sub2.id)
-        i += 1
-      end
-    end
   
     puts "Done!"
   end
+
+  # ******Old
+
+  # user2 = User.create!(
+    #   email: 'test@user.io', 
+    #   password: '1111111'
+    # )
+  
+    # # More users
+    # # 10.times do 
+    # #   User.create!({
+    # #     email: Faker::Internet.unique.email,
+    # #     password: 'password'
+    # #   }) 
+    # # end
+
+    # i = 0
+
+    # User.all.each do |user|
+    #   5.times do |n|
+    #     puts "form#{n+1}"
+    #     form = user.forms.create!(
+    #       title: "Form #{n+1}",
+    #       description: "This is form #{n+1}",
+    #       status: "active",
+    #       custom_url: "form#{i}"
+    #     )
+    
+    #     question1 = form.questions.create!(
+    #       prompt: "Question 1",
+    #       description: "This is question 1",
+    #       required: true
+    #     )
+        
+    #     question2 = form.questions.create!(
+    #       prompt: "Question 2",
+    #       description: "This is question 2",
+    #       required: false
+    #     )
+
+    #     sub1 = Submission.create!(form_id: form.id)
+
+    #     question1.responses.create!(answer: "Response 1", submission_id: sub1.id)
+    #     question2.responses.create!(answer: "Response 2", submission_id: sub1.id)
+
+    #     sub2 = Submission.create!(form_id: form.id)
+
+    #     question1.responses.create!(answer: "Response 1", submission_id: sub2.id)
+    #     question2.responses.create!(answer: "Response 2", submission_id: sub2.id)
+    #     i += 1
+    #   end
+    # end
+
+    # ******Old
 
   # puts "Creating forms..."
   # customer_feedback_form = Form.create!(

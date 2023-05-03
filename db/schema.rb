@@ -80,6 +80,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_161500) do
     t.bigint "form_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", null: false
+    t.string "name", null: false
+    t.string "email", null: false
     t.index ["form_id"], name: "index_submissions_on_form_id"
   end
 
