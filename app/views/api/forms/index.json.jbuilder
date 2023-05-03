@@ -1,7 +1,8 @@
 @forms.each do |form|
     json.set! form.id do
         json.extract! form, :id, :title, :description, :status, :user_id, :custom_url
-        json.photo form.photo.url
+        json.photo url_for(form.photo) if form.photo.present?
+        # json.photo form.photo.url
     end
 end
 
@@ -18,3 +19,6 @@ end
 #       json.partial! 'tea', tea: tea
 #     end
 #   end
+
+# json.photo_urls post.photo.map {|photo| url_for(photo)}
+# json.user_photo url_for(post.author.photo) if post.author.photo.present?
