@@ -8,18 +8,3 @@
     width: 80%;
     max-width: 300px;
 }
-
-.r-name-email-wrapper {
-    width: 100%;
-}
-
-.res-sub-input {
-    display: flex;
-    justify-content: space-between;
-}
-
-.res-sub-input-radio {
-    display: flex;
-    gap: 15px;
-    padding-top: 10px;
-}

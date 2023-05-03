@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
 import ResponsePane from '../ResponsePane/ResponsePane';
 import csrfFetch from '../../store/csrf';
+import { SubmitterInputPane } from '../SubmitterInputPane/SubmitterInputPane';
 
 export default function ResponsePage (props) {
 
@@ -18,11 +19,12 @@ export default function ResponsePage (props) {
 
     const [refs, setRefs] = useState({});
     const [submitted, setSubmitted] = useState(false);
+    
+    const questions = useSelector(selectQuestions(formId));
+
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [attendStatus, setAttendStatus] = useState(null);
-
-    const questions = useSelector(selectQuestions(formId));
 
     function postResponse() {
 
@@ -84,26 +86,8 @@ export default function ResponsePage (props) {
 
     return (
         <div className="response-wrapper">
-            <div className="r-name-email-wrapper">
-                <div className="res-sub-input">
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" value={name} id='name' onChange={(e)=> {setName(e.target.value)}}/>
-                </div>
-                <div className="res-sub-input">
-                    <label htmlFor="email">Email: </label>
-                    <input type="text" value={email} id='name' onChange={(e)=> {setEmail(e.target.value)}}/>
-                </div>
-                <div className="res-sub-input-radio">
-                    <input id='yes' type='radio' value='accept' checked={attendStatus === "accept"} onChange={(e) => {setAttendStatus(e.target.value)}}/>
-                    <label htmlFor="yes">Attending</label>
-                </div>
-            
-                <div className="res-sub-input-radio">
-                    <input id='no' type='radio' value='decline' checked={attendStatus === "decline"} onChange={(e) => {setAttendStatus(e.target.value)}}/>
-                    <label htmlFor="no">Can't Make it</label>
-                </div>
-            </div>
 
+            <SubmitterInputPane name={name} setName={setName} email={email} setEmail={setEmail} attendStatus={attendStatus} setAttendStatus={setAttendStatus} allowInput={true}/>
             {listQuestions()}
             <button onClick={postResponse} disabled={!attendStatus}>Submit</button>
         </div>

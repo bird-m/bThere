@@ -1,0 +1,22 @@
+.si-wrapper {
+    width: 100%;
+}
+
+.si-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.si-input-radio {
+    display: flex;
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.si-wrapper label input {
+    width: 50%;
+}
+
+#name {
+    width: 50%;
+}

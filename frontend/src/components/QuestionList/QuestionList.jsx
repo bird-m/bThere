@@ -3,6 +3,7 @@ import { fetchQuestions, selectQuestions } from "../../store/questionReducer";
 import { useEffect } from "react";
 import QuestionPane from "../QuestionPane/QuestionPane";
 import './QuestionList.css'
+import { SubmitterInputPane } from "../SubmitterInputPane/SubmitterInputPane";
 
 export function QuestionList({questions, formId}) {
     // console.log(formId, "QuestionList");
@@ -19,6 +20,7 @@ export function QuestionList({questions, formId}) {
 
     return (
         <div className="ql-list">
+            <SubmitterInputPane disable={true}/>
             {questions.map((q) => {
                 return <QuestionPane key ={q.id} question={q} formId={formId}/>
             })}
