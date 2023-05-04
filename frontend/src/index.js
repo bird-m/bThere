@@ -12,6 +12,7 @@ import { fetchSession } from './store/session';
 import * as sessionActions from './store/session';
 import { fetchForms, deleteForm, fetchForm } from './store/formReducer';
 import * as questionActions from './store/questionReducer';
+import {formatDate} from './util/util'
 
 const store = configureStore();
 export let inDevelopment = false;
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.deleteForm = deleteForm;
   window.fetchForm = fetchForm;
   window.questionActions = questionActions;
+  window.formatDate = formatDate
 }
 
 const root = createRoot(document.getElementById('root'));

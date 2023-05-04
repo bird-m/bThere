@@ -12,14 +12,17 @@ export default function SubmissionPane ({submission, questions}) {
     const newReponses = useSelector(selectResponsesByQuestionId(submission.id));
     // console.log(newReponses, "NEW RESPONSES");
 
-    return (
-        <tr className="sp-wrapper">
-            <td>{submission.createdAt}</td>
-            {responses.map((res) => {
-                return <td>{res.answer}</td>
-            })}
-        </tr>
-    )
+
+    return null;
+
+    // return (
+    //     <tr className="sp-wrapper">
+    //         <td>{submission.createdAt}</td>
+    //         {responses.map((res) => {
+    //             return <td>{res.answer}</td>
+    //         })}
+    //     </tr>
+    // )
 }
 
 

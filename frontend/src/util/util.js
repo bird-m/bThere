@@ -18,11 +18,18 @@ export function isValidEmail(email) {
     return emailRegex.test(email);
   }
 
-//   export function fetchList(path) {
-//     return async function(dispatch) {
-//         const response = await csrfFetch('/api/forms');
-//         const data = await response.json();
-//         dispatch(receiveForms(data));
-//         return response;
-//     }
-// }
+  export function formatDate(date) {
+    const formattedDate = date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'UTC'
+      })
+      .replace(',', '') // remove the comma from the formatted date string
+      .replace(' ', 'T'); // replace the space between the date and time with 'T'
+      
+      console.log(formattedDate, "DATE"); // output: "2023-05-03T18:47"
+      console.log()
+  }
