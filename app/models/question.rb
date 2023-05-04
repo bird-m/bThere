@@ -28,7 +28,8 @@ class Question < ApplicationRecord
     has_many :responses,
         class_name: :Response,
         foreign_key: :question_id,
-        inverse_of: :question
+        inverse_of: :question,
+        dependent: :destroy
         # not dependent destroying as a question should only be deleted by destroying the submission
 end
     

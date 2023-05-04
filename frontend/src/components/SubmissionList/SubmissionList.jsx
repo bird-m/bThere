@@ -43,7 +43,7 @@ export default function SubmissionList ({form, questions}) {
 
             {submissions.map((sub) => {
                 return(
-                    <div className="sub-row-wrapper">
+                    <div key={sub.id} className="sub-row-wrapper">
                         
                         <div className="sl-cell">
                             <div className="sl-inner-cell">{sub.createdAt}</div>

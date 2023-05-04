@@ -1,3 +1,5 @@
+import { RECEIVE_SUBMISSIONS_PAYLOAD } from "./submissionReducer";
+
 export const RECEIVE_RESPONSES = 'RECEIVE_RESPONSES';
 
 export function receiveResponses(responses) {
@@ -43,8 +45,11 @@ export function selectResponsesByQuestionId(submissionId) {
 export default function responseReducer(state = {}, action) {
     switch(action.type) {
         case RECEIVE_RESPONSES:
+            console.log("****THIS SHOULD BE DEPRECATED****")
             // because we get responses based on submissions, there are cases in which a submission will not have a response. This is why we have this or
             return (action.responses || state)
+        case RECEIVE_SUBMISSIONS_PAYLOAD:
+            return (action.submissionsPayload.responses || state)
         default: 
             return state;
     }

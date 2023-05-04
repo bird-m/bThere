@@ -12,6 +12,15 @@ export function receiveSubmissions(submissions) {
     }
 }
 
+export const RECEIVE_SUBMISSIONS_PAYLOAD = 'RECEIVE_SUBMISSIONS_PAYLOAD';
+
+export function receiveSubmissionsPayload (submissionsPayload) {
+    return {
+        type: RECEIVE_SUBMISSIONS_PAYLOAD,
+        submissionsPayload
+    }
+}
+
 // selectors
 
 export function selectSubmissions(formId) {
@@ -33,8 +42,10 @@ export function fetchSubmissions(formId) {
     return async function(dispatch) {
         const response = await csrfFetch(`/api/${formId}/submissions`);
         const data = await response.json();
-        dispatch(receiveSubmissions(data.submissions));
-        dispatch(receiveResponses(data.responses));
+        // dispatch(receiveSubmissions(data.submissions));
+        // dispatch(receiveResponses(data.responses));
+        dispatch(receiveSubmissionsPayload(data));
+
         return response;
     }
     
@@ -46,8 +57,11 @@ export default function submissionReducer(state = {}, action) {
 
     switch (action.type) {
         case RECEIVE_SUBMISSIONS:
+            console.log("****THIS SHOULD BE DEPRECATED****");
             // the || accounts for when we attempt to grab submissions but there aren't any there
             return (action.submissions || state);
+        case RECEIVE_SUBMISSIONS_PAYLOAD:
+            return (action.submissionsPayload.submissions || state);
         default:
             return state;
     }

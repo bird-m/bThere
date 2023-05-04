@@ -7,63 +7,60 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 ApplicationRecord.transaction do 
-    puts "Destroying tables..."
-    # Unnecessary if using `rails db:seed:replant`
-    Response.destroy_all
-    Submission.destroy_all
-    Question.destroy_all
-    Form.destroy_all
-    User.destroy_all
+  puts "Destroying tables..."
+  # Unnecessary if using `rails db:seed:replant`
+  Response.destroy_all
+  Submission.destroy_all
+  Question.destroy_all
+  Form.destroy_all
+  User.destroy_all
+  puts 'Destroying all ActiveStorage attachments'
+  ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
+
+  puts "Resetting primary keys..."
+  # For easy testing, so that after seeding, the first `User` has `id` of 1
+  ApplicationRecord.connection.reset_pk_sequence!('users')
+  ApplicationRecord.connection.reset_pk_sequence!('forms')
+  ApplicationRecord.connection.reset_pk_sequence!('questions')
+  ApplicationRecord.connection.reset_pk_sequence!('responses')
+  ApplicationRecord.connection.reset_pk_sequence!('submissions')
+
+  puts "Creating users..."
+  # Create one user with an easy to remember email, and password:
+  user = User.create!(
+    email: 'demo@user.io', 
+    password: 'password'
+  )
+
+  puts "Creating form"
+  form1 = Form.create(title: "Taylor's Birthday Party", description: "No need to bring anything, your...presENCE is a present enough ;)", status: "published", user: user, custom_url: "taylor-bday")
+
+  puts "Creating questions"
+  question1 = Question.create(prompt: "Are there any dietary restrictions we should be aware of?", required: true, form: form1)
+  question2 = Question.create(prompt: "What is a favorite memory you have with Taylor?", required: true, form: form1)
+  question3 = Question.create(prompt: "Anything else to share?", required: true, form: form1)
+
+
+  puts "Creating submissions"
+  submission1 = Submission.create(form: form1, name: "Charlie", email: "charlie@example.com", status: "accept")
+  submission2 = Submission.create(form: form1, name: "Alex", email: "alex@example.com", status: "accept")
+  submission3 = Submission.create(form: form1, name: "Avery", email: "avery@example.com", status: "decline")
+
+  puts "Creating responses"
+  Response.create(submission: submission1, question: question1, answer: "Yes, I'm vegetarian.")
+  Response.create(submission: submission1, question: question2, answer: "My favorite memory with Taylor was when we went on a road trip together.")
+  Response.create(submission: submission1, question: question3, answer: "Looking forward to seeing everyone at the party!")
   
-    puts "Resetting primary keys..."
-    # For easy testing, so that after seeding, the first `User` has `id` of 1
-    ApplicationRecord.connection.reset_pk_sequence!('users')
-    ApplicationRecord.connection.reset_pk_sequence!('forms')
-    ApplicationRecord.connection.reset_pk_sequence!('questions')
-    ApplicationRecord.connection.reset_pk_sequence!('responses')
-    ApplicationRecord.connection.reset_pk_sequence!('submissions')
-  
-    puts "Creating users..."
-    # Create one user with an easy to remember email, and password:
-    user = User.create!(
-      email: 'demo@user.io', 
-      password: 'password'
-    )
+  Response.create(submission: submission2, question: question1, answer: "No, I don't have any dietary restrictions.")
+  Response.create(submission: submission2, question: question2, answer: "One of my favorite memories with Taylor was when we went to a concert together.")
+  Response.create(submission: submission2, question: question3, answer: "Thanks for inviting me to the party!")
 
-    form1 = Form.create(title: "Customer Satisfaction Survey", description: "Please take a moment to share your thoughts on our products and services.", status: "published", user: user, custom_url: "customer-satisfaction-survey")
+  Response.create(submission: submission3, question: question1, answer: "No, I don't have any dietary restrictions.")
+  Response.create(submission: submission3, question: question2, answer: "I'm sorry, I don't have a favorite memory with Taylor as we haven't met before.")
+  Response.create(submission: submission3, question: question3, answer: "Sorry, I won't be able to make it to the party but thank you for the invitation!")
 
-    # create questions for the form
-    question1 = Question.create(prompt: "How satisfied are you with our products?", required: true, form: form1)
-    question2 = Question.create(prompt: "How satisfied are you with our customer service?", required: true, form: form1)
-
-    # create another form
-    form2 = Form.create(title: "Job Application", description: "Please fill out this form if you are interested in applying for a job at our company.", status: "published", user: user, custom_url: "job-application")
-
-    # create questions for the second form
-    question3 = Question.create(prompt: "What is your previous work experience?", required: true, form: form2)
-    question4 = Question.create(prompt: "Why do you want to work for our company?", required: true, form: form2)
-
-    # create submissions for the first form
-    submission1 = Submission.create(form: form1, name: "Jane Doe", email: "jane@example.com", status: "accept")
-    submission2 = Submission.create(form: form1, name: "John Smith", email: "john@example.com", status: "decline")
-
-    # create responses for the submissions
-    response1 = Response.create(answer: "Very satisfied", question: question1, submission: submission1)
-    response2 = Response.create(answer: "Somewhat satisfied", question: question2, submission: submission1)
-    response3 = Response.create(answer: "Not satisfied", question: question1, submission: submission2)
-    response4 = Response.create(answer: "Very satisfied", question: question2, submission: submission2)
-
-    # create a submission for the second form
-    submission3 = Submission.create(form: form2, name: "Bob Johnson", email: "bob@example.com", status: "accept")
-
-    # create responses for the submission
-    response5 = Response.create(answer: "I have 5 years of experience in a similar role", question: question3, submission: submission3)
-    response6 = Response.create(answer: "I think your company is doing great work and I want to be a part of that", question: question4, submission: submission3)
-
-    
-  
-    puts "Done!"
-  end
+  puts "Done!"
+end
 
   # ******Old
 

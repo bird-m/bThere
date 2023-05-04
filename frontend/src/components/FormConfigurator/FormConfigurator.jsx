@@ -17,7 +17,7 @@ export default function FormConfigurator () {
     // console.log("FormConfigurator");
     const dispatch = useDispatch();
 
-    const [mode, setMode] = useState("questions")
+    const [mode, setMode] = useState("responses")
 
     useEffect(() => {
         dispatch(fetchQuestions(formId));
@@ -33,8 +33,12 @@ export default function FormConfigurator () {
     function paneMode() {
         switch(mode) {
             case "responses":
-                // debugger;
-                return <SubmissionList questions={questions} form={form}/>
+                if(form) {
+                    return <SubmissionList questions={questions} form={form}/>
+                } else {
+                    return <h1>Loading</h1>
+                }
+                
             case "questions":
                 return <QuestionList questions={questions} formId={formId}/>
             default: 
