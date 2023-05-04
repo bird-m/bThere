@@ -63,20 +63,29 @@
 
 .form-status > span {
     /* border: black solid 1px; */
-    width: 30%
+    /* width: 30% */
 }
 
 .form-delete-icon {
-    /* color: #1F2937; */
+    margin-left: 13px;
 }
 
-.detail-banner-icons {
+.form-edit-icon {
+    margin-right: 13px;
+}
+
+.detail-share-icon {
     position: absolute;
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-.detail-banner-icons a {
-    margin-right: 10px;
+.detail-share-icon:hover {
+    cursor: pointer;
+}
+
+.detail-share-icon svg {
+    margin-right: 15px;
+    color: #551A8B;
 }
