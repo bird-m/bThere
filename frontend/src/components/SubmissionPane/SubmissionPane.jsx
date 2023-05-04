@@ -10,7 +10,7 @@ export default function SubmissionPane ({submission, questions}) {
     // console.log(submission       .created_, "submitted at")
 
     const newReponses = useSelector(selectResponsesByQuestionId(submission.id));
-    console.log(newReponses, "NEW RESPONSES");
+    // console.log(newReponses, "NEW RESPONSES");
 
     return (
         <tr className="sp-wrapper">

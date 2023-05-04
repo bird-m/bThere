@@ -6,5 +6,10 @@
     margin-left: auto;
     margin-right: auto;
     width: 80%;
-    max-width: 300px;
+    max-width: 500px;
+    padding-top: 50px;
+}
+
+.no-gap {
+    gap: 0px;
 }

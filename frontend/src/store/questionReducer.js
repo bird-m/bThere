@@ -4,6 +4,7 @@ import csrfFetch from "./csrf";
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 
 export function receiveQuestions (questions) {
+    // debugger
     return {
         type: RECEIVE_QUESTIONS,
         questions
@@ -126,7 +127,7 @@ export default function questionReducer(state = {}, action) {
     switch(action.type) {
 
         case RECEIVE_QUESTIONS:
-            return action.questions;
+            return action.questions || state;
         case RECEIVE_QUESTION:
             nextState[action.question.id] = action.question;
             return nextState;

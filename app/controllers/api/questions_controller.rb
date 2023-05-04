@@ -44,6 +44,7 @@ class Api::QuestionsController < ApplicationController
     # end
 
     @form = Form.find_by(id: params[:form_id])
+    @title = @form.title
 
     # if the form exists and it belongs to the current user
 

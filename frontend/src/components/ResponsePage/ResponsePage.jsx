@@ -6,6 +6,7 @@ import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
 import ResponsePane from '../ResponsePane/ResponsePane';
 import csrfFetch from '../../store/csrf';
 import { SubmitterInputPane } from '../SubmitterInputPane/SubmitterInputPane';
+import { fetchForm, selectForm } from '../../store/formReducer';
 
 export default function ResponsePage (props) {
 
@@ -15,12 +16,14 @@ export default function ResponsePage (props) {
 
     useEffect(() => {
         dispatch(fetchQuestions(formId));
+        dispatch(fetchForm(formId));
     },[dispatch])
 
     const [refs, setRefs] = useState({});
     const [submitted, setSubmitted] = useState(false);
     
     const questions = useSelector(selectQuestions(formId));
+    const form = useSelector(selectForm(formId));
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
@@ -66,15 +69,19 @@ export default function ResponsePage (props) {
     function listQuestions() {
         if(attendStatus === "accept") {
 
-            return (<>
-            {questions.length > 0 ? "Amazing! Please answer these event related questions" : null}
-            <br/>
-            <br/>
-            {questions.map((q) => {
-                return(
-                    <ResponsePane key={q.id} question={q} setRefs={setRefs} refs={refs}/>
-                )})}
-                </>)
+            return (
+                <>
+                <div className="ql-header">
+                    {questions.length > 0 ? "Amazing! Please answer these event related questions" : null}
+                </div>
+            <div className="ql-added-questions no-gap">
+
+                {questions.map((q) => {
+                    return(
+                        <ResponsePane key={q.id} question={q} setRefs={setRefs} refs={refs}/>
+                    )})}
+            </div>
+            </>)
         }
     }
 
@@ -82,10 +89,23 @@ export default function ResponsePage (props) {
         return <h1>Thank you for your submission!</h1>
     }
 
-    
+    function injectHeader() {
+        if(form && form.title) {
+            return (
+                <div className="rpage-header">{form.title}<br/>
+                    <div className="rpage-des">
+                        {form.description}
+                    </div>
+                </div>
+            )
+        }
+    }
 
     return (
         <div className="response-wrapper">
+
+
+            {injectHeader()}
 
             <SubmitterInputPane name={name} setName={setName} email={email} setEmail={setEmail} attendStatus={attendStatus} setAttendStatus={setAttendStatus} allowInput={true}/>
             {listQuestions()}

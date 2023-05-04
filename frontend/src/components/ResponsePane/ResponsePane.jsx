@@ -17,12 +17,11 @@ export default function ResponsePane ({question, setRefs, refs}) {
 
     // debugger;
     return (
-        <>
-            {question.prompt} <br/>
-            {question.description} <br/>
-            <label htmlFor={question.id}>Response: </label>
+        <div className="rpane-wrapper">
+            <label htmlFor={question.id}>{question.prompt}</label>
+            {question.description}
             <textarea ref={inputRef} id={question.id} data-question-id={question.id}
             value={response} onChange={(e) => {setResponse(e.target.value)}}/>
-        </>
+        </div>
     );
 }

@@ -1,0 +1,29 @@
+.rpage-header {
+    font-size: x-large;
+    width: 100%;
+    text-align: center;
+    /* padding-bottom: 20px; */
+}
+
+.rpage-des {
+    font-size: small;
+    padding-top: 10px;
+}
+
+.rpane-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid lightgray;
+}
+
+.ql-added-questions .rpane-wrapper:last-of-type {
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+
