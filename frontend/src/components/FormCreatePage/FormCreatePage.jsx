@@ -41,8 +41,11 @@ export default function FormCreatePage (props) {
     const [customUrl, setCustomUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
     const [formPhoto, setFormPhoto] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
+    const [createdFormId, setCreatedFormId] = useState(null);
 
     const editForm = useSelector(selectForm(formId));
+    const createdForm = useSelector(selectForm(createdFormId));
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -83,8 +86,10 @@ export default function FormCreatePage (props) {
         // debugger;
         // console.log(formId, "FORMID")
         dispatch(postForm(formData, formId || ""))
-            .then((res) => {
-                history.push("/forms");
+            .then((data) => {
+                // debugger;
+                setSubmitted(true);
+                setCreatedFormId(data.form.id)
             })
             .catch((res) => {
                 res.json().then((data) => {
@@ -117,6 +122,28 @@ export default function FormCreatePage (props) {
                 <div className="fc-df-txt">Default Image <br/>(will exclude this text)</div>
             </div>);
         }
+    }
+
+    if(submitted) {
+        debugger;
+        return (
+            <div className="rp-thank-you-wrapper">
+                <div className="rp-thank-you">
+                    You've created your form! <br/>What's next you ask?
+                    <div className="fc-follow-up">
+                        <div className="fc-cta">
+                            <Link to={`/submit/${createdForm.id}`}>Share</Link>your RSVP form
+                        </div>
+                        <div className="fc-cta">
+                            <Link to={`/form/configure/${createdForm.id}`}>Add questions</Link>to your RSVP form
+                        </div>
+                        <div className="fc-cta">
+                        <Link to={`/form/configure/${createdForm.id}`}>View responses</Link>to your RSVP form
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     return (
