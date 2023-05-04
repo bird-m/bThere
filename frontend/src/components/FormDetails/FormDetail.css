@@ -76,7 +76,7 @@
 
 .detail-share-icon {
     position: absolute;
-    width: 100%;
+    margin-left: 92%;
     display: flex;
     justify-content: flex-end;
 }

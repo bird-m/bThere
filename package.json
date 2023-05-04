@@ -23,6 +23,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "react-icons": "^4.8.0"
+    "react-icons": "^4.8.0",
+    "stream-browserify": "^3.0.0"
   }
 }

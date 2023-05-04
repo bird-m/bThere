@@ -8,6 +8,8 @@ import { formatDate } from '../../util/util';
 // import {AiOutlineClose} from 'react-icons/ai'
 import {BsCheck2Circle} from 'react-icons/bs'
 import {BsXSquare} from 'react-icons/bs'
+// import stream from 'stream-browserify';
+// import {stringify} from 'csv-stringify';
 
 export default function SubmissionList ({form, questions}) {
 
@@ -27,13 +29,39 @@ export default function SubmissionList ({form, questions}) {
 
     const submissions = useSelector(selectSubmissions(form.id));
 
-    // if (submissions && submissions[1].createdAt) {
-    //     formatDate(submi)
-    // }
+    function generateCsvData() {
+        const header = ['SubmissionTime','SubmitterName','SubmitterEmail','SubmitterStatus']
+
+        let csv = header.join(',') + '\n'
+
+        submissions.forEach(sub => {
+            const row = [
+                sub.createdAt,
+                sub.name,
+                sub.email,
+                sub.status
+            ]
+            csv = csv + row.join(",") + '\n';
+        });
+
+        return csv;
+    }
+
+    // function downloadCsv() {
+    //     const csvData = generateCsvData();
+    //     stringify(csvData, (err, output) => {
+    //       if (err) {
+    //         console.error(err);
+    //         return;
+    //       }
+    //       const blob = new Blob([output], { type: 'text/csv' });
+    //       const url = URL.createObjectURL(blob);
+    //       return url;
+    //     });
+    //   }
 
     return (
         <div className="sub-list-wrapper">
-            
             <div className="sub-row-wrapper sub-row-header">
                 <div className="sl-cell">Submission Time</div>
                 <div className="sl-cell">Name</div>
