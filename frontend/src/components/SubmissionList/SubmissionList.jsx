@@ -53,8 +53,8 @@ export default function SubmissionList ({form, questions}) {
                         <div className="sl-cell">
                             <div className="sl-inner-cell">{sub.email}</div></div>
                         <div className="sl-cell">
-                            <div className="sl-inner-cell">{sub.status === "accept" ? 
-                                <> <div className='sl-icon sl-green'><BsCheck2Circle/></div> Attending</> : 
+                            <div className="sl-inner-cell sl-inner-icons">{sub.status === "accept" ? 
+                                <> <div className="sl-icon sl-green"> <BsCheck2Circle/></div>Attending</> : 
                                 <> <div className='sl-icon sl-red'><BsXSquare/></div>Can't make it</>}
                             </div>
                         </div>

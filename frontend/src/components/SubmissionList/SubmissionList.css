@@ -52,8 +52,15 @@ td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: flex;
     gap: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    /* align-items: center; */
+    /* display: inline-block; */
+  }
+
+  .sl-inner-icons {
+    display: flex;
     align-items: center;
   }
 
