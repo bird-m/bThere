@@ -5,6 +5,7 @@
     flex-direction: column;
     background-color: #0E0A1E;
     color: #D1D5DB;
+    min-width: 145px;
     /* padding-left: 20px;
     padding-top: 20px; */
     /* padding-top: 20px; */

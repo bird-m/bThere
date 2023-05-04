@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './ResponsePage.css'
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
 import ResponsePane from '../ResponsePane/ResponsePane';
 import csrfFetch from '../../store/csrf';
@@ -86,7 +86,16 @@ export default function ResponsePage (props) {
     }
 
     if(submitted) {
-        return <h1>Thank you for your submission!</h1>
+        return (
+            <div className="rp-thank-you-wrapper">
+                <div className="rp-thank-you">
+                    Thank you for your RSVP!
+                    <div className="rp-cta">
+                        <Link to="/">Learn</Link> how to create your own RSVPs!
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     function injectHeader() {
