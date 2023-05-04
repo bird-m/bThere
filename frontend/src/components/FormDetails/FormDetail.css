@@ -69,3 +69,14 @@
 .form-delete-icon {
     /* color: #1F2937; */
 }
+
+.detail-banner-icons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.detail-banner-icons a {
+    margin-right: 10px;
+}

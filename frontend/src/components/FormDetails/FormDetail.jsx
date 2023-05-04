@@ -16,6 +16,7 @@ export default function FormDetail (props) {
 
     return (
         <div className="detail-wrapper">
+            <div className="detail-banner-icons"><div>sldfkja</div></div>
             <div className="detail-title">
                 <Link to={`/form/configure/${form.id}`}>{form ? form.title : "loading..."}</Link>
             </div>
