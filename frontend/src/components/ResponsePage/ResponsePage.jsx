@@ -10,6 +10,9 @@ import { fetchForm, selectForm } from '../../store/formReducer';
 
 export default function ResponsePage (props) {
 
+    const [refs, setRefs] = useState({});
+
+
     const {formId} = useParams()
 
     const dispatch = useDispatch();
@@ -20,7 +23,6 @@ export default function ResponsePage (props) {
         dispatch(fetchForm(formId));
     },[dispatch])
 
-    const [refs, setRefs] = useState({});
     const [submitted, setSubmitted] = useState(false);
     
     const questions = useSelector(selectQuestions(formId));
@@ -46,14 +48,8 @@ export default function ResponsePage (props) {
 
         keys.forEach(key => {
             const ref = refs[key];
-            // console.log("START")
-            // console.log(ref.current.value, "val")
-            // console.log(ref.current.id, "ID")
-            // debugger
             submission['submission']['responses'].push({questionId: ref.current.dataset.questionId, answer: ref.current.value})
         });
-
-        // console.log(submission);
 
         csrfFetch('/api/submissions',{
             method: 'POST',

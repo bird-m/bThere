@@ -64,8 +64,6 @@ export function QuestionList({questions, formId}) {
 
             {showQpane ? null : <button onClick={() => {setShowQpane(true)}}>Add Question</button>}
             
-            
-            
             {showQpane ? injectQ() : null}
             
             <div className="ql-header">

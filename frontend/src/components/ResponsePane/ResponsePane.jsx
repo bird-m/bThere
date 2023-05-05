@@ -9,9 +9,7 @@ export default function ResponsePane ({question, setRefs, refs}) {
     // console.log(refs.length, "REFS");
 
     useEffect(()=> {
-        
         setRefs((prevRefs) => ({...prevRefs, [question.id]: inputRef}));
-        // debugger;
     }, [])
     
 
