@@ -40,7 +40,7 @@ export default function FormDetail (props) {
                     </Link>
                 </span>
                 <span>
-                    {form ? form.status : "loading..."}
+                    
                 </span>
                 <span>
                 <Link to={`/form/${form.id}`}>
