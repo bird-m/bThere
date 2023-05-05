@@ -6,6 +6,7 @@ import { loggedInUser, login, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function AuthFormPage (props) {
 
@@ -15,6 +16,8 @@ export default function AuthFormPage (props) {
     // debugger;
     // const sessionUser = useSelector((state) => (state.session.user))
     const sessionUser = useSelector(loggedInUser);
+
+    console.log(mode, "MODE");
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

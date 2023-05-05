@@ -6,6 +6,12 @@ Manage your RSVP lists for all of life's events with bThere. Simply create a for
 ## Technlogies
 bThere is a full stack application utilizing Rails and React/Redux to manage all the complexities of event management.
 
+## Features
+- create an attendance form to send to your invite list
+- add, edit, and delete custom questions on your form for attendees to answer
+- add, edit, and remove photos to display on your form
+- view responses and download the responses to a csv
+
 ## Challenges
 ### Dynamic Input Processing
 Unlike simple forms that have a fixed set of inputs, bThere allows the user to create their own forms with an arbitrary number of questions they create. This added significant management complexity in terms of tracking all the input elements and processing them through to the front end.

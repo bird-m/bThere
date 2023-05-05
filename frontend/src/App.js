@@ -42,7 +42,8 @@ function App() {
       </Route>
 
       <Route exact path="/signup">
-        <AuthFormPage mode='signup'/>
+        <h1>Test</h1>
+        {/* <AuthFormPage mode='signup'/> */}
       </Route>
 
       <Route path="/forms">
