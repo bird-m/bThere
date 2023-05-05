@@ -81,3 +81,13 @@ td {
   .sub-row-header {
     font-weight: 800;
   }
+
+  .sl-download-div {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .sl-download-div svg {
+    color: #0E0A1E;
+    height: 30px;
+  }

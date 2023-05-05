@@ -10,6 +10,7 @@ json.responses do
     @form.responses.each do |res|
         json.set! res.id do
             json.extract! res, :answer, :id, :submission_id, :created_at, :question_id
+            json.form_id @form.id
         end        
     end
 end

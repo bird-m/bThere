@@ -9,38 +9,52 @@ export function receiveResponses(responses) {
     }
 }
 
-export function selectResponses(submissionId) {
-    return function(state) {
-        if (state && state.responses) {
-            return Object.values(state.responses).filter((res) => {
-                return parseInt(res.submissionId) === parseInt(submissionId);
-            })
-        } else {
-            return [];
-        }
-    }
-}
+// export function selectResponses(submissionId) {
+//     return function(state) {
+//         if (state && state.responses) {
+//             return Object.values(state.responses).filter((res) => {
+//                 return parseInt(res.submissionId) === parseInt(submissionId);
+//             })
+//         } else {
+//             return [];
+//         }
+//     }
+// }
 
-export function selectResponsesByQuestionId(submissionId) {
-    return function(state) {
+// export function selectReso
+
+export function selectResponsesByForm(formId) {
+    return function (state) {
         if(state && state.responses) {
-            
-            const keys = Object.keys(state.responses)
-            const output = {}
-
-            keys.forEach((k) => {
-                const response = state.responses[k];
-                if(parseInt(response.submissionId) === parseInt(submissionId)) {
-                    output[response.questionId] = response.answer
-                }
-            })
-
-            return output
+            return Object.values(state.responses).filter((r) => (parseInt(r.formId) === parseInt(formId)))
         } else {
-            return {};
+            return []
         }
     }
 }
+
+// export function selectResponse
+
+// export function selectResponsesByQuestionId(submissionId) {
+//     return function(state) {
+//         if(state && state.responses) {
+            
+//             const keys = Object.keys(state.responses)
+//             const output = {}
+
+//             keys.forEach((k) => {
+//                 const response = state.responses[k];
+//                 if(parseInt(response.submissionId) === parseInt(submissionId)) {
+//                     output[response.questionId] = response.answer
+//                 }
+//             })
+
+//             return output
+//         } else {
+//             return {};
+//         }
+//     }
+// }
 
 export default function responseReducer(state = {}, action) {
     switch(action.type) {

@@ -3,6 +3,7 @@
     width: 100vw;
     background-color: #f5f7fb;
     flex-direction: column;
+    padding-top: 8%;
 }
 
 .splash-wrapper button {

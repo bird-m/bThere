@@ -28,7 +28,9 @@ export default function FormsPage (props) {
 
     return (
         <div className="form-page-wrapper">
-            <LoggedInBanner/>
+            <div className="added-banner-wrap">
+                <LoggedInBanner/>
+            </div>
             <div className="form-nav">
                 <Link to="/form" className="form-button"><button>Create Form</button></Link>
             </div>

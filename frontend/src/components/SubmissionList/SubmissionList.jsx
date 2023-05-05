@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import './SubmissionList.css'
 import { useEffect } from 'react';
 import { fetchSubmissions, selectSubmissions } from '../../store/submissionReducer';
-import SubmissionPane from '../SubmissionPane/SubmissionPane';
+// import SubmissionPane from '../SubmissionPane/SubmissionPane';
 import { useState } from 'react';
 import { formatDate } from '../../util/util';
 // import {AiOutlineClose} from 'react-icons/ai'
 import {BsCheck2Circle} from 'react-icons/bs'
 import {BsXSquare} from 'react-icons/bs'
+import {BiDownload} from 'react-icons/bi'
+import { selectResponsesByForm } from '../../store/responseReducer';
 // import stream from 'stream-browserify';
 // import {stringify} from 'csv-stringify';
 
@@ -28,11 +30,29 @@ export default function SubmissionList ({form, questions}) {
     }, [questions])
 
     const submissions = useSelector(selectSubmissions(form.id));
+    const responses = useSelector(selectResponsesByForm(form.id));
+
+    console.log(responses);
 
     function generateCsvData() {
-        const header = ['SubmissionTime','SubmitterName','SubmitterEmail','SubmitterStatus']
+        let header = ['SubmissionTime','SubmitterName','SubmitterEmail','SubmitterStatus']
+        let questionHeader = []
+        let questionIds = [];
+        
+        if(form && questions && submissions) {
+            // debugger;
+            questions.forEach((q, ix) => {
+                questionHeader.push(q.prompt);
+                questionIds.push(q.id);
+            })
+        }
 
-        let csv = header.join(',') + '\n'
+        console.log(questionIds, "QIDs");
+
+        header = header.concat(questionHeader)
+
+        // prime header
+        let csv = deComma(header).join(',') + '\n'
 
         submissions.forEach(sub => {
             const row = [
@@ -41,27 +61,72 @@ export default function SubmissionList ({form, questions}) {
                 sub.email,
                 sub.status
             ]
-            csv = csv + row.join(",") + '\n';
+
+            // console.log("RUNNING");
+            // console.log(responses, "Responses");
+            let subResponses = responses.filter((r)=> {
+                // console.log(sub.id, "SUBID");
+                // console.log(r.submissionId, "RSUBID");
+                return parseInt(sub.id) === parseInt(r.submissionId);
+            })
+
+            console.log(subResponses, "subResponses");
+
+            const resRow = []
+            
+            questionIds.forEach((qId)=> {
+                let found = false
+                for (let index = 0; index < subResponses.length; index++) {
+                    const r = subResponses[index];
+                    if(parseInt(r.questionId) === parseInt(qId)) {
+                        resRow.push(r.answer)
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found) {
+                    resRow.push(" ")
+                }
+            })
+
+            console.log(resRow, "RESROW");
+
+            // console.log(subResponses, "srrrrr")
+
+            // questionIds.forEach((id) => {
+                
+            // })
+
+            // debugger;
+            
+            // debugger;
+            const preCsv = row.concat(resRow)
+            // debugger;
+            csv = csv + deComma(preCsv).join(",") + '\n';
+            // debugger;
         });
 
+        console.log(csv);
         return csv;
     }
 
-    // function downloadCsv() {
-    //     const csvData = generateCsvData();
-    //     stringify(csvData, (err, output) => {
-    //       if (err) {
-    //         console.error(err);
-    //         return;
-    //       }
-    //       const blob = new Blob([output], { type: 'text/csv' });
-    //       const url = URL.createObjectURL(blob);
-    //       return url;
-    //     });
-    //   }
+    function deComma(array) {
+        return array.map((e) => {
+            return e.replace(/,/g, "");
+        })
+    }
+
+    function downloadCsv() {
+        const csvData = generateCsvData();
+
+        const blob = new Blob([csvData], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          return url;
+      }
 
     return (
         <div className="sub-list-wrapper">
+            <div className="sl-download-div"><a download={`${form.title}_response_list.csv`} href={downloadCsv()}><BiDownload/></a></div>
             <div className="sub-row-wrapper sub-row-header">
                 <div className="sl-cell">Submission Time</div>
                 <div className="sl-cell">Name</div>

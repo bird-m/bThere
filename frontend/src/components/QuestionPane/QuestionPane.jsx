@@ -57,15 +57,21 @@ export default function QuestionPane ({question, createMode, formId}) {
     
     // return null;
     return (<div className="qp-wrapper">
+        <div className="qp-mod-button-wrapper">
+            sdfa
+        </div>
         <div className="qp">
             <div className="qp-ele">
-                {(editMode || createMode) ? <input type="text" value={prompt} onChange={(e) => {setPrompt(e.target.value)}}/> : <h2>{prompt}</h2>}
+                {(editMode || createMode) ? <input placeholder="enter the question here" type="text" value={prompt} onChange={(e) => {setPrompt(e.target.value)}}/> : <h2>{prompt}</h2>}
                 
             </div>
-            <div className="qp-ele">
-                {(editMode || createMode) ? <textarea value={description} onChange={(e) => {setDescription(e.target.value)}}/> : <h2>{description}</h2>}
-                
-            </div>
+
+            {!description && !(editMode || createMode) ? null :
+                <div className="qp-ele">
+                    {(editMode || createMode) ? <textarea placeholder="enter a description here" value={description} onChange={(e) => {setDescription(e.target.value)}}/> : <h2>{description}</h2>}
+                </div>
+            }
+
 
             {actionButton()}
 

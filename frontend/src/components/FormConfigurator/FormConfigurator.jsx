@@ -61,4 +61,3 @@ export default function FormConfigurator () {
         </div>
     </div>)
 }
-
