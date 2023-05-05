@@ -36,10 +36,10 @@
 .ql-added-questions {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    /* gap: 30px; */
 }
 
-.ql-added-questions .qp-wrapper:first-of-type {
+.qp-wrapper {
     padding-top: 20px;
 }
 

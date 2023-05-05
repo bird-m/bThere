@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteQuestion, fetchQuestion, postQuestion, selectQuestion } from "../../store/questionReducer";
 import './QuestionPane.css'
+import {AiFillEdit} from 'react-icons/ai'
+import {FaCheck} from 'react-icons/fa'
+import {AiFillDelete} from 'react-icons/ai'
 
 export default function QuestionPane ({question, createMode, formId}) {
     // console.log(formId, "FORM ID IN QP")
@@ -53,12 +56,30 @@ export default function QuestionPane ({question, createMode, formId}) {
         }
     }
 
+    function injectIcons() {
+        if (editMode) {
+            return (
+            <>
+            <div></div>
+            <div className="qp-mod-icon qp-save-icon" onClick={updateQuestion}><FaCheck/></div>
+            </>)
+        } else if (createMode) {
+            return null;
+        }
+        else {
+            return (<>
+                    <div className="qp-mod-icon qp-del-icon" onClick={() => {dispatch(deleteQuestion(question.id))}}><AiFillDelete/></div>
+                    <div className="qp-mod-icon qp-edit-icon" onClick={() => setEditMode(true)}><AiFillEdit/></div>
+                </>)
+        }
+    }
+
     // let a = {question: {formId: 1, prompt: "updated another",required: true, description: "hd"}}
     
     // return null;
     return (<div className="qp-wrapper">
         <div className="qp-mod-button-wrapper">
-            sdfa
+            {injectIcons()}
         </div>
         <div className="qp">
             <div className="qp-ele">
@@ -73,7 +94,7 @@ export default function QuestionPane ({question, createMode, formId}) {
             }
 
 
-            {actionButton()}
+            {/* {actionButton()} */}
 
         </div>
     </div>);

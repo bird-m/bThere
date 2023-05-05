@@ -6,7 +6,9 @@
 .qp-mod-button-wrapper {
     position: absolute;
     top: 10px;
-    right: 10px;
+    display: flex;
+    width: 96%;
+    justify-content: space-between;
 }
 
 .qp {
@@ -51,6 +53,7 @@
 .qp-save-cancel {
     display: flex;
     justify-content: space-around;
+    flex-direction: row-reverse;
 }
 
 .qp-save-cancel button {
@@ -63,4 +66,20 @@
 
 .save-button {
     background-color: green;
+}
+
+.qp-mod-icon {
+    color: rgb(168, 168, 24);
+}
+
+.qp-mod-icon:hover {
+    cursor: pointer;
+}
+
+.qp-save-icon {
+    color:green;
+}
+
+.qp-del-icon {
+    color: rgb(114, 8, 8);
 }
