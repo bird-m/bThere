@@ -141,9 +141,9 @@ export default function FormCreatePage (props) {
                             <div><span>Add questions</span> to your invite!</div>
 
                         </div>
-                        <div className="fcp-cta">
+                        <div className="fcp-cta" onClick={() => {history.push(`/submit/${createdFormId}`)}}>
 
-                            <div className="fcp-icon"onClick={() => {history.push(`/submit/${createdFormId}`)}}><TbShare2/></div>
+                            <div className="fcp-icon"><TbShare2/></div>
                             <div><span>Share</span> your invite!</div>
 
                              
