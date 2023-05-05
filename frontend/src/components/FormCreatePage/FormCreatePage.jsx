@@ -139,11 +139,11 @@ export default function FormCreatePage (props) {
                             
                             <div className="fcp-icon"><AiOutlinePlusCircle/></div>
                             <div><span>Add questions</span> to your invite!</div>
-                            
+
                         </div>
                         <div className="fcp-cta">
 
-                            <div className="fcp-icon"onClick={() => {window.open(`/submit/${createdFormId}`)}}><TbShare2/></div>
+                            <div className="fcp-icon"onClick={() => {history.push(`/submit/${createdFormId}`)}}><TbShare2/></div>
                             <div><span>Share</span> your invite!</div>
 
                              

@@ -19,10 +19,12 @@ export default function FormDetail (props) {
     function handleShare () {
 
     }
-
+    
     return (
         <div className="detail-wrapper">
-            <div className="detail-share-icon" onClick={(e)=> {window.open(`/submit/${form.id}`)}}><TbShare2/></div>
+            <div className="detail-share-icon">
+                <Link to={`/submit/${form.id}`}><TbShare2/></Link>
+            </div>
             <div className="detail-title">
                 <Link to={`/form/configure/${form.id}`}>{form ? form.title : "loading..."}</Link>
             </div>
