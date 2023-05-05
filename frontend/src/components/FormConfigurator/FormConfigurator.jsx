@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './FormConfigurator.css'
 import { useEffect } from 'react';
 import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { QuestionList } from '../QuestionList/QuestionList';
 import FormConfigSidePanel from '../FormConfigSidePanel/FormConfigSidePanel';
 import { LoggedInBanner } from '../LoggedInBanner/LoggedInBanner';
@@ -16,8 +16,18 @@ export default function FormConfigurator () {
     const {formId} = useParams();
     // console.log("FormConfigurator");
     const dispatch = useDispatch();
+    const location = useLocation();
 
-    const [mode, setMode] = useState("responses")
+    const [mode, setMode] = useState(startingPoint());
+
+
+    function startingPoint() {
+        if (location && location.state && location.state.dest && location.state.dest === "questions") {
+            return "questions"
+        } else {
+            return "responses"
+        }
+    }
 
     useEffect(() => {
         dispatch(fetchQuestions(formId));

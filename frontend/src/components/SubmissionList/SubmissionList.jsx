@@ -32,7 +32,7 @@ export default function SubmissionList ({form, questions}) {
     const submissions = useSelector(selectSubmissions(form.id));
     const responses = useSelector(selectResponsesByForm(form.id));
 
-    console.log(responses);
+    // console.log(responses);
 
     function generateCsvData() {
         let header = ['SubmissionTime','SubmitterName','SubmitterEmail','SubmitterStatus']
@@ -47,7 +47,7 @@ export default function SubmissionList ({form, questions}) {
             })
         }
 
-        console.log(questionIds, "QIDs");
+        // console.log(questionIds, "QIDs");
 
         header = header.concat(questionHeader)
 
@@ -70,7 +70,7 @@ export default function SubmissionList ({form, questions}) {
                 return parseInt(sub.id) === parseInt(r.submissionId);
             })
 
-            console.log(subResponses, "subResponses");
+            // console.log(subResponses, "subResponses");
 
             const resRow = []
             
@@ -89,7 +89,7 @@ export default function SubmissionList ({form, questions}) {
                 }
             })
 
-            console.log(resRow, "RESROW");
+            // console.log(resRow, "RESROW");
 
             // console.log(subResponses, "srrrrr")
 
@@ -106,7 +106,7 @@ export default function SubmissionList ({form, questions}) {
             // debugger;
         });
 
-        console.log(csv);
+        // console.log(csv);
         return csv;
     }
 

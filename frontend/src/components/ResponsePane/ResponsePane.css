@@ -38,7 +38,7 @@
 .rp-thank-you {
     margin-top: 10%;
     width: 70%;
-    height: 20%;
+    height: 25%;
     justify-content: center;
     display: flex;
     align-items: center;
@@ -50,6 +50,7 @@
     flex-direction: column;
     gap: 20px;
     font-size: x-large;
+    color: #4B5563;
 }
 
 .rp-cta {

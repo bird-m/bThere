@@ -10,7 +10,9 @@
 .ql-header {
     text-align: center;
     width: 100%;
-    padding-top: 20px;
+    font-weight: 600;
+    color: #4B5563;
+    /* padding-top: 20px; */
 }
 
 .ql-added-questions {
@@ -30,7 +32,7 @@
 
 .ql-create {
     width: 80%;
-    margin: 25px 0px;
+    margin-bottom: 25px;
 }
 
 .ql-added-questions {

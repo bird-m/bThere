@@ -47,7 +47,7 @@
 }
 
 .qp-ele label + textarea {
-    width: 60%;
+    width: 60.5%;
 }
 
 .qp-save-cancel {
@@ -61,11 +61,11 @@
 }
 
 .cancel-button {
-    background-color: red;
+    background-color: #720808;
 }
 
 .save-button {
-    background-color: green;
+    background-color: #008000;
 }
 
 .qp-mod-icon {

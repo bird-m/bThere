@@ -30,6 +30,6 @@ export function isValidEmail(email) {
       .replace(',', '') // remove the comma from the formatted date string
       .replace(' ', 'T'); // replace the space between the date and time with 'T'
       
-      console.log(formattedDate, "DATE"); // output: "2023-05-03T18:47"
-      console.log()
+    //   console.log(formattedDate, "DATE"); // output: "2023-05-03T18:47"
+    //   console.log()
   }
