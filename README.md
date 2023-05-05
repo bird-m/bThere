@@ -1,24 +1,14 @@
-# README
+# bThere
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
+Manage your RSVP lists for all of life's events with bThere. Simply create a form, add your questions, share, and....let the RSVPs flow in.
 
-Things you may want to cover:
+## Technlogies
+bThere is a full stack application utilizing Rails and React/Redux to manage all the complexities of event management.
 
-* Ruby version
+## Challenges
+### Dynamic Input Processing
+Unlike simple forms that have a fixed set of inputs, bThere allows the user to create their own forms with an arbitrary number of questions they create. This added significant management complexity in terms of tracking all the input elements and processing them through to the front end.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### CSV Output
+The CSV input feature involves bringing together several slices of state into a singular backage, requiring significant processing on the front end.
