@@ -81,8 +81,8 @@ export function postForm(form, formId = "") {
             body: formPackage
         })
         const data = await response.json();
-        dispatch(receiveForm(data));
-        return response;
+        return dispatch(receiveForm(data));
+        // return response;
     }
 }
 

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './ResponsePage.css'
 import { useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
 import ResponsePane from '../ResponsePane/ResponsePane';
 import csrfFetch from '../../store/csrf';
@@ -13,6 +13,7 @@ export default function ResponsePage (props) {
     const {formId} = useParams()
 
     const dispatch = useDispatch();
+    // const location = useLocation();
 
     useEffect(() => {
         dispatch(fetchQuestions(formId));
@@ -109,6 +110,8 @@ export default function ResponsePage (props) {
             )
         }
     }
+
+    
 
     return (
         <div className="response-wrapper">

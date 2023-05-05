@@ -44,8 +44,8 @@ export function QuestionList({questions, formId}) {
                         <textarea value={description} id="create-des" onChange={(e) => {setDescription(e.target.value)}}/>
                     </div>
                     <div className="qp-save-cancel">
-                        <button className="cancel-button" onClick={handleCancel}>Cancel</button>
                         <button className="save-button" onClick={handleSave}>Save</button>
+                        <button className="cancel-button" onClick={handleCancel}>Cancel</button>
                     </div>
                 </div>
             </div>

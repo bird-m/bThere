@@ -9,6 +9,9 @@ import { LoggedInBanner } from "../LoggedInBanner/LoggedInBanner";
 import {AiOutlineClose} from 'react-icons/ai'
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import sample from '../../images/sample-form-img.png'
+import {AiOutlinePlusCircle} from 'react-icons/ai'
+import {TbShare2} from 'react-icons/tb'
+import {AiOutlineEye} from 'react-icons/ai'
 // import loadingImg from '../../images/loading.png'
 // import {IoCloseSharp} from 'react-icons/io'
 
@@ -41,6 +44,8 @@ export default function FormCreatePage (props) {
     const [customUrl, setCustomUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
     const [formPhoto, setFormPhoto] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
+    const [createdFormId, setCreatedFormId] = useState(null);
 
     const editForm = useSelector(selectForm(formId));
 
@@ -84,7 +89,9 @@ export default function FormCreatePage (props) {
         // console.log(formId, "FORMID")
         dispatch(postForm(formData, formId || ""))
             .then((res) => {
-                history.push("/forms");
+                // debugger;
+                setCreatedFormId(res.form.id)
+                setSubmitted(true);
             })
             .catch((res) => {
                 res.json().then((data) => {
@@ -117,6 +124,38 @@ export default function FormCreatePage (props) {
                 <div className="fc-df-txt">Default Image <br/>(will exclude this text)</div>
             </div>);
         }
+    }
+
+    if(submitted) {
+        // console.log(submitt)
+        return (
+            <div className="fcp-thank-you-wrapper">
+                <div className="fcp-thank-you">
+                    <div className="fcp-header">
+                    {formId ? "You've updated your invite! Remember you can always..." : "You've created an invite! What's next you ask?"}
+                    </div>
+                    <div className="fcp-cta-wrapper">
+                        <div className="fcp-cta" onClick={() => {history.push(`/form/configure/${createdFormId}`,{dest:"questions"})}}>
+                            
+                            <div className="fcp-icon"><AiOutlinePlusCircle/></div>
+                            <div><span>Add questions</span> to your invite!</div>
+                            
+                        </div>
+                        <div className="fcp-cta">
+
+                            <div className="fcp-icon"onClick={() => {window.open(`/submit/${createdFormId}`)}}><TbShare2/></div>
+                            <div><span>Share</span> your invite!</div>
+
+                             
+                        </div>
+                        <div className="fcp-cta" onClick={() => {history.push(`/form/configure/${createdFormId}`)}}>
+                            <div className="fcp-icon"><AiOutlineEye/></div>
+                            <div><span>View</span> responses to your invite!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     return (

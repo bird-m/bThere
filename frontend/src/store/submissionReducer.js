@@ -57,7 +57,7 @@ export default function submissionReducer(state = {}, action) {
 
     switch (action.type) {
         case RECEIVE_SUBMISSIONS:
-            console.log("****THIS SHOULD BE DEPRECATED****");
+            // console.log("****THIS SHOULD BE DEPRECATED****");
             // the || accounts for when we attempt to grab submissions but there aren't any there
             return (action.submissions || state);
         case RECEIVE_SUBMISSIONS_PAYLOAD:
