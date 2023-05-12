@@ -1,4 +1,3 @@
-
 .response-wrapper {
     display: flex;
     flex-direction: column;
@@ -12,4 +11,22 @@
 
 .no-gap {
     gap: 0px;
+}
+
+.restriction-message, .restricted {
+    text-align: center;
+}
+
+.restriction-message {
+    color: #4B5563;
+}
+
+.email-password {
+    text-align: center;
+    color: #4B5563;
+}
+
+.restricted {
+    color: red;
+    font-weight: 600;
 }

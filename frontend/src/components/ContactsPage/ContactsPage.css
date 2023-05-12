@@ -1,0 +1,38 @@
+.contact-show {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.contact-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.contact-entry svg:hover {
+    cursor: pointer;
+}
+
+.contact-list-entry svg:hover {
+    cursor: pointer;
+}
+
+.contact-list-entry svg {
+    color: #720808;
+}
+
+.contact-list-entry {
+    display: flex;
+}
+
+.contact-list-entry span {
+    margin-left: 10px;
+}
+
+.contacts-header {
+    margin-bottom: 10px;
+    font-weight: 600;
+}

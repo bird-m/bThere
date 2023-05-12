@@ -1,0 +1,1 @@
+json.extract! @contact, :id, :email, :user_id

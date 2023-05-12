@@ -10,6 +10,7 @@ import QuestionPane from '../QuestionPane/QuestionPane';
 import { useState } from 'react';
 import SubmissionList from '../SubmissionList/SubmissionList';
 import { fetchForm, selectForm } from '../../store/formReducer';
+import ContactsPage from '../ContactsPage/ContactsPage';
 
 export default function FormConfigurator () {
 
@@ -51,8 +52,11 @@ export default function FormConfigurator () {
                 
             case "questions":
                 return <QuestionList questions={questions} formId={formId}/>
+            case "contacts":
+                return <ContactsPage/>;
             default: 
                 return <QuestionList questions={questions} formId={formId}/>
+                // return <ContactsPage/>;
         }
     }
 

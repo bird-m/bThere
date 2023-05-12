@@ -17,3 +17,17 @@
 .logged-in-banner-wrapper div {
     padding-right: 20px;
 }
+
+.ban-email {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.ban-email button {
+    height: 20px;
+}
+
+.banner-logout {
+    margin-top: 10px;
+}

@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
     get '/:form_id/submissions', to: 'submissions#index'
     get '/photos', to: 'forms#test'
+    get '/contacts', to: 'contacts#index'
+    delete '/contacts/:id', to: 'contacts#destroy'
+    post '/contacts', to: 'contacts#create'
+    post '/check/:form_id/:ignore', to: 'contacts#check'
   end
 
   # post 'api/test', to: 'application#test'

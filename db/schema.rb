@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_03_161500) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_044602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_161500) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "email", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_contacts_on_email", unique: true
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
+
   create_table "forms", force: :cascade do |t|
     t.string "title", null: false
     t.string "description"
@@ -50,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_161500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "custom_url", null: false
+    t.boolean "restricted", default: false
     t.index ["custom_url"], name: "index_forms_on_custom_url", unique: true
     t.index ["user_id", "title"], name: "index_forms_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_forms_on_user_id"
@@ -98,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_161500) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "contacts", "users"
   add_foreign_key "forms", "users"
   add_foreign_key "questions", "forms"
   add_foreign_key "responses", "questions"

@@ -9,6 +9,7 @@ export default function FormConfigSidePanel ({setMode}) {
         <div className="form-config-panel-wrapper">
             <div onClick={() => {setMode("responses")}} className="sp-nav-div">View Responses</div>
             <div onClick={() => {setMode("questions")}} className="sp-nav-div">Add Questions</div>
+            <div onClick={() => {setMode("contacts")}} className="sp-nav-div">Add Contacts</div>
             <div className="sp-nav-div" onClick={() => {history.push("/forms")}}>Back to Forms</div>
 
 

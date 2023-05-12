@@ -7,6 +7,7 @@ import formReducer from './formReducer';
 import questionReducer from './questionReducer';
 import submissionReducer from './submissionReducer';
 import responseReducer from './responseReducer';
+import contactReducer from './contactReducer';
 
 // export function rootReduc
 
@@ -15,7 +16,8 @@ export const rootReducer = combineReducers({
     forms: formReducer,
     questions: questionReducer,
     submissions: submissionReducer,
-    responses: responseReducer
+    responses: responseReducer,
+    contacts: contactReducer
 })
 
 let enhancer;

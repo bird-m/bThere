@@ -46,6 +46,7 @@ export default function FormCreatePage (props) {
     const [formPhoto, setFormPhoto] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [createdFormId, setCreatedFormId] = useState(null);
+    const [restrictedForm, setRestrictedForm] = useState(false);
 
     const editForm = useSelector(selectForm(formId));
 
@@ -64,6 +65,7 @@ export default function FormCreatePage (props) {
             setDescription(editForm.description);
             setCustomUrl(editForm.customUrl);
             setFormPhoto(editForm.photo ? editForm.photo : sample)
+            setRestrictedForm(editForm.restricted)
         }
     }, [editForm])
 
@@ -79,6 +81,7 @@ export default function FormCreatePage (props) {
         formData.append('form[title]', title)
         formData.append('form[description]', description)
         formData.append('form[customUrl]', customUrl)
+        formData.append('form[restricted]', restrictedForm)
 
         if (photoFile) {
             formData.append('form[photo]', photoFile);
@@ -142,7 +145,7 @@ export default function FormCreatePage (props) {
 
                         </div>
                         <div className="fcp-cta" onClick={() => {history.push(`/submit/${createdFormId}`)}}>
-
+                    
                             <div className="fcp-icon"><TbShare2/></div>
                             <div><span>Share</span> your invite!</div>
 
@@ -186,6 +189,10 @@ export default function FormCreatePage (props) {
                 <div className="fc-input-pane">
                     <label htmlFor="custom-url">CUSTOM URL </label><br/>
                     <input id="custom-url" type='text' value = {customUrl} onChange={(e) => {setCustomUrl(e.target.value)}}/>
+                </div>
+                <div className="fc-check-pane">
+                    <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => {setRestrictedForm((prev)=> !prev)}}></input>
+                    <label htmlFor="fc-restricted">RESTRICTED TO CONTACTS</label>
                 </div>
                 <div className="fc-input-pane">
                     <label htmlFor="photo">{photoText}</label><br/>

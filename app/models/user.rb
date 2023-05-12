@@ -29,6 +29,12 @@ class User < ApplicationRecord
     through: :forms,
     source: :questions
 
+  has_many :contacts,
+    class_name: :Contact,
+    foreign_key: :user_id,
+    inverse_of: :user,
+    dependent: :destroy
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     

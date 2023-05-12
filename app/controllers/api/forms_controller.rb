@@ -76,7 +76,7 @@ class Api::FormsController < ApplicationController
   private
 
   def form_params
-    params.require(:form).permit(:title, :description, :custom_url, :photo)
+    params.require(:form).permit(:title, :description, :custom_url, :photo, :restricted)
   end
 
 end

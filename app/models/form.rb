@@ -10,12 +10,14 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  custom_url  :string           not null
+#  restricted  :boolean          default(FALSE)
 #
 class Form < ApplicationRecord
 
     validates :title, :status, presence: true
     validates :title, uniqueness: {scope: :user_id}
     validates :custom_url, uniqueness: true, allow_nil: true
+    validates :restricted, inclusion: {in: [true, false]}
 
     has_one_attached :photo
 
