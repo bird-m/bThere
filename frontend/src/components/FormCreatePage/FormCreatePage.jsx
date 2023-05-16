@@ -201,7 +201,7 @@ export default function FormCreatePage (props) {
                 <div className="fc-input-pane">
                     <button onClick={handlePhotoTest}>{buttonText}</button>
                 </div>
-                <div className="fc-input-pane">
+                <div className="fc-input-pane" id="fc-error-pane">
                     <div className="form-create-errors">
                         {errors.map((e, ix) => {
                             return (<><span key={ix}>{e}</span><br/></>)
