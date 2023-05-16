@@ -32,7 +32,7 @@ export default function FormsPage (props) {
                 <LoggedInBanner/>
             </div>
             <div className="form-nav">
-                <Link to="/form" className="form-button"><button>Create Form</button></Link>
+                <Link to="/form" className="form-button"><button>Create New Form</button></Link>
             </div>
             <div className="form-grid">
                 {forms.map((form) => {

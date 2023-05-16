@@ -6,6 +6,7 @@ import { loggedInUser, login, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
+import checkLogo from '../../images/check-logo.png'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function AuthFormPage (props) {
@@ -59,18 +60,18 @@ export default function AuthFormPage (props) {
             <div className='auth-body'>
                <div className="auth-pane">
                     <div className="auth-header">
-                        <Link className="auth-header" to="/"><img className='logo' src={logo}/></Link>
+                        <Link className="auth-header" to="/"><img className='logo' src={checkLogo}/></Link>
                         <span className='cta'>
                             {mode === "login" ? "Sign in to your account" : "Sign up to create your event."}
                         </span> <br/>
-                            {mode === "login" ? <a href='/signup'>Or sign up free</a> : ""}
+                            {mode === "login" ? <a href='/signup'>Or sign up here</a> : ""}
                     </div>
                     <div className="auth-form">
                         <form onSubmit={handleSubmit} >
                             <div className="form-fields">
                                 <span className='auth-element'>
                                     <label htmlFor='email'>EMAIL ADDRESS</label>
-                                    <input type='text' id='email' value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                                    <input type='email' id='email' value={email} onChange={(e)=> setEmail(e.target.value)}/>
                                 </span>
                                 <span className='auth-element'>
                                     <label htmlFor='password'>PASSWORD</label>
