@@ -17,7 +17,8 @@ export default function ContactsPage () {
 
     const contacts = useSelector(selectContacts);
 
-    function handleContactCreate () {
+    function handleContactCreate (e) {
+        e.preventDefault();
         const newContact = {contact: {
             email
         }}
@@ -33,12 +34,12 @@ export default function ContactsPage () {
     // console.log()
     return (
         <div className="contact-show">
-            <div className="contact-entry">
+            <form className="contact-entry" onSubmit={(e) => {handleContactCreate(e)}}>
                 <label htmlFor='contact-email'>Add new contact</label>
-                <input placeholder='contact email' type="text" htmlFor='contact-email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>
-                <div onClick={handleContactCreate}><AiOutlinePlusCircle/></div>
+                <input placeholder='contact email' type="email" required htmlFor='contact-email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>
+                <button className='svg-button dark-grey'><AiOutlinePlusCircle/></button>
                 
-            </div>
+            </form>
             <div className="contacts-header">
                 {contacts ? "CONTACTS" : ""}
             </div>

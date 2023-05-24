@@ -92,13 +92,17 @@
     color: rgb(114, 8, 8);
 }
 
-#qp-save-check {
+.svg-button svg {
+    height: 16px;
+    width: 16px;
+}
+
+.svg-button {
     padding: unset;
     height: unset;
     background-color: transparent;
 }
 
-#qp-save-check svg {
-    height: 16px;
-    width: 16px;
+.dark-grey {
+    color: #4B5563;
 }

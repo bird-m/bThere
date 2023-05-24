@@ -37,7 +37,7 @@ export default function QuestionPane({ question, formId }) {
             return (
                 <>
                     <div></div>
-                    <button id="qp-save-check" className="qp-mod-icon qp-save-icon"><FaCheck /></button>
+                    <button className="qp-mod-icon qp-save-icon svg-button"><FaCheck /></button>
                 </>)
         }
         else {
