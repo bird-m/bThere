@@ -16,10 +16,12 @@ import BannerNav from '../BannerNav/BannerNav';
 export default function FormConfigurator () {
 
     // options on the topBar
-    const RESPONSES = "View Responses"
+    const RESPONSES = "Responses"
     const QUESTIONS = "Questions"
     const CONTACTS = "Invite List"
     const FORMS = "Back to Forms"
+
+    const navOptions = [RESPONSES, QUESTIONS, CONTACTS, FORMS]
 
     const history = useHistory();
 
@@ -76,15 +78,10 @@ export default function FormConfigurator () {
         <div className="fc-banner">
             <LoggedInBanner/>
         </div>
-        <BannerNav setTab={setMode} tab={mode} navOptions={[
-            RESPONSES,
-            QUESTIONS,
-            CONTACTS,
-            FORMS
-        ]}/>
+        <BannerNav setTab={setMode} tab={mode} navOptions={navOptions}/>
         <div className="fc-sub-header">
             <div className="fc-side-panel">
-                <FormConfigSidePanel setMode={setMode}/>
+                <FormConfigSidePanel setMode={setMode} navOptions={navOptions}/>
             </div>
             <div className="fc-question-list">
                 {paneMode()}

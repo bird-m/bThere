@@ -33,3 +33,12 @@ export function isValidEmail(email) {
     //   console.log(formattedDate, "DATE"); // output: "2023-05-03T18:47"
     //   console.log()
   }
+
+  export function cleanDate(dateString) {
+    const dateStringComponents = dateString.split("T");
+    const dateComponents = dateStringComponents[0].split("-");
+    let year = dateComponents.shift();
+    year = year.slice(2,4);
+    dateComponents.push(year);
+    return dateComponents.join("-");
+  }
