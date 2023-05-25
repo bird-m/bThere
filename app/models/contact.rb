@@ -16,4 +16,10 @@ class Contact < ApplicationRecord
         class_name: :User,
         foreign_key: :user_id,
         inverse_of: :contacts
+
+    has_many :invites,
+        class_name: :Invite,
+        foreign_key: :contact_id,
+        inverse_of: :contact,
+        dependent: :destroy
 end

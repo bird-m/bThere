@@ -192,7 +192,7 @@ export default function FormCreatePage (props) {
                 </div>
                 <div className="fc-check-pane">
                     <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => {setRestrictedForm((prev)=> !prev)}}></input>
-                    <label htmlFor="fc-restricted">RESTRICTED TO CONTACTS</label>
+                    <label htmlFor="fc-restricted">Invite Only</label>
                 </div>
                 <div className="fc-input-pane">
                     <label htmlFor="photo">{photoText}</label><br/>

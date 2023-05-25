@@ -41,4 +41,10 @@ class Form < ApplicationRecord
     has_many :responses,
         through: :submissions,
         source: :responses
+
+    has_many :invites,
+        class_name: :Invite,
+        foreign_key: :form_id,
+        inverse_of: :form,
+        dependent: :destroy
 end

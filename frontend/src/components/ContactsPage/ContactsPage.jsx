@@ -4,6 +4,7 @@ import {AiOutlinePlusCircle} from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts, postContact, selectContacts } from '../../store/contactReducer';
 import {AiFillDelete} from 'react-icons/ai'
+import ContactPane from '../CreationPane/ContactPane';
 
 export default function ContactsPage () {
 

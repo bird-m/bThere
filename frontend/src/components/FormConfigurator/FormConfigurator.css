@@ -22,7 +22,7 @@
 .fc-question-list {
     display: flex;
     justify-content: center;
-    width: 85%;
+    width: 100%;
     padding-top: 50px;
     background-color: #F3F4F6;
     padding-bottom: 50px;
