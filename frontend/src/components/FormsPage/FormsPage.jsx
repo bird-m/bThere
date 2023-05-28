@@ -10,7 +10,6 @@ import checkLogo from '../../images/check-logo.png'
 import { LoggedInBanner } from "../LoggedInBanner/LoggedInBanner";
 import ContactsPage from "../ContactsPage/ContactsPage";
 import BannerNav from "../BannerNav/BannerNav";
-import Modal from "../Modal/Modal";
 
 export default function FormsPage(props) {
 
@@ -21,7 +20,6 @@ export default function FormsPage(props) {
     const forms = useSelector(selectAllForms);
     const [tab, setTab] = useState(FORMS);
     const sessionUser = useSelector(loggedInUser);
-    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         dispatch(fetchForms())
@@ -38,7 +36,6 @@ export default function FormsPage(props) {
 
     return (
         <div className="form-page-wrapper">
-            {showModal && <Modal setShowModal={setShowModal}/>}
             <div className="added-banner-wrap">
                 <LoggedInBanner />
             </div>

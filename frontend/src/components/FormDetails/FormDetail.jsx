@@ -4,24 +4,30 @@ import './FormDetail.css'
 import {AiFillDelete} from 'react-icons/ai'
 import {MdModeEdit} from 'react-icons/md'
 import { useDispatch } from 'react-redux';
-import { deleteForm } from '../../store/formReducer';
 import {TbShare2} from 'react-icons/tb'
+import { useState } from 'react';
+import Modal from '../Modal/Modal'
+import DeletFormConfirmation from '../DeleteFormConfirmation/DeleteFormConfirmation';
 
 // MdModeEdit
 
-export default function FormDetail (props) {
+export default function FormDetail ({form}) {
 
-    const {form} = props;
     const history = useHistory();
     const dispatch = useDispatch();
-    // console.log(form);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    function handleShare () {
+    function closeModals() {
+        showDeleteModal && setShowDeleteModal(false);
+    }
 
+    function openDeleteModal() {
+        setShowDeleteModal(true);
     }
     
     return (
         <div className="detail-wrapper">
+            {showDeleteModal && <Modal closeModal={closeModals} content={<DeletFormConfirmation formId={form.id} closeModal={closeModals}/>}/>}
             <div className="detail-share-icon">
                 <Link to={`/submit/${form.id}`}><TbShare2/></Link>
             </div>
@@ -35,7 +41,7 @@ export default function FormDetail (props) {
             </div>
             <div className="form-status">
                 <span>
-                <Link to="#" onClick={() => {dispatch(deleteForm(form.id))}}>
+                <Link to="#" onClick={openDeleteModal}>
                     <span className='form-delete-icon'>
                         <AiFillDelete/>
                     </span>

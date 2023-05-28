@@ -6,33 +6,7 @@ import FormDetail from '../FormDetails/FormDetail';
 import './FormSummary.css'
 import { Redirect } from 'react-router-dom';
 
-export function FormSummary (props) {
-
-    const {form} = props;
-
-    // const sessionUser = useSelector(loggedInUser);
-
-    // if(!sessionUser) {
-    //     return <Redirect to="/login" />
-    // }
-
-    
-
-    // const 
-    // debugger;
-    
-    // return (
-    //     <div className="form-grid-wrapper">
-    //         forms.map((form)=> {
-    //             return (
-    //                 <div className="form-summary-wrapper">
-    //                     <img className='form-image' src={sample}/>
-    //                     <FormDetail form={form}/>
-    //                 </div>
-    //             )
-    //         })
-    //     </div>
-    //  );
+export function FormSummary ({form}) {
 
     return (<div className="form-summary-wrapper">
         
