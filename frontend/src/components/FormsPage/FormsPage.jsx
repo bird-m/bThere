@@ -10,11 +10,13 @@ import checkLogo from '../../images/check-logo.png'
 import { LoggedInBanner } from "../LoggedInBanner/LoggedInBanner";
 import ContactsPage from "../ContactsPage/ContactsPage";
 import BannerNav from "../BannerNav/BannerNav";
+import FormConfigSidePanel from "../FormConfigSidePanel/FormConfigSidePanel";
 
 export default function FormsPage(props) {
 
     const FORMS = "Forms";
     const CONTACTS = "Contacts";
+    const navOptions = [FORMS, CONTACTS];
 
     const dispatch = useDispatch();
     const forms = useSelector(selectAllForms);
@@ -29,8 +31,8 @@ export default function FormsPage(props) {
         return (<Redirect to="/login" />);
     }
 
-    if(tab === "contacts") {
-        return <ContactsPage/>
+    if (tab === "contacts") {
+        return <ContactsPage />
     }
 
 
@@ -39,24 +41,27 @@ export default function FormsPage(props) {
             <div className="added-banner-wrap">
                 <LoggedInBanner />
             </div>
-            <BannerNav navOptions={[FORMS, CONTACTS]} setTab={setTab} tab={tab}/>
+            <BannerNav navOptions={[FORMS, CONTACTS]} setTab={setTab} tab={tab} />
             {tab === FORMS && renderFormGrid()}
-            {tab === CONTACTS && <ContactsPage/>}
+            {tab === CONTACTS && <ContactsPage />}
         </div>
 
     )
 
     function renderFormGrid() {
         return (
-            <div className="form-grid">
-                {forms.map((form) => {
-                    return (
-                        <div key={form.id} className="form-page-item">
-                            <FormSummary form={form} />
-                        </div>
-                    )
-                })}
-            </div>
+            <>
+                
+                <div className="form-grid">
+                    {forms.map((form) => {
+                        return (
+                            <div key={form.id} className="form-page-item">
+                                <FormSummary form={form} />
+                            </div>
+                        )
+                    })}
+                </div>
+            </>
         )
     }
 }

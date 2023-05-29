@@ -6,7 +6,7 @@ import { deleteContact, fetchContacts, postContact, selectContacts } from '../..
 import {AiFillDelete} from 'react-icons/ai'
 import ContactPane from '../CreationPane/ContactPane';
 
-export default function ContactsPage () {
+export default function ContactsPage ({formId}) {
 
     const dispatch = useDispatch();
 
@@ -35,6 +35,7 @@ export default function ContactsPage () {
     // console.log()
     return (
         <div className="contact-show">
+            {formId && "I have a formId!"}
             <form className="contact-entry" onSubmit={(e) => {handleContactCreate(e)}}>
                 <label htmlFor='contact-email'>Add new contact</label>
                 <input placeholder='contact email' type="email" required htmlFor='contact-email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>

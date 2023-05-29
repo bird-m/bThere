@@ -64,7 +64,7 @@ export default function FormConfigurator () {
             case QUESTIONS:
                 return <QuestionList questions={questions} formId={formId}/>
             case CONTACTS:
-                return <ContactsPage/>;
+                return <ContactsPage formId={formId}/>;
             case FORMS:
                 history.push("/forms")
             default: 
