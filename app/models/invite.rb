@@ -10,6 +10,8 @@
 #
 class Invite < ApplicationRecord
 
+    validates :contact_id, uniqueness: {scope: :form_id}
+
     belongs_to :contact,
         class_name: :Contact,
         foreign_key: :contact_id,

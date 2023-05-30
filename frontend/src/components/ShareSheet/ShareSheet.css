@@ -46,8 +46,15 @@
     color: #E6E4EC;
 }
 
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
 .copied-message {
     position: absolute;
     width: 100%;
     top: -250%;
+    animation: fade-in 0.5s ease-out;
 }
+

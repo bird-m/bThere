@@ -47,4 +47,8 @@ class Form < ApplicationRecord
         foreign_key: :form_id,
         inverse_of: :form,
         dependent: :destroy
+
+    has_many :invited_contacts,
+        through: :invites,
+        source: :contact
 end

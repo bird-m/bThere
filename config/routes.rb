@@ -11,7 +11,10 @@ Rails.application.routes.draw do
       resources :questions, only: [:create]
     end
 
+    resources :invites, only: [:destroy]
+
     get '/forms/:custom_url', to: 'forms#show'
+    post '/forms/:form_id/:contact_id', to: 'invites#create'
     get '/:form_id/questions', to: 'questions#index'
     
     get '/questions/:id', to: 'questions#show'
@@ -22,7 +25,8 @@ Rails.application.routes.draw do
 
     get '/:form_id/submissions', to: 'submissions#index'
     get '/photos', to: 'forms#test'
-    get '/contacts', to: 'contacts#index'
+    # get '/contacts', to: 'contacts#index'
+    get '/contacts/:form_id', to: 'contacts#index'
     delete '/contacts/:id', to: 'contacts#destroy'
     post '/contacts', to: 'contacts#create'
     post '/check/:form_id/:ignore', to: 'contacts#check'

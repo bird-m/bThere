@@ -6,9 +6,9 @@ export default function FormConfigSidePanel ({setMode, navOptions}) {
     return (
         <div className="form-config-panel-wrapper">
 
-            {navOptions.map((o) => {
+            {navOptions.map((o, ix) => {
                 return (
-                    <div onClick={() => {setMode(o)}} className="sp-nav-div">{o}</div>
+                    <div key={ix} onClick={() => {setMode(o)}} className="sp-nav-div">{o}</div>
                 )
             })}
         </div>
