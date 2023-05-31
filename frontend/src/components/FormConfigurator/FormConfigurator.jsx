@@ -9,11 +9,29 @@ import { LoggedInBanner } from '../LoggedInBanner/LoggedInBanner';
 import QuestionPane from '../QuestionPane/QuestionPane';
 import { useState } from 'react';
 import SubmissionList from '../SubmissionList/SubmissionList';
-import { fetchForm, selectForm } from '../../store/formReducer';
+import { fetchForm, fetchForms, selectAllForms, selectForm } from '../../store/formReducer';
 import ContactsPage from '../ContactsPage/ContactsPage';
 import BannerNav from '../BannerNav/BannerNav';
+import { FormSummary } from '../FormSummary/FormSummary';
 
 export default function FormConfigurator() {
+
+    // get any relevant params
+    const { formId } = useParams();
+
+    // retrieve data from back end and load it in the store
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchQuestions(formId));
+        dispatch(fetchForm(formId));
+        dispatch(fetchForms())
+    }, [dispatch])
+    
+    // retrieve necessary data from the store
+    const questions = useSelector(selectQuestions(formId));
+    const form = useSelector(selectForm(formId));
+    const forms = useSelector(selectAllForms);
 
     // options on the topBar
     const RESPONSES = "Responses"
@@ -25,9 +43,7 @@ export default function FormConfigurator() {
 
     const history = useHistory();
 
-    const { formId } = useParams();
     // console.log("FormConfigurator");
-    const dispatch = useDispatch();
     const location = useLocation();
 
     const [mode, setMode] = useState(startingPoint());
@@ -41,16 +57,10 @@ export default function FormConfigurator() {
         }
     }
 
-    useEffect(() => {
-        dispatch(fetchQuestions(formId));
-        dispatch(fetchForm(formId));
-    }, [dispatch])
 
     // console.log(formId, "FORM ID");
-    const questions = useSelector(selectQuestions(formId));
     // console.log(questions, "QUESTIONS");
 
-    const form = useSelector(selectForm(formId));
 
     function paneMode() {
         switch (mode) {
@@ -66,11 +76,28 @@ export default function FormConfigurator() {
             case CONTACTS:
                 return <ContactsPage formId={formId} />;
             case FORMS:
-                // history.push("/forms")
+                return renderFormGrid();
             default:
                 return <QuestionList questions={questions} formId={formId} />
             // return <ContactsPage/>;
         }
+    }
+
+    function renderFormGrid() {
+        return (
+            <>
+                
+                <div className="form-grid">
+                    {forms.map((form) => {
+                        return (
+                            <div key={form.id} className="form-page-item">
+                                <FormSummary form={form} />
+                            </div>
+                        )
+                    })}
+                </div>
+            </>
+        )
     }
 
     return (
