@@ -29,6 +29,7 @@ export default function FormConfigurator() {
         dispatch(fetchForms())
     }, [dispatch])
 
+    const form = useSelector(selectForm(formId));
 
     // retrieve necessary data from the store
     // const questions = useSelector(selectQuestions(formId));
@@ -57,7 +58,7 @@ export default function FormConfigurator() {
     return (
         <div className="fc-wrapper">
             <div className="fc-side-panel">
-                <FormConfigSidePanel navOptions={sideNavOptions} />
+                <FormConfigSidePanel form={form} navOptions={sideNavOptions}/>
             </div>
             <div className="fc-sub-header">
                 <div className="fc-banner">

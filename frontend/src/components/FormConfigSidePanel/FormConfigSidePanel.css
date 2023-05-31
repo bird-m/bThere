@@ -25,6 +25,12 @@
     color: #0E0A1E;
 }
 
+.sp-nav-div-selected {
+    background-color: white;
+    cursor: pointer;
+    color: #0E0A1E;
+}
+
 .sp-nav-div:first-child {
     margin-top: 30px;
 }
@@ -46,4 +52,16 @@
 
 .banner-img-wrapper {
     height: 80px;
+}
+
+.sp-form-title {
+    padding-top: 40px;
+    font-weight: 600;
+    padding-left: 5%;
+}
+
+.sp-form-title:hover{
+    background-color: #0E0A1E;
+    cursor: unset;
+    color: #D1D5DB;
 }
