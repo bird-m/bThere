@@ -42,7 +42,6 @@ function App() {
       </Route>
 
       <Route exact path="/signup">
-        {/* <h1>Test</h1> */}
         <AuthFormPage mode='signup'/>
       </Route>
 

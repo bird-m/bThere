@@ -1,0 +1,15 @@
+.cp-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cp-row {
+    display: flex;
+    gap: 20px;
+}
+
+.cp-cell {
+    
+}

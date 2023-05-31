@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { fetchSubmissions, selectSubmissions } from '../../store/submissionReducer';
 // import SubmissionPane from '../SubmissionPane/SubmissionPane';
 import { useState } from 'react';
-import { formatDate } from '../../util/util';
+import { cleanDate, formatDate } from '../../util/util';
 // import {AiOutlineClose} from 'react-icons/ai'
 import {BsCheck2Circle} from 'react-icons/bs'
 import {BsXSquare} from 'react-icons/bs'
@@ -128,7 +128,7 @@ export default function SubmissionList ({form, questions}) {
         <div className="sub-list-wrapper">
             <div className="sl-download-div"><a download={`${form.title}_response_list.csv`} href={downloadCsv()}><BiDownload/></a></div>
             <div className="sub-row-wrapper sub-row-header">
-                <div className="sl-cell">Submission Time</div>
+                <div className="sl-cell">Submit Date</div>
                 <div className="sl-cell">Name</div>
                 <div className="sl-cell">Email</div>
                 <div className="sl-cell">RSVP</div>
@@ -139,7 +139,7 @@ export default function SubmissionList ({form, questions}) {
                     <div key={sub.id} className="sub-row-wrapper">
                         
                         <div className="sl-cell">
-                            <div className="sl-inner-cell">{sub.createdAt}</div>
+                            <div className="sl-inner-cell">{cleanDate(sub.createdAt)}</div>
                         </div>    
                         <div className="sl-cell">
                             <div className="sl-inner-cell">{sub.name}</div></div>
@@ -157,21 +157,4 @@ export default function SubmissionList ({form, questions}) {
             })}
         </div>
     )
-
-    return null
-    // return (
-    //     <div className="sl-wrapper">
-    //         <div>
-    //             <tr className="sl-q-wrapper">
-    //                 <th>Submission Time</th>
-    //                 {questions.map((q) => {
-    //                     return <th>{q.prompt}</th>
-    //                 })}
-    //             </tr>
-    //         </div>
-    //         {submissions.map((sub) => {
-    //             return <SubmissionPane key={sub.id} submission={sub} questions={questions}/>
-    //         })}
-    //     </div>
-    // );
 }

@@ -67,12 +67,7 @@ class Api::FormsController < ApplicationController
       render json: {errors: @form.errors.full_messages}, status: :unprocessable_entity
     end
   end
-
-  # def test
-  #   @forms = Form.all
-  #   render 'api/forms/photo'
-  # end
-
+  
   private
 
   def form_params

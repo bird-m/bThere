@@ -35,6 +35,27 @@ export function selectContacts(state) {
     }
 }
 
+export function postInvite(invite) {
+    return async function (dispatch) {
+        const response = await csrfFetch(`/api/forms/${invite.formId}/${invite.contactId}`,{
+            method: 'POST'
+        });
+        const data = await response.json();
+        return dispatch(receiveContact(data));
+    }
+}
+
+export function deleteInvite(contact) {
+    return async function(dispatch) {
+        const res = await csrfFetch(`/api/invites/${contact.inviteId}`,{
+            method: 'DELETE'
+        })
+        const data = await res.json()
+        // we are receiving a contact without the invite information, which will overwrite the pre-existing contact that had the info
+        return dispatch(receiveContact(data));
+    }
+}
+
 export function postContact(contact) {
     return async function (dispatch) {
         const response = await csrfFetch('/api/contacts', {
@@ -57,9 +78,9 @@ export function deleteContact(contactId) {
     }
 }
 
-export function fetchContacts() {
+export function fetchContacts(formId = null) {
     return async function(dispatch) {
-        const response = await csrfFetch('/api/contacts');
+        const response = await csrfFetch(`/api/contacts/${formId}`);
         const data = await response.json();
         return dispatch(receiveContacts(data));
     }

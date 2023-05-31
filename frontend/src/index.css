@@ -12,7 +12,7 @@ button, a {
     cursor: pointer;
   }
 
-button {
+button, input[type="submit"] {
     background-color: var(--r-purple);
     border-radius: 0.375rem;
     color: #e7e4ec;

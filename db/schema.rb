@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_044602) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_025603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_044602) do
     t.index ["user_id"], name: "index_forms_on_user_id"
   end
 
+  create_table "invites", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.bigint "form_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_invites_on_contact_id"
+    t.index ["form_id", "contact_id"], name: "index_invites_on_form_id_and_contact_id", unique: true
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "prompt", null: false
     t.string "description"
@@ -110,6 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_044602) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "contacts", "users"
   add_foreign_key "forms", "users"
+  add_foreign_key "invites", "contacts"
+  add_foreign_key "invites", "forms"
   add_foreign_key "questions", "forms"
   add_foreign_key "responses", "questions"
   add_foreign_key "responses", "submissions"

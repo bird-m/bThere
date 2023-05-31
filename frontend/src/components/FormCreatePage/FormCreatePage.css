@@ -1,12 +1,15 @@
 .create-forms-page-wrapper {
     width: 100vw;
     height: 100vh;
-    /* align-items: center; */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .fc-banner-wrapper {
-    height :50px;
     align-items: center;
+    width: 100%;
+    height: 64px;
 }
 
 .create-pane-wrapper {
@@ -21,6 +24,10 @@
     /* margin-bottom: 5%; */
     /* padding-bottom: 10%; */
     /* border: 1px solid black; */
+    width: 40%;
+    min-width: 350px;
+    max-width: 600px;
+    padding-bottom: 64px;
 }
 
 /* .create-forms-page-wrapper div {
@@ -28,39 +35,52 @@
 } */
 
 .fc-input-pane button {
-    width: 515px;
-    padding: 15px
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 100px;
 }
 
 .fc-input-pane input {
-    width: 500px;
+    width: 95%;
     margin-top: 10px;
     height: 25px;
     border: 0.5px solid gray;
     padding: 5px;
     box-shadow: inset 0 0 2px 1px #e0e0e08d;
+    
 }
 
-
+#fc-error-pane {
+    height: 64px;
+}
 
 .fc-input-pane textarea {
-    width: 500px;
+    width: 95%;
     margin-top: 10px;
     border: 0.5px solid gray;
     padding: 5px;
     box-shadow: inset 0 0 2px 1px #e0e0e08d;
+    font-family: 'Arial', sans-serif;    
 }
 
 .fc-input-pane {
     color: #4b5563;
     font-size: 12px;
     font-weight: 400;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fc-input-pane label {
+    width: 100%;
 }
 
 .fc-check-pane {
     display: flex;
     /* justify-content: space-between; */
-    width: 520px;
+    width: 100%;
     font-weight: 600;
     color: #4b5563;
     font-size: 12px;
@@ -85,6 +105,7 @@
 #photo {
     border: none;
     box-shadow: none;
+    width: 100%;
 }
 
 .fc-large, .fc-small {
@@ -99,6 +120,7 @@
     padding-top: 10px;
     padding-right: 10px;
     color: #0E0A1E;
+    width: 100%;
 }
 
 .fx-x * {
@@ -106,11 +128,12 @@
 }
 
 .fc-img-pane {
-    width: 500px;
+    width: 100%;
 }
 
 .fc-df-image-wrap {
     position: relative;
+    width: 100%;
 }
 
 .fc-df-txt {

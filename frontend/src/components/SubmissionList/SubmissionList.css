@@ -22,7 +22,8 @@ td {
 
   .sub-list-wrapper {
     background-color: #F3F4F6;
-    width: 80%;
+    width: 90%;
+    max-width: 900px;
     height: 100%;
     display: flex;
     flex-direction: column;

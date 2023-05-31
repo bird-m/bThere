@@ -22,9 +22,21 @@
 .fc-question-list {
     display: flex;
     justify-content: center;
-    width: 85%;
+    width: 100%;
     padding-top: 50px;
     background-color: #F3F4F6;
     padding-bottom: 50px;
     color: #4B5563;
+}
+
+@media screen and (max-width: 751px) {
+    .fc-side-panel {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 752px) {
+    .fc-wrapper .form-nav {
+        display: none;
+    }
 }

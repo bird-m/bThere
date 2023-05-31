@@ -60,8 +60,16 @@
     width: 40%;
 }
 
+.qp-save-cancel input[type="submit"] {
+    width: 40%;
+}
+
 .cancel-button {
     background-color: #720808;
+}
+
+#save-button {
+    background-color: #008000;
 }
 
 .save-button {
@@ -82,4 +90,19 @@
 
 .qp-del-icon {
     color: rgb(114, 8, 8);
+}
+
+.svg-button svg {
+    height: 16px;
+    width: 16px;
+}
+
+.svg-button {
+    padding: unset;
+    height: unset;
+    background-color: transparent;
+}
+
+.dark-grey {
+    color: #4B5563;
 }

@@ -1,0 +1,60 @@
+.share-field {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.ss-share-link-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 2px black;
+    border-radius: 0.375rem;
+}
+
+.share-field-copy {
+    background-color: #45286B;
+    color: #E6E4EC;
+}
+
+.share-field-copy, .share-field {
+    padding: 10px;
+}
+
+.share-field-copy:hover {
+    cursor: pointer;
+}
+
+.ss-share-link {
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.closer-header {
+    position: absolute;
+    top: 3%;
+    left: 96%;
+}
+
+.delete-cancel-icon {
+    color: #4B5563;
+}
+
+.delete-cancel-icon:hover {
+    cursor: pointer;
+    color: #E6E4EC;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.copied-message {
+    position: absolute;
+    width: 100%;
+    top: -250%;
+    animation: fade-in 0.5s ease-out;
+}
+
