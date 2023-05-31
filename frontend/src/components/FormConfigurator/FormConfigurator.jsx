@@ -107,7 +107,7 @@ export default function FormConfigurator() {
             </div>
             <div className="fc-sub-header">
                 <div className="fc-banner">
-                    <LoggedInBanner />
+                    <LoggedInBanner setTab={setMode} />
                 </div>
                 {/* <BannerNav setTab={setMode} tab={mode} navOptions={navOptions} /> */}
 

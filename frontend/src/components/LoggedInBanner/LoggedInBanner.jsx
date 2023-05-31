@@ -3,7 +3,12 @@ import './LoggedInBanner.css'
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../store/session";
 
-export function LoggedInBanner (props) {
+export function LoggedInBanner ({setTab}) {
+
+    // const RESPONSES = "Responses"
+    // const QUESTIONS = "Questions"
+    // const CONTACTS = "Invite List"
+    // const FORMS = "Back to Forms"
 
     const sessionUser = useSelector(loggedInUser);
     const dispatch = useDispatch();
@@ -17,8 +22,8 @@ export function LoggedInBanner (props) {
     return (
         <div className="logged-in-banner-wrapper">
             <div className="li-banner-nav">
-                <div className="li-banner-nav-option">Forms</div>
-                <div className="li-banner-nav-option">Contacts</div>
+                <div className="li-banner-nav-option" onClick={() => {setTab("Back to Forms")}}>Forms</div>
+                <div className="li-banner-nav-option" onClick={() => {setTab("Invite List")}}>Contacts</div>
             </div>
             <div className="ban-email">
                 
