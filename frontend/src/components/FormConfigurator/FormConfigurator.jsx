@@ -13,7 +13,7 @@ import { fetchForm, selectForm } from '../../store/formReducer';
 import ContactsPage from '../ContactsPage/ContactsPage';
 import BannerNav from '../BannerNav/BannerNav';
 
-export default function FormConfigurator () {
+export default function FormConfigurator() {
 
     // options on the topBar
     const RESPONSES = "Responses"
@@ -25,7 +25,7 @@ export default function FormConfigurator () {
 
     const history = useHistory();
 
-    const {formId} = useParams();
+    const { formId } = useParams();
     // console.log("FormConfigurator");
     const dispatch = useDispatch();
     const location = useLocation();
@@ -45,7 +45,7 @@ export default function FormConfigurator () {
         dispatch(fetchQuestions(formId));
         dispatch(fetchForm(formId));
     }, [dispatch])
-    
+
     // console.log(formId, "FORM ID");
     const questions = useSelector(selectQuestions(formId));
     // console.log(questions, "QUESTIONS");
@@ -53,39 +53,43 @@ export default function FormConfigurator () {
     const form = useSelector(selectForm(formId));
 
     function paneMode() {
-        switch(mode) {
+        switch (mode) {
             case RESPONSES:
-                if(form) {
-                    return <SubmissionList questions={questions} form={form}/>
+                if (form) {
+                    return <SubmissionList questions={questions} form={form} />
                 } else {
                     return <h1>Loading</h1>
                 }
-                
+
             case QUESTIONS:
-                return <QuestionList questions={questions} formId={formId}/>
+                return <QuestionList questions={questions} formId={formId} />
             case CONTACTS:
-                return <ContactsPage formId={formId}/>;
+                return <ContactsPage formId={formId} />;
             case FORMS:
-                history.push("/forms")
-            default: 
-                return <QuestionList questions={questions} formId={formId}/>
-                // return <ContactsPage/>;
+                // history.push("/forms")
+            default:
+                return <QuestionList questions={questions} formId={formId} />
+            // return <ContactsPage/>;
         }
     }
 
     return (
-    <div className="fc-wrapper">
-        <div className="fc-banner">
-            <LoggedInBanner/>
-        </div>
-        <BannerNav setTab={setMode} tab={mode} navOptions={navOptions}/>
-        <div className="fc-sub-header">
+        <div className="fc-wrapper">
             <div className="fc-side-panel">
-                <FormConfigSidePanel setMode={setMode} navOptions={navOptions}/>
+                <FormConfigSidePanel setMode={setMode} navOptions={navOptions} />
             </div>
-            <div className="fc-question-list">
-                {paneMode()}
+            <div className="fc-sub-header">
+                <div className="fc-banner">
+                    <LoggedInBanner />
+                </div>
+                {/* <BannerNav setTab={setMode} tab={mode} navOptions={navOptions} /> */}
+
+                <div className="fc-contents-wrapper">
+                    <div className="fc-question-list">
+                        {paneMode()}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>)
+
+        </div>)
 }
