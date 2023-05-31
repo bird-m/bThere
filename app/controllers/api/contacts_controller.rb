@@ -104,7 +104,7 @@ class Api::ContactsController < ApplicationController
     @form = Form.find_by(id: params[:form_id])
     
     if(@form)
-      @contacts = @form.user.contacts.pluck(:email).map(&:downcase)
+      @contacts = @form.invited_contacts.pluck(:email).map(&:downcase)
       # debugger
       render json: @contacts.include?(params[:email].downcase)
       
