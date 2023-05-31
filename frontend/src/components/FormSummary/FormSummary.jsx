@@ -6,11 +6,11 @@ import FormDetail from '../FormDetails/FormDetail';
 import './FormSummary.css'
 import { Redirect } from 'react-router-dom';
 
-export function FormSummary ({form, setFormId}) {
+export function FormSummary ({form}) {
 
     return (<div className="form-summary-wrapper">
         
         <img className='form-image' src={form.photo ? form.photo : sample}/>
-        <FormDetail form={form} setFormId={setFormId}/>
+        <FormDetail form={form}/>
     </div> );
 }

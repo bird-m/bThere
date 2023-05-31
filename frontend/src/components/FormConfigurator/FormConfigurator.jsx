@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './FormConfigurator.css'
 import { useEffect } from 'react';
 import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
-import { useHistory, useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { QuestionList } from '../QuestionList/QuestionList';
 import FormConfigSidePanel from '../FormConfigSidePanel/FormConfigSidePanel';
 import { LoggedInBanner } from '../LoggedInBanner/LoggedInBanner';
@@ -13,117 +13,80 @@ import { fetchForm, fetchForms, selectAllForms, selectForm } from '../../store/f
 import ContactsPage from '../ContactsPage/ContactsPage';
 import BannerNav from '../BannerNav/BannerNav';
 import { FormSummary } from '../FormSummary/FormSummary';
+import FormGrid from '../FormGrid/FormGrid';
 
 export default function FormConfigurator() {
 
     // get any relevant params
     const { formId } = useParams();
-
-    // const [formId, setFormId] = useState();
-    console.log(formId);
+    const params = useParams();
 
     // retrieve data from back end and load it in the store
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchQuestions(formId));
-        dispatch(fetchForm(formId));
+        // dispatch(fetchQuestions(formId));
         dispatch(fetchForms())
     }, [dispatch])
 
-    // useEffect(() => {
-    //     if(formId) {
-            
-    //     }
-    // }, [formId])
-    
+
     // retrieve necessary data from the store
-    const questions = useSelector(selectQuestions(formId));
-    const form = useSelector(selectForm(formId));
+    // const questions = useSelector(selectQuestions(formId));
     const forms = useSelector(selectAllForms);
 
-    // options on the topBar
-    const RESPONSES = "Responses"
-    const QUESTIONS = "Questions"
-    const CONTACTS = "Invite List"
-    const FORMS = "Back to Forms"
+    const [sideNavOptions, setSideNavOptions] = useState({});
+    const [bannerOptions, setBannerOptions] = useState({
+        "Home": "/forms",
+        "Address Book": "/forms"
+    })
 
-    const navOptions = [RESPONSES, QUESTIONS, CONTACTS, FORMS]
-
-    const history = useHistory();
-
-    // console.log("FormConfigurator");
-    const location = useLocation();
-
-    const [mode, setMode] = useState(FORMS);
-
-
-    function startingPoint() {
-        if (location && location.state && location.state.dest && location.state.dest === "questions") {
-            return QUESTIONS;
+    useEffect(() => {
+        // console.log(formId, "setting nav options");
+        if(formId) {
+            setSideNavOptions({
+                "Responses": `/forms/${formId}/responses`,
+                "Questions": `/forms/${formId}/questions`,
+                "Invite List": `/forms/${formId}/invite-list`,
+            })
         } else {
-            return RESPONSES;
+            setSideNavOptions({});
         }
-    }
+    }, [formId])
 
-
-    // console.log(formId, "FORM ID");
-    // console.log(questions, "QUESTIONS");
-
-
-    function paneMode() {
-        switch (mode) {
-            case RESPONSES:
-                if (form) {
-                    return <SubmissionList questions={questions} form={form} />
-                } else {
-                    return <h1>Loading</h1>
-                }
-
-            case QUESTIONS:
-                return <QuestionList questions={questions} formId={formId} />
-            case CONTACTS:
-                return <ContactsPage formId={formId} />;
-            case FORMS:
-                return renderFormGrid();
-            default:
-                return renderFormGrid();
-                // return <QuestionList questions={questions} formId={formId} />
-            // return <ContactsPage/>;
-        }
-    }
-
-    function renderFormGrid() {
-        return (
-            <>
-                
-                <div className="form-grid">
-                    {forms.map((form) => {
-                        return (
-                            <div key={form.id} className="form-page-item">
-                                <FormSummary form={form} setFormId={setFormId}/>
-                            </div>
-                        )
-                    })}
-                </div>
-            </>
-        )
-    }
 
     return (
         <div className="fc-wrapper">
             <div className="fc-side-panel">
-                <FormConfigSidePanel setMode={setMode} navOptions={navOptions} />
+                <FormConfigSidePanel navOptions={sideNavOptions} />
             </div>
             <div className="fc-sub-header">
                 <div className="fc-banner">
-                    <LoggedInBanner setTab={setMode} />
+                    <LoggedInBanner navOptions={bannerOptions}/>
                 </div>
-                {/* <BannerNav setTab={setMode} tab={mode} navOptions={navOptions} /> */}
+                <BannerNav/>
 
                 <div className="fc-contents-wrapper">
                     <div className="fc-question-list">
-                        {paneMode()}
+                        <Switch>
+                            <Route exact path="/forms">
+                                <FormGrid/>
+                            </Route>
+                            <Route path="/address-book">
+                                <ContactsPage/>
+                            </Route>
+                            <Route path="/forms/:formId/questions">
+                                <QuestionList/>
+                            </Route>
+                            <Route path="/forms/:formId/responses">
+                                <SubmissionList/>
+                            </Route>
+                            <Route path="/forms/:formId/invite-list">
+                                <ContactsPage/>
+                            </Route>
+                            <Route path="/forms">
+                                <FormGrid/>
+                            </Route>
+                        </Switch>
                     </div>
                 </div>
             </div>

@@ -5,11 +5,6 @@ import { loggedInUser, logout } from "../../store/session";
 
 export function LoggedInBanner ({setTab}) {
 
-    // const RESPONSES = "Responses"
-    // const QUESTIONS = "Questions"
-    // const CONTACTS = "Invite List"
-    // const FORMS = "Back to Forms"
-
     const sessionUser = useSelector(loggedInUser);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -22,8 +17,8 @@ export function LoggedInBanner ({setTab}) {
     return (
         <div className="logged-in-banner-wrapper">
             <div className="li-banner-nav">
-                <div className="li-banner-nav-option" onClick={() => {setTab("Back to Forms")}}>Forms</div>
-                <div className="li-banner-nav-option" onClick={() => {setTab("Invite List")}}>Contacts</div>
+                <div className="li-banner-nav-option" onClick={() => {history.push("/forms")}}>Home</div>
+                <div className="li-banner-nav-option" onClick={() => {history.push("/address-book")}}>Address Book</div>
             </div>
             <div className="ban-email">
                 

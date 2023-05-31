@@ -5,10 +5,19 @@ import QuestionPane from "../QuestionPane/QuestionPane";
 import './QuestionList.css'
 import { SubmitterInputPane } from "../SubmitterInputPane/SubmitterInputPane";
 import { useState } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { fetchForm } from "../../store/formReducer";
 
-export function QuestionList({ questions, formId }) {
+export function QuestionList() {
 
+    const {formId} = useParams();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchQuestions(formId))
+    }, [dispatch])
+
+    const questions = useSelector(selectQuestions(formId));
 
     const [showQpane, setShowQpane] = useState(false);
 

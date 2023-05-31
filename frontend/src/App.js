@@ -45,7 +45,7 @@ function App() {
           <AuthFormPage mode='signup' />
         </Route>
 
-        <Route path="/forms">
+        <Route path={["/forms/:formId","/forms", "/address-book" ]}>
           <FormConfigurator />
         </Route>
 

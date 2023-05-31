@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts, postContact, selectContacts } from '../../store/contactReducer';
 import ContactPane from '../CreationPane/ContactPane';
 import ContactModifier from '../ContactModifier/ContactModifier';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
-export default function ContactsPage ({formId}) {
+export default function ContactsPage () {
+
+    const {formId} = useParams();
 
     const dispatch = useDispatch();
 
