@@ -19,6 +19,9 @@ export default function FormConfigurator() {
     // get any relevant params
     const { formId } = useParams();
 
+    // const [formId, setFormId] = useState();
+    console.log(formId);
+
     // retrieve data from back end and load it in the store
     const dispatch = useDispatch();
 
@@ -27,6 +30,12 @@ export default function FormConfigurator() {
         dispatch(fetchForm(formId));
         dispatch(fetchForms())
     }, [dispatch])
+
+    // useEffect(() => {
+    //     if(formId) {
+            
+    //     }
+    // }, [formId])
     
     // retrieve necessary data from the store
     const questions = useSelector(selectQuestions(formId));
@@ -46,7 +55,7 @@ export default function FormConfigurator() {
     // console.log("FormConfigurator");
     const location = useLocation();
 
-    const [mode, setMode] = useState(startingPoint());
+    const [mode, setMode] = useState(FORMS);
 
 
     function startingPoint() {
@@ -78,7 +87,8 @@ export default function FormConfigurator() {
             case FORMS:
                 return renderFormGrid();
             default:
-                return <QuestionList questions={questions} formId={formId} />
+                return renderFormGrid();
+                // return <QuestionList questions={questions} formId={formId} />
             // return <ContactsPage/>;
         }
     }
@@ -91,7 +101,7 @@ export default function FormConfigurator() {
                     {forms.map((form) => {
                         return (
                             <div key={form.id} className="form-page-item">
-                                <FormSummary form={form} />
+                                <FormSummary form={form} setFormId={setFormId}/>
                             </div>
                         )
                     })}

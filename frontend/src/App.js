@@ -19,43 +19,43 @@ import ResponsePage from "./components/ResponsePage/ResponsePage";
 
 
 function App() {
-  
+
 
   return (
     <>
-    
-    <Switch>
-      <Route path="/submit/:formId">
-        <ResponsePage/>
-      </Route>
 
-      <Route path="/form/configure/:formId">
-        <FormConfigurator/>
-      </Route>
+      <Switch>
+        <Route path="/submit/:formId">
+          <ResponsePage />
+        </Route>
 
-      <Route path="/form/:formId?">
-        <FormCreatePage/>
-      </Route>
+        <Route path="/form/configure/:formId">
+          <FormConfigurator />
+        </Route>
 
-      <Route exact path="/login">
-        <AuthFormPage mode='login'/>
-      </Route>
+        <Route path="/form/:formId?">
+          <FormCreatePage />
+        </Route>
 
-      <Route exact path="/signup">
-        <AuthFormPage mode='signup'/>
-      </Route>
+        <Route exact path="/login">
+          <AuthFormPage mode='login' />
+        </Route>
 
-      <Route path="/forms">
-        <FormsPage/>
-      </Route>
+        <Route exact path="/signup">
+          <AuthFormPage mode='signup' />
+        </Route>
 
-      <Route path="/">
-        <NavBar/>
-        <SplashPage/>
-        <SplashFooter/>
-      </Route>
+        <Route path="/forms">
+          <FormConfigurator />
+        </Route>
 
-    </Switch>
+        <Route path="/">
+          <NavBar />
+          <SplashPage />
+          <SplashFooter />
+        </Route>
+
+      </Switch>
     </>
   );
 }
