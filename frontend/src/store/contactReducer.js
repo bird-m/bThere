@@ -64,7 +64,7 @@ export function postContact(contact) {
         });
         const data = await response.json();
         dispatch(receiveContact(data));
-        return response;
+        return data;
     }
 }
 

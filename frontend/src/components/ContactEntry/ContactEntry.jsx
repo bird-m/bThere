@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './ContactEntry.css'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useDispatch } from 'react-redux';
-import { postContact } from '../../store/contactReducer';
+import { postContact, postInvite } from '../../store/contactReducer';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function ContactEntry({closeModal}) {
@@ -19,14 +19,22 @@ export default function ContactEntry({closeModal}) {
         e.preventDefault();
         const newContact = {
             contact: {
-                email
+                email,
+                name
             }
         }
 
-        dispatch(postContact(newContact)).then(() => {
+        if(invited) {
+            newContact.formId = formId;
+        }
+
+        dispatch(postContact(newContact))
+        .then((receivedContact) => {
+            setEmail("");
+            setName("");
+            setInvited(false);
             closeModal && closeModal();
-        });
-        setEmail("");
+        })
     }
 
     function handleInvite(e) {

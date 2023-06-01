@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_025603) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_003707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_025603) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
     t.index ["email"], name: "index_contacts_on_email", unique: true
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
@@ -99,9 +100,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_025603) do
     t.bigint "form_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status", null: false
-    t.string "name", null: false
-    t.string "email", null: false
+    t.string "status", default: "maybe", null: false
+    t.string "name", default: "Doe", null: false
+    t.string "email", default: "doe@unknown.com", null: false
     t.index ["form_id"], name: "index_submissions_on_form_id"
   end
 

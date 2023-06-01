@@ -2,6 +2,7 @@ import './ContactModifier.css'
 import { useDispatch } from 'react-redux';
 import { AiFillDelete } from 'react-icons/ai'
 import { deleteContact, deleteInvite, postInvite } from '../../store/contactReducer';
+import TableRow from '../TableRow/TableRow';
 
 export default function ContactModifier({ contact, formId }) {
 
@@ -29,13 +30,15 @@ export default function ContactModifier({ contact, formId }) {
         }
     }
 
+    // <div onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
+    // ,
+
     return (
-        <div key={contact.id} className="contact-list-entry">
-            {formId && <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />}
-            <span>{contact.email}</span>
-            <div onClick={() => { dispatch(deleteContact(contact.id)) }}>
-                <AiFillDelete />
-            </div>
-        </div>
+        <TableRow rowContent={[
+            <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />,
+            "name",
+            contact.email,
+            <div className="contact-delete-icon" onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
+        ]}/>
     )
 }

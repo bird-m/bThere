@@ -1,5 +1,5 @@
 .contact-show {
-    width: 400px;
+    width: 80%;
     display: flex;
     flex-direction: column;    
 }
@@ -27,4 +27,6 @@
 .contacts-header {
     margin-bottom: 10px;
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
 }
