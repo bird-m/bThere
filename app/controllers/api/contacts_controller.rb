@@ -7,6 +7,7 @@ class Api::ContactsController < ApplicationController
 
     @contact = Contact.new(contact_params)
     @contact.user_id = current_user.id
+    @contact.email = params[:contact][:email].downcase
 
     # initializing these two, may override later
     @form_id = params[:form_id]
@@ -116,16 +117,14 @@ class Api::ContactsController < ApplicationController
     puts "I AM HERE"
     
     @form = Form.find_by(id: params[:form_id])
+    contact = nil;
     
     if(@form)
-      @contacts = @form.invited_contacts.pluck(:email).map(&:downcase)
+      contact = @form.invited_contacts.find_by(email: params[:email].downcase)
       # debugger
-      render json: @contacts.include?(params[:email].downcase)
-      
-    else
-      # debugger
-      render json: false
     end
+      # debugger
+      render json: contact
   end
 
   private
