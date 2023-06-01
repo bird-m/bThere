@@ -1,6 +1,6 @@
 .logged-in-banner-wrapper {
     width: 100%;
-    height: 100%;
+    height: 80px;
     background-color: #0E0A1E;
     color: #FFFFFF;
     display: flex;
@@ -9,7 +9,7 @@
 }
 
 .logged-in-banner-wrapper img {
-    height: 100%;
+    height: 40px;
 }
 
 .logged-in-banner-wrapper a {
@@ -17,7 +17,8 @@
 }
 
 .logged-in-banner-wrapper div {
-    padding-right: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .ban-email {
@@ -32,15 +33,22 @@
 }
 
 .li-banner-nav {
-    display: flex;   
+    display: flex;
+    height: 100%;
 }
 
-.li-banner-nav-option {
+.li-banner-nav-option, .li-banner-nav-icon {
     color: #D1D5DB;
+    display: flex;
+    align-items: center;
 }
 
 .li-banner-nav-option:hover {
     cursor: pointer;
     background-color: #FFFFFF;
     color: #0E0A1E;
+}
+
+.li-banner-nav-icon:hover {
+    cursor: pointer;
 }

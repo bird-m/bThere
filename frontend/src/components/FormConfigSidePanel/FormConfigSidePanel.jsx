@@ -19,13 +19,7 @@ export default function FormConfigSidePanel({ navOptions, form }) {
     }
 
     return (
-        <div className="form-config-panel-wrapper">
-            <div className="banner-img-wrapper">
-                <Link to="/">
-                    <img className='banner-img' src={checkLogo} />
-                </Link>
-            </div>
-
+        <>
             {form?.title && <div className="sp-nav-div sp-form-title">
                 {form.title}
             </div>}
@@ -38,6 +32,6 @@ export default function FormConfigSidePanel({ navOptions, form }) {
                     <div key={viewableLink} onClick={() => { history.push(path) }} className={assignNavClass(path)}>{viewableLink}</div>
                 )
             })}
-        </div>
+        </>
     );
 }
