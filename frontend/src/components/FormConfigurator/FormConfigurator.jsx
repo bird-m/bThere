@@ -43,16 +43,22 @@ export default function FormConfigurator() {
 
     useEffect(() => {
         // console.log(formId, "setting nav options");
-        if(formId) {
+        if(formId && form && form.restricted) {
             setSideNavOptions({
                 "Responses": `/forms/${formId}/responses`,
                 "Questions": `/forms/${formId}/questions`,
-                "Invite List": `/forms/${formId}/invite-list`,
+                "Invite List": `/forms/${formId}/invite-list`
+            })
+        } else if(formId && form) {
+            setSideNavOptions({
+                "Responses": `/forms/${formId}/responses`,
+                "Questions": `/forms/${formId}/questions`
             })
         } else {
             setSideNavOptions({});
         }
-    }, [formId])
+        
+    }, [formId, form])
 
 
     return (

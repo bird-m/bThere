@@ -5,13 +5,13 @@ import { deleteContact, deleteInvite, postInvite } from '../../store/contactRedu
 import TableRow from '../TableRow/TableRow';
 import { useEffect, useState } from 'react';
 
-export default function ContactModifier({ contact, formId }) {
+export default function ContactModifier({ contact, form }) {
 
     const dispatch = useDispatch();
     let rowContent;
 
 
-    if (formId) {
+    if (form && form.restricted) {
         rowContent = [
             <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />,
             contact.name,
@@ -31,7 +31,7 @@ export default function ContactModifier({ contact, formId }) {
 
         if (e.target.checked) {
             const newInvite = {
-                formId,
+                formId: form.id,
                 contactId: contact.id
             }
 
@@ -43,7 +43,7 @@ export default function ContactModifier({ contact, formId }) {
 
     function invited(contact) {
         if (contact.formId) {
-            return (contact.formId.toString() === formId.toString())
+            return (contact.formId.toString() === form.id.toString())
         } else {
             return false
         }

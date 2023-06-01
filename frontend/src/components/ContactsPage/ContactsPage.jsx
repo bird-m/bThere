@@ -9,15 +9,29 @@ import ContactEntry from '../ContactEntry/ContactEntry';
 import Modal from '../Modal/Modal';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import TableRow from '../TableRow/TableRow';
+import { fetchForm, selectForm } from '../../store/formReducer';
 
 export default function ContactsPage() {
 
     const { formId } = useParams();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(formId) {
+            dispatch(fetchForm(formId))
+        }
+
+        dispatch(fetchContacts(formId))
+
+    }, [dispatch, formId])
+
+    const form = useSelector(selectForm(formId));
+    const contacts = useSelector(selectContacts);
 
     const [header, setHeader] = useState([])
 
     useEffect(() => {
-        if (formId) {
+        if (form && form.restricted) {
             setHeader([
                 "INVITED",
                 "NAME",
@@ -31,21 +45,19 @@ export default function ContactsPage() {
                 "MODIFY"
             ])
         }
-    }, [formId])
+    }, [form])
 
-    const dispatch = useDispatch();
     const [showContactModal, setShowContactModal] = useState(false);
 
     function closeContactModal() {
         setShowContactModal(false);
     }
 
-    useEffect(() => {
-        dispatch(fetchContacts(formId))
-    }, [dispatch])
-
-    const contacts = useSelector(selectContacts);
-
+    if((formId && !form) || !contacts) {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
 
     return (
         <div className="contact-show">
@@ -59,7 +71,7 @@ export default function ContactsPage() {
 
             {contacts.map((c) => {
                 return (
-                    <ContactModifier key={c.id} contact={c} formId={formId} />
+                    <ContactModifier key={c.id} contact={c} form={form} />
                 )
             })}
         </div>
