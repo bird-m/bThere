@@ -30,3 +30,26 @@
     color: red;
     font-weight: 600;
 }
+
+.restriction-form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    max-width: 500px;
+    align-items: center;
+}
+
+.restriction-form button {
+    width: 300px;
+}
+
+.restriction-form input {
+    width: 300px;
+}
+
+.form-submit-error {
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-weight: bold;
+}

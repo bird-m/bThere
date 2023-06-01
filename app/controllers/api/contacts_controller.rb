@@ -7,18 +7,33 @@ class Api::ContactsController < ApplicationController
 
     @contact = Contact.new(contact_params)
     @contact.user_id = current_user.id
+    @contact.email = params[:contact][:email].downcase
 
-    # need this in order to share the same show view, which always expects these variables
-    @form_id = nil
+    # initializing these two, may override later
+    @form_id = params[:form_id]
+    @form = nil
     @invite_id = nil
 
-    if(@contact.save)
-      @invitation_fetched = false;
-      render 'api/contacts/show'
-    else
-      render json: {errors: @contact.errors.full_messages}, status: :unprocessable_entity
+    if(@form_id)
+      @form = Form.find_by(id: params[:form_id])
+
+      if(!@form || @form.user_id != current_user.id)
+        render json: {errors: ["form not found or form does not belong to user"]}, status: :unprocessable_entity
+      end
     end
 
+    # need this in order to share the same show view, which always expects these variables
+
+    if(!@contact.save)
+      render json: {errors: @contact.errors.full_messages}, status: :unprocessable_entity      
+    end
+
+    if(@form)
+      invite = Invite.create(contact_id: @contact.id, form_id: @form_id)
+      @invite_id = invite.id
+    end
+    
+    render 'api/contacts/show'
   end
 
   def index
@@ -102,20 +117,18 @@ class Api::ContactsController < ApplicationController
     puts "I AM HERE"
     
     @form = Form.find_by(id: params[:form_id])
+    contact = nil;
     
     if(@form)
-      @contacts = @form.invited_contacts.pluck(:email).map(&:downcase)
+      contact = @form.invited_contacts.find_by(email: params[:email].downcase)
       # debugger
-      render json: @contacts.include?(params[:email].downcase)
-      
-    else
-      # debugger
-      render json: false
     end
+      # debugger
+      render json: contact
   end
 
   private
   def contact_params
-    params.require(:contact).permit(:email);
+    params.require(:contact).permit(:email, :name);
   end
 end

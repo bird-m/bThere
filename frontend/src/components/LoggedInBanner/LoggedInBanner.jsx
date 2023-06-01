@@ -1,10 +1,9 @@
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import checkLogo from '../../images/check-logo.png'
 import './LoggedInBanner.css'
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../store/session";
 
-export function LoggedInBanner (props) {
+export function LoggedInBanner ({setTab}) {
 
     const sessionUser = useSelector(loggedInUser);
     const dispatch = useDispatch();
@@ -17,9 +16,10 @@ export function LoggedInBanner (props) {
     
     return (
         <div className="logged-in-banner-wrapper">
-            <Link to="/">
-                <img src={checkLogo}/>
-            </Link>
+            <div className="li-banner-nav">
+                <div className="li-banner-nav-option" onClick={() => {history.push("/forms")}}>Home</div>
+                <div className="li-banner-nav-option" onClick={() => {history.push("/address-book")}}>Address Book</div>
+            </div>
             <div className="ban-email">
                 
                 {sessionUser.email}
@@ -29,10 +29,3 @@ export function LoggedInBanner (props) {
         </div>
     )
 }
-
-{/* <div className="form-nav form-page-nav">
-                <Link to="/">
-                    <img src={checkLogo} className="fp-logo"/>
-                </Link>
-                <div className="fp-account">{sessionUser.email}</div>
-            </div> */}

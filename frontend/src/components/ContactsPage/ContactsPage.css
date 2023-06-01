@@ -1,15 +1,7 @@
 .contact-show {
-    width: 400px;
+    width: 80%;
     display: flex;
-    flex-direction: column;
-    
-}
-
-.contact-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+    flex-direction: column;    
 }
 
 .contact-entry svg:hover {
@@ -35,4 +27,6 @@
 .contacts-header {
     margin-bottom: 10px;
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
 }

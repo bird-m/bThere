@@ -10,7 +10,6 @@
 
 .logged-in-banner-wrapper img {
     height: 100%;
-    padding-left: 20px;
 }
 
 .logged-in-banner-wrapper a {
@@ -30,4 +29,18 @@
 
 .ban-email button {
     height: 20px;
+}
+
+.li-banner-nav {
+    display: flex;   
+}
+
+.li-banner-nav-option {
+    color: #D1D5DB;
+}
+
+.li-banner-nav-option:hover {
+    cursor: pointer;
+    background-color: #FFFFFF;
+    color: #0E0A1E;
 }

@@ -40,7 +40,7 @@ export default function FormDetail ({form}) {
                 <Link to="#" onClick={openShareModal}><TbShare2/></Link>
             </div>
             <div className="detail-title">
-                <Link to={`/form/configure/${form.id}`}>{form ? form.title : "loading..."}</Link>
+                <Link to={`/forms/${form.id}/responses`}>{form ? form.title : "loading..."}</Link>
             </div>
             <div className="detail-bar">
                     <span className='a-count'> <span className='attending'>{form.acceptCount}</span> <br/>ATTENDING</span>

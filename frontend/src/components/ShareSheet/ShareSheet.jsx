@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './ShareSheet.css'
 import { MdOutlineCancel } from 'react-icons/md'
 import { useState } from 'react';
@@ -34,7 +34,10 @@ export default function ShareSheet({ form, closeModal }) {
                     {showCopyMessage && <div className="copied-message">
                         Copied to clipboard!
                     </div>}
-                    {window.location.origin + "/" + (form.customUrl ? form.customUrl : "hello")}
+                    
+                    <Link to={`/submit/${form?.id}`} target="_blank" rel="noopener noreferrer">
+                    {window.location.origin + "/" + `submit/${form?.id}`}
+                    </Link>
                 </div>
                 <div className="share-field-copy" onClick={handleCopyClick}>Copy</div>
             </div>

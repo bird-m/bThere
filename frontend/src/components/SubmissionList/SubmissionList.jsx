@@ -10,18 +10,30 @@ import {BsCheck2Circle} from 'react-icons/bs'
 import {BsXSquare} from 'react-icons/bs'
 import {BiDownload} from 'react-icons/bi'
 import { selectResponsesByForm } from '../../store/responseReducer';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { fetchForm, selectForm } from '../../store/formReducer';
+import { fetchQuestions, selectQuestions } from '../../store/questionReducer';
 // import stream from 'stream-browserify';
 // import {stringify} from 'csv-stringify';
 
-export default function SubmissionList ({form, questions}) {
+export default function SubmissionList () {
+
+    const {formId} = useParams();
 
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(fetchSubmissions(formId));
+        dispatch(fetchForm(formId));
+        dispatch(fetchQuestions(formId));
+    }, [dispatch])
+
+    const form = useSelector(selectForm(formId));
+    const questions = useSelector(selectQuestions(formId));
+
     const [columnCount, setColumnCount] = useState(questions.length + 1);
     // const
     
-    useEffect(() => {
-        dispatch(fetchSubmissions(form.id));
-    }, [dispatch])
 
     useEffect(() => {
         if ((questions.length + 1) !== columnCount) {
@@ -29,8 +41,8 @@ export default function SubmissionList ({form, questions}) {
         }
     }, [questions])
 
-    const submissions = useSelector(selectSubmissions(form.id));
-    const responses = useSelector(selectResponsesByForm(form.id));
+    const submissions = useSelector(selectSubmissions(formId));
+    const responses = useSelector(selectResponsesByForm(formId));
 
     // console.log(responses);
 
@@ -88,25 +100,11 @@ export default function SubmissionList ({form, questions}) {
                     resRow.push(" ")
                 }
             })
-
-            // console.log(resRow, "RESROW");
-
-            // console.log(subResponses, "srrrrr")
-
-            // questionIds.forEach((id) => {
-                
-            // })
-
-            // debugger;
             
-            // debugger;
             const preCsv = row.concat(resRow)
-            // debugger;
             csv = csv + deComma(preCsv).join(",") + '\n';
-            // debugger;
         });
 
-        // console.log(csv);
         return csv;
     }
 
@@ -124,13 +122,19 @@ export default function SubmissionList ({form, questions}) {
           return url;
       }
 
+    if(!form) {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+
     return (
         <div className="sub-list-wrapper">
             <div className="sl-download-div"><a download={`${form.title}_response_list.csv`} href={downloadCsv()}><BiDownload/></a></div>
             <div className="sub-row-wrapper sub-row-header">
-                <div className="sl-cell">Submit Date</div>
-                <div className="sl-cell">Name</div>
-                <div className="sl-cell">Email</div>
+                <div className="sl-cell">SUBMIT DATE</div>
+                <div className="sl-cell">NAME</div>
+                <div className="sl-cell">EMAIL</div>
                 <div className="sl-cell">RSVP</div>
             </div>
 

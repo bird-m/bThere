@@ -1,6 +1,6 @@
 export default function BannerNav({ navOptions, setTab, tab}) {
 
-    
+    return (null);
     return (
         <div className="form-nav">
             <div className="form-nav-left">
