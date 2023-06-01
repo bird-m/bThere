@@ -7,11 +7,31 @@ import ContactModifier from '../ContactModifier/ContactModifier';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import ContactEntry from '../ContactEntry/ContactEntry';
 import Modal from '../Modal/Modal';
-import {AiOutlinePlusCircle} from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import TableRow from '../TableRow/TableRow';
 
-export default function ContactsPage () {
+export default function ContactsPage() {
 
-    const {formId} = useParams();
+    const { formId } = useParams();
+
+    const [header, setHeader] = useState([])
+
+    useEffect(() => {
+        if (formId) {
+            setHeader([
+                "INVITED",
+                "NAME",
+                "EMAIL",
+                "MODIFY"
+            ])
+        } else {
+            setHeader([
+                "NAME",
+                "EMAIL",
+                "MODIFY"
+            ])
+        }
+    }, [formId])
 
     const dispatch = useDispatch();
     const [showContactModal, setShowContactModal] = useState(false);
@@ -26,25 +46,20 @@ export default function ContactsPage () {
 
     const contacts = useSelector(selectContacts);
 
-    
+
     return (
-        <div className="contact-show">            
-            {showContactModal && <Modal closeModal={closeContactModal} content={<ContactEntry closeModal={closeContactModal}/>}/>}
+        <div className="contact-show">
+            {showContactModal && <Modal closeModal={closeContactModal} content={<ContactEntry closeModal={closeContactModal} />} />}
             <div className="contacts-header">
-                <div className="contacts-title">CONTACTS</div>
-                <button className='svg-button dark-grey'onClick={() => {setShowContactModal(true)}} ><AiOutlinePlusCircle/></button>
+                <div className="contacts-title">{formId ? "INVITES" : "CONTACTS"}</div>
+                <button className='svg-button dark-grey' onClick={() => { setShowContactModal(true) }} ><AiOutlinePlusCircle /></button>
             </div>
 
-            <div className="sub-row-wrapper">
-                <div className="sl-cell">INVITED</div>
-                <div className="sl-cell">NAME</div>
-                <div className="sl-cell">EMAIL</div>
-                <div className="sl-cell">MODIFY</div>
-            </div>
+            <TableRow rowContent={header} />
 
             {contacts.map((c) => {
                 return (
-                    <ContactModifier key={c.id} contact={c} formId={formId}/>
+                    <ContactModifier key={c.id} contact={c} formId={formId} />
                 )
             })}
         </div>

@@ -3,10 +3,29 @@ import { useDispatch } from 'react-redux';
 import { AiFillDelete } from 'react-icons/ai'
 import { deleteContact, deleteInvite, postInvite } from '../../store/contactReducer';
 import TableRow from '../TableRow/TableRow';
+import { useEffect, useState } from 'react';
 
 export default function ContactModifier({ contact, formId }) {
 
     const dispatch = useDispatch();
+    let rowContent;
+
+
+    if (formId) {
+        rowContent = [
+            <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />,
+            contact.name,
+            contact.email,
+            <div className="contact-delete-icon" onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
+        ]
+    } else {
+        rowContent = [
+            contact.name,
+            contact.email,
+            <div className="contact-delete-icon" onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
+        ]
+    }
+
 
     function handleInviteChange(e) {
 
@@ -30,15 +49,7 @@ export default function ContactModifier({ contact, formId }) {
         }
     }
 
-    // <div onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
-    // ,
-
     return (
-        <TableRow rowContent={[
-            <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />,
-            "name",
-            contact.email,
-            <div className="contact-delete-icon" onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
-        ]}/>
+        <TableRow rowContent={rowContent} />
     )
 }
