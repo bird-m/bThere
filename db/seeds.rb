@@ -14,6 +14,7 @@ ApplicationRecord.transaction do
   Question.destroy_all
   Form.destroy_all
   User.destroy_all
+  Contact.destroy_all
   puts 'Destroying all ActiveStorage attachments'
   ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
 
@@ -24,6 +25,7 @@ ApplicationRecord.transaction do
   ApplicationRecord.connection.reset_pk_sequence!('questions')
   ApplicationRecord.connection.reset_pk_sequence!('responses')
   ApplicationRecord.connection.reset_pk_sequence!('submissions')
+  ApplicationRecord.connection.reset_pk_sequence!('contacts')
 
   puts "Creating users..."
   # Create one user with an easy to remember email, and password:
