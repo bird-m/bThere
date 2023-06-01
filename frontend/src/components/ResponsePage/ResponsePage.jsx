@@ -46,10 +46,10 @@ export default function ResponsePage(props) {
 
     function postResponse() {
 
-        if(!attendStatus) {
+        if (!attendStatus) {
             setSubmitMsg("Please indicate your attendance!");
             return null;
-        } else if(!name || !email) {
+        } else if (!name || !email) {
             setSubmitMsg("Please enter name and email!");
             return null;
         }
@@ -67,11 +67,12 @@ export default function ResponsePage(props) {
             }
         }
 
-        
-        keys.forEach(key => {
-            const ref = refs[key];
-            ref.current && (submission['submission']['responses'].push({ questionId: ref.current.dataset.questionId, answer: ref.current.value }))
-        });
+        if (keys.length > 0 && refs[keys[0]].current) {
+            keys.forEach(key => {
+                const ref = refs[key];
+                submission['submission']['responses'].push({ questionId: ref.current.dataset.questionId, answer: ref.current.value })
+            });
+        }
 
         csrfFetch('/api/submissions', {
             method: 'POST',
@@ -180,7 +181,7 @@ export default function ResponsePage(props) {
             return (
                 <>
                     {injectHeader()}
-                    <SubmitterInputPane disabled={contactFieldsDisabled} name={name} setName={setName} email={email} setEmail={setEmail} attendStatus={attendStatus} setAttendStatus={setAttendStatus} allowInput={true} setSubmitMsg={setSubmitMsg}/>
+                    <SubmitterInputPane disabled={contactFieldsDisabled} name={name} setName={setName} email={email} setEmail={setEmail} attendStatus={attendStatus} setAttendStatus={setAttendStatus} allowInput={true} setSubmitMsg={setSubmitMsg} />
                     {getRollout()}
                 </>
             )
