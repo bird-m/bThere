@@ -25,6 +25,13 @@
     justify-content: space-around;
 }
 
+.detail-title a {
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* .detail-wrapper div {
     border: black solid 1px;
 } */

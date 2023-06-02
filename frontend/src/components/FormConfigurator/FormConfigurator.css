@@ -38,6 +38,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    min-height: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    padding-bottom: 100px;
 }
 
 @media screen and (max-width: 751px) {

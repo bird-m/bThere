@@ -1,16 +1,16 @@
 .form-grid {
-    height: 80%;
-    width: 90%;
-
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    row-gap: 20%;
+    row-gap: 60px;
+    align-items: center;
+    justify-items: center;
 }
 
 .form-page-item {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
 }
 
 .form-create-banner {
@@ -19,7 +19,8 @@
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    padding-right: 20px;    
+    padding-right: 20px;
+    box-sizing: border-box;    
 }
 
 .form-create-banner button {
@@ -37,7 +38,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-        row-gap: 30%;
+        /* row-gap: 30%; */
     
         /* display: flex;
         justify-content: space-around;
@@ -45,7 +46,7 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
     .form-grid {
         height: 40%;
         width: 90%;
@@ -53,7 +54,7 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-        row-gap: 15%;
+        /* row-gap: 15%; */
     
         /* display: flex;
         justify-content: space-around;
