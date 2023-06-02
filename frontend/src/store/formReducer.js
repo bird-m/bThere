@@ -81,8 +81,13 @@ export function postForm(form, formId = "") {
             body: formPackage
         })
         const data = await response.json();
-        return dispatch(receiveForm(data));
-        // return response;
+        dispatch(receiveForm(data));
+        if (response.ok) {
+            return data;
+        } else {
+            return response;
+        }
+        
     }
 }
 

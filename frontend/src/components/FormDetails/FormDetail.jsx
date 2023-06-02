@@ -36,7 +36,7 @@ export default function FormDetail ({form}) {
     return (
         <div className="detail-wrapper">
             {showDeleteModal && <Modal closeModal={closeModals} content={<DeletFormConfirmation formId={form.id} closeModal={closeModals}/>}/>}
-            {showShareModal && <Modal closeModal={closeModals} content={<ShareSheet form={form} closeModal={closeModals}/>}/>}
+            {showShareModal && <Modal closeModal={closeModals} content={<ShareSheet formId={form.id} closeModal={closeModals}/>}/>}
             <div className="detail-share-icon">
                 <Link to="#" onClick={openShareModal}><TbShare2/></Link>
             </div>

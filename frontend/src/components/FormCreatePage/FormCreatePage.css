@@ -28,7 +28,6 @@
 .fc-input-pane button {
     width: 100%;
     padding: 15px;
-    margin-bottom: 100px;
 }
 
 .fc-input-pane input {
@@ -43,6 +42,8 @@
 
 #fc-error-pane {
     height: 64px;
+    color: red;
+    font-size: 20px;
 }
 
 .fc-input-pane textarea {
@@ -140,16 +141,21 @@
 
 .fcp-cta-wrapper {
     display: flex;
-    flex-direction: column;
     font-size: medium;
     text-align: left;
     gap: 10px;
+    width: fit-content;
 }
 
 .fcp-cta {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.fcp-cta a {
+    text-decoration: none;
+    border-bottom: 1px solid #45286B;
 }
 
 .fcp-cta:hover {
@@ -159,9 +165,11 @@
 .fcp-icon {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    color: #45286B;
 }
 
-.fcp-cta span {
+.fcp-link-span {
     font-weight: bold;
     color: #45286B;
 }
@@ -193,4 +201,17 @@
 .fcp-header {
     width: 80%;
     text-align: center;
+}
+
+.fcp-combined-cta {
+    width: fit-content;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.fcp-link {
+    display: flex;
+    align-items: baseline;
 }

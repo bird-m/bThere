@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './SubmitterInputPane.css'
 
-export function SubmitterInputPane ({name, setName, email, setEmail, attendStatus, setAttendStatus, disabled, setSubmitMsg}) {
+export function SubmitterInputPane ({name, setName, email, setEmail, attendStatus, setAttendStatus, disabled, setSubmitMsg, radioDisabled}) {
     
     function handleAttend(e) {
         setSubmitMsg(null);
@@ -33,12 +33,12 @@ export function SubmitterInputPane ({name, setName, email, setEmail, attendStatu
                 </div>
                 <div className="si-radio-input">
                     <div className="si-input-radio">
-                        <input id='yes' type='radio' value='accept' checked={attendStatus === "accept"} onChange={(e) => {handleAttend(e)}} />
+                        <input id='yes' type='radio' value='accept' checked={attendStatus === "accept"} onChange={(e) => {handleAttend(e)}} disabled={radioDisabled}/>
                         <label htmlFor="yes">Attending</label>
                     </div>
                 
                     <div className="si-input-radio">
-                        <input id='no' type='radio' value='decline' checked={attendStatus === "decline"} onChange={(e) => {handleAttend(e)}} />
+                        <input id='no' type='radio' value='decline' checked={attendStatus === "decline"} onChange={(e) => {handleAttend(e)}} disabled={radioDisabled} />
                         <label htmlFor="no">Can't Make it</label>
                     </div>
                 </div>

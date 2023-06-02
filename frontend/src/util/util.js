@@ -42,3 +42,7 @@ export function isValidEmail(email) {
     dateComponents.push(year);
     return dateComponents.join("-");
   }
+
+  export function shareLink(formId) {
+    return (window.location.origin + "/" + `submit/${formId}`)
+  }

@@ -2,6 +2,7 @@
     height: 40px;
     display: flex;
     justify-content: center;
+    font-size: medium;
 }
 
 .ss-share-link-wrapper {
@@ -41,6 +42,11 @@
     color: #4B5563;
 }
 
+.delete-cancel-icon svg {
+    height: 16px;
+    width: 16px;
+}
+
 .delete-cancel-icon:hover {
     cursor: pointer;
     color: #E6E4EC;
@@ -56,5 +62,7 @@
     width: 100%;
     top: -250%;
     animation: fade-in 0.5s ease-out;
+    text-align: center;
+    color: #45286B;
 }
 

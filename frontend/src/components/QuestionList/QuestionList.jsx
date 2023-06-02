@@ -79,7 +79,7 @@ export function QuestionList() {
                 Required Questions
             </div>
 
-            <SubmitterInputPane disable={true} />
+            <SubmitterInputPane disabled={true} radioDisabled={true}/>
 
 
             {showQpane ? null : <button onClick={() => { setShowQpane(true) }}>Add Question</button>}
