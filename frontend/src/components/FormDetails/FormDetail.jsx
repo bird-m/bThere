@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Modal from '../Modal/Modal'
 import DeletFormConfirmation from '../DeleteFormConfirmation/DeleteFormConfirmation';
 import ShareSheet from '../ShareSheet/ShareSheet';
+import Switch from 'react-switch';
 
 // MdModeEdit
 
@@ -55,8 +56,10 @@ export default function FormDetail ({form}) {
                     </span>
                     </Link>
                 </span>
-                <span>
-                    
+                <span className='privacy-toggle'>
+                    {form.restricted ? "Invite Only Event" : "Open Event"}
+
+                    {/* <Switch onChange={() => {}}/> */}
                 </span>
                 <span>
                 <Link to={`/form/${form.id}`}>

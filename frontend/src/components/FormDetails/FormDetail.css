@@ -59,6 +59,7 @@
     color: #1F2937;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .form-status > span {
@@ -88,4 +89,8 @@
 .detail-share-icon svg {
     margin-right: 15px;
     color: #551A8B;
+}
+
+.privacy-toggle {
+    color: #4B5563;
 }
