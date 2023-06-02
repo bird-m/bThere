@@ -35,8 +35,9 @@
     width: calc(100% - 175px);
     background-color: #F3F4F6;
     display:flex;
-    justify-content: center;
-    padding-top: 50px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .fc-contents-wrapper {

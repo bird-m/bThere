@@ -16,16 +16,12 @@
     height: 60%;
 }
 
-.logged-in-banner-wrapper div {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
 .ban-email {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+    padding-right: 15px;
 }
 
 .ban-email button {
@@ -37,10 +33,20 @@
     height: 100%;
 }
 
-.li-banner-nav-option, .li-banner-nav-icon {
+.li-banner-nav-option  {
     color: #D1D5DB;
     display: flex;
     align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.li-banner-nav-icon {
+    width: 175px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    box-sizing: border-box;
 }
 
 .li-banner-nav-option:hover {

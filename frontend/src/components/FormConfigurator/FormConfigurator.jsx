@@ -67,7 +67,7 @@ export default function FormConfigurator() {
             <LoggedInBanner navOptions={bannerOptions} />
 
             <div className="fc-sub-header">
-                <BannerNav />
+                
 
                 {/* <div className="fc-contents-wrapper"> */}
                 {/* <div className="fc-question-list"> */}
@@ -75,6 +75,7 @@ export default function FormConfigurator() {
                     <FormConfigSidePanel form={form} navOptions={sideNavOptions} />
                 </div>
                 <div className="fc-alternating-pane">
+                <BannerNav navOptions={sideNavOptions}/>
                     <Switch>
                         <Route exact path="/forms">
                             <FormGrid />

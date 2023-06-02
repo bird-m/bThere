@@ -18,8 +18,6 @@ export function LoggedInBanner ({setTab}) {
     return (
         <div className="logged-in-banner-wrapper">
             <div className="li-banner-nav">
-                
-
                 <div className="li-banner-nav-icon"> <img src={checkLogo}/></div>
 
                 <div className="li-banner-nav-option" onClick={() => {history.push("/forms")}}> <div>Home</div></div>
