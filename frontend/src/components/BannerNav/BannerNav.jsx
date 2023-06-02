@@ -1,24 +1,37 @@
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import './BannerNav.css'
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function BannerNav({ navOptions}) {
+export default function BannerNav({ navOptions, form }) {
 
     const history = useHistory();
+    const location = useLocation();
+
+    function assignNavClass(pathname) {
+        if(pathname === location.pathname) {
+            return "form-nav-selected"
+        } else {
+            return "form-nav-item"
+        }
+    }
 
     // return (null);
     return (
+        <div className="form-nav-wrapper">
+        <div className="form-nav-title">
+            {form && form.title}
+            <hr className='form-nav-title-bar'/>
+        </div>
         <div className="form-nav">
             <div className="form-nav-left">
                 {Object.entries(navOptions).map(([viewableLink, path]) => {
                     return (
-                        <div key={viewableLink} className="form-nav-selected" onClick={() => { history.push(path) }}>
+                        <div key={viewableLink} className={assignNavClass(path)} onClick={() => { history.push(path) }}>
                             {viewableLink}
                         </div>
                     )
                 })}
             </div>
-            <div className="form-nav-right">
-                {/* <Link to="/form" className="form-button"><button>Create New Form</button></Link> */}
-            </div>
+        </div>
         </div>
     )
 }

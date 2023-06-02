@@ -1,10 +1,12 @@
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import './LoggedInBanner.css'
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser, logout } from "../../store/session";
 import checkLogo from '../../images/check-logo.png'
 
 export function LoggedInBanner ({setTab}) {
+
+    const {formId} = useParams();
 
     const sessionUser = useSelector(loggedInUser);
     const dispatch = useDispatch();
@@ -18,7 +20,7 @@ export function LoggedInBanner ({setTab}) {
     return (
         <div className="logged-in-banner-wrapper">
             <div className="li-banner-nav">
-                <div className="li-banner-nav-icon"> <img src={checkLogo}/></div>
+                <div className="li-banner-nav-icon" style={{width: (!formId && "75px")}}> <img src={checkLogo}/></div>
 
                 <div className="li-banner-nav-option" onClick={() => {history.push("/forms")}}> <div>Home</div></div>
                 <div className="li-banner-nav-option" onClick={() => {history.push("/address-book")}}><div>Address Book</div></div>

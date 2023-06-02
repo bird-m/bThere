@@ -8,7 +8,6 @@ export default function FormConfigSidePanel({ navOptions, form }) {
 
     const location = useLocation();
 
-    console.log(location.pathname, "pathname");
 
     function assignNavClass(pathname) {
         if(pathname === location.pathname) {

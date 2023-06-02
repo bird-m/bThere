@@ -40,18 +40,30 @@
     align-items: center;
 }
 
-.fc-contents-wrapper {
-    /* min-height: calc(100% - 80px); */
-}
-
-/* @media screen and (max-width: 751px) {
-    .fc-side-panel {
+@media screen and (max-width: 751px) {
+    .form-config-panel-wrapper {
         display: none;
+    }
+
+    .fc-alternating-pane {
+        width: 100%;
+    }
+
+    .li-banner-nav-icon {
+        width: 75px;
+    }
+
+    .form-nav {
+        padding-bottom: 20px;
     }
 }
 
 @media screen and (min-width: 752px) {
-    .fc-wrapper .form-nav {
+    .form-nav-left {
         display: none;
     }
-} */
+
+    .form-nav-title {
+        display: none;
+    }
+}

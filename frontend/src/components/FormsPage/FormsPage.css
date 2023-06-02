@@ -31,6 +31,7 @@
 .form-nav {
     width: 100%;
     height: 50px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -77,5 +78,10 @@
 
 .form-nav-selected {
     font-weight: 800;
+    border-bottom: 1px solid black;
+}
+
+.form-nav-item:hover {
+    /* font-weight: 800; */
     border-bottom: 1px solid black;
 }

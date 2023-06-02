@@ -71,11 +71,12 @@ export default function FormConfigurator() {
 
                 {/* <div className="fc-contents-wrapper"> */}
                 {/* <div className="fc-question-list"> */}
+                {formId &&
                 <div className="form-config-panel-wrapper">
                     <FormConfigSidePanel form={form} navOptions={sideNavOptions} />
-                </div>
-                <div className="fc-alternating-pane">
-                <BannerNav navOptions={sideNavOptions}/>
+                </div>}
+                <div className="fc-alternating-pane" style={{width: (!formId && "100%")}}>
+                <BannerNav form={form} navOptions={sideNavOptions}/>
                     <Switch>
                         <Route exact path="/forms">
                             <FormGrid />
