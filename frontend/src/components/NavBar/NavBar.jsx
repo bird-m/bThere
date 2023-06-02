@@ -1,8 +1,10 @@
 import { Link, useHistory } from 'react-router-dom';
 import "./NavBar.css"
-import logo from '../../images/logo.png'
+import checkLogo from '../../images/check-logo.png'
 import { logout } from "../../store/session"
 import { useDispatch, useSelector } from "react-redux"
+import bThereLogo from '../../images/bThere-white.png'
+
 
 export default function NavBar (props) {
 
@@ -21,17 +23,15 @@ export default function NavBar (props) {
     return (
         <div className="nav-wrapper">
             <div className="nav-left">
-                <img className="nav-logo" src={logo}/>
-                <Link to="#">RSVPify for...</Link>
-                <Link to="#">Features</Link>
-                <Link to="#">Pricing</Link>
+                <img className="nav-logo" src={checkLogo}/>
+                <img className="bthere-nav-logo-text" src={bThereLogo}/>
+            </div>
+            <div className="nav-mid">
+        
             </div>
             <div className="nav-right">
-                <Link to="#">Sales</Link>
-                <Link to="#">Support</Link>
-                <Link to="#">Blog</Link>
+                
                 <Link to="#" onClick ={handleClick}>{sessionUser ? "Logout" : "Login"}</Link>
-                <Link to="/login"><button className="nav-button">Create My Event</button></Link>
             </div>
         </div>
     )

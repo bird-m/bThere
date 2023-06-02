@@ -16,7 +16,7 @@ export function SplashPage (props) {
     return (
         <div className="splash-wrapper">
             <div className="splash-pane hero-pane">
-                <div className="hero-text">Elite event management software for all. No contract required.</div>
+                <div className="hero-text">Elite event management software for all.<br/> No contract required.</div>
                 <Link to="/signup"><button>Get started for free</button></Link>
             </div>
             <div className="vid-pane splash-pane">

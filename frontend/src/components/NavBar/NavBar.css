@@ -6,9 +6,10 @@
     font-size: 14px;
     position: fixed;
     z-index: 100;
-    background-color: #F5F7FB;
-    /* padding-top: 10px; */
-    height: 8%;
+    background-color: #0E0A1E;
+    justify-content: space-around;
+    height: 80px;
+    overflow: hidden;
 }
 
 /* .nav-wrapper div {
@@ -20,18 +21,37 @@
     padding-right: 20px;
 }
 
-.nav-left, .nav-right {
-    width: 100%;
+.nav-left, .nav-right, .nav-mid {
+    width: 30vw;
     display: flex;
     align-items: center;
-    justify-content: space-around;
     font-family: 'Arial', sans-serif;
     font-weight: 550;
     height: 100%;
 }
 
 .nav-logo {
-    height: 50px;
+    height: 40px;
+}
+
+.nav-left {
+
+}
+
+.nav-mid {
+    justify-content: center;
+}
+.nav-right {
+    justify-content: flex-end;
+}
+
+.nav-right a {
+    color: #F5F7FB;
+}
+
+.bthere-nav-logo-text {
+    height: 125px;
+    margin-left: -10px;
 }
 
 .nav-button {
