@@ -66,7 +66,7 @@ export default function FormConfigurator() {
 
             <LoggedInBanner navOptions={bannerOptions} />
 
-            <div className="fc-sub-header">
+            <div className="fc-sub-header" style={{height: (!formId && "100%")}}>
                 
 
                 {/* <div className="fc-contents-wrapper"> */}
@@ -76,7 +76,7 @@ export default function FormConfigurator() {
                     <FormConfigSidePanel form={form} navOptions={sideNavOptions} />
                 </div>}
                 <div className="fc-alternating-pane" style={{width: (!formId && "100%")}}>
-                <BannerNav form={form} navOptions={sideNavOptions}/>
+                {formId && <BannerNav form={form} navOptions={sideNavOptions}/>}
                     <Switch>
                         <Route exact path="/forms">
                             <FormGrid />

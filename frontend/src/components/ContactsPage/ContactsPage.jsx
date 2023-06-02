@@ -60,7 +60,7 @@ export default function ContactsPage() {
     }
 
     return (
-        <div className="contact-show">
+        <div className="contact-show" style={{paddingTop: !formId && "50px"}}>
             {showContactModal && <Modal closeModal={closeContactModal} content={<ContactEntry closeModal={closeContactModal} />} />}
             <div className="contacts-header">
                 <div className="contacts-title">{formId ? "INVITES" : "CONTACTS"}</div>

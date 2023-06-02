@@ -163,13 +163,8 @@ export default function FormCreatePage (props) {
 
     return (
         <div className="create-forms-page-wrapper">
-                <div className="fc-banner-wrapper">
+                <div className="logged-in-banner-wrapper">
                     <LoggedInBanner/>
-                </div>
-                <div className="fc-x">
-                    <Link to="/forms">
-                        <AiOutlineClose/>
-                    </Link>
                 </div>
             <div className="create-pane-wrapper">
                 <div className="fc-input-pane">

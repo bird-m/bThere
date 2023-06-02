@@ -1,6 +1,7 @@
 .logged-in-banner-wrapper {
     width: 100%;
     height: 80px;
+    min-height: 80px;
     background-color: #0E0A1E;
     color: #FFFFFF;
     display: flex;
@@ -47,6 +48,10 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
+}
+
+.li-banner-nav-icon a {
+    height: fit-content;
 }
 
 .li-banner-nav-option:hover {

@@ -3,10 +3,12 @@ import './FormGrid.css'
 import { useEffect } from 'react';
 import { fetchForms, selectAllForms } from '../../store/formReducer';
 import { FormSummary } from '../FormSummary/FormSummary';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function FormGrid() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(fetchForms())
@@ -14,8 +16,13 @@ export default function FormGrid() {
 
     const forms = useSelector(selectAllForms);
 
+    // return null;
     return (
         <>
+            <div className="form-create-banner">
+                <Link to="/form"><button className='form-create-button'>CREATE INVITE</button></Link>
+                
+            </div>
             <div className="form-grid">
                 {forms.map((form) => {
                     return (

@@ -9,8 +9,24 @@
 }
 
 .form-page-item {
-    width: 90%;
+    width: 100%;
     height: 100%;
+}
+
+.form-create-banner {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding-right: 20px;    
+}
+
+.form-create-banner button {
+    color: #e7e4ec;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 1000px) {
@@ -31,7 +47,7 @@
 
 @media screen and (max-width: 600px) {
     .form-grid {
-        height: 80%;
+        height: 40%;
         width: 90%;
     
         display: grid;
