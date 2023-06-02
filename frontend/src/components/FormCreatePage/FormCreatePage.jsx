@@ -16,6 +16,7 @@ import FormUpdateCta from "../FormUpdateCta/FormUpdateCta";
 import { shareLink } from "../../util/util";
 import Modal from "../Modal/Modal";
 import ShareSheet from "../ShareSheet/ShareSheet";
+import ErrorPane from "../ErrorPane/ErrorPane";
 
 
 export default function FormCreatePage(props) {
@@ -50,6 +51,7 @@ export default function FormCreatePage(props) {
     const [newFormId, setNewFormId] = useState(null);
     const [restrictedForm, setRestrictedForm] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     const editForm = useSelector(selectForm(formId));
 
@@ -93,7 +95,11 @@ export default function FormCreatePage(props) {
             .catch((error) => {
                 // console.log(error, "check");
                 error.json().then((data) => {
+                    // debugger;
+                    // console.log("here :(")
                     setErrors(data.errors);
+                    
+                    setShowErrorModal(true);
                 })
             })
     }
@@ -204,6 +210,7 @@ export default function FormCreatePage(props) {
 
     return (
         <div className="create-forms-page-wrapper">
+            {showErrorModal && <Modal closeModal={() => {setShowErrorModal(false)}} content={<ErrorPane closeModal={() => {setShowErrorModal(false)}} errors={errors}/>}/>}
             <div className="logged-in-banner-wrapper">
                 <LoggedInBanner />
             </div>
@@ -239,9 +246,9 @@ export default function FormCreatePage(props) {
                 </div>
                 <div className="fc-input-pane" id="fc-error-pane">
                     <div className="form-create-errors">
-                        {errors.map((e, ix) => {
+                        {/* {errors.map((e, ix) => {
                             return (<><span key={ix}>{e}</span><br /></>)
-                        })}
+                        })} */}
                     </div>
                 </div>
             </div>

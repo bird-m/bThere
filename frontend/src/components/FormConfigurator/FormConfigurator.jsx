@@ -47,7 +47,8 @@ export default function FormConfigurator() {
             setSideNavOptions({
                 "Responses": `/forms/${formId}/responses`,
                 "Questions": `/forms/${formId}/questions`,
-                "Invite List": `/forms/${formId}/invite-list`
+                "Invite List": `/forms/${formId}/invite-list`,
+                "Settings": `/form/${formId}`
             })
         } else if (formId && form) {
             setSideNavOptions({

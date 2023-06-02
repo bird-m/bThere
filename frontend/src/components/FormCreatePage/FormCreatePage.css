@@ -1,6 +1,7 @@
 .create-forms-page-wrapper {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -22,7 +23,6 @@
     width: 40%;
     min-width: 350px;
     max-width: 600px;
-    padding-bottom: 64px;
 }
 
 .fc-input-pane button {

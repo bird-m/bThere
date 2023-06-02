@@ -1,0 +1,23 @@
+.ep-wrapper {
+    padding: 25px;
+    background-color: #FFFFFF;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ep-title {
+    padding-bottom: 10px;
+}
+
+.ep-error {
+    color: red;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+
+.ep-button {
+    margin-top: 10px;
+}
