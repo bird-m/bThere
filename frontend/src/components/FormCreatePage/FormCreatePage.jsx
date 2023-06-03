@@ -9,14 +9,13 @@ import { LoggedInBanner } from "../LoggedInBanner/LoggedInBanner";
 import { AiOutlineClose } from 'react-icons/ai'
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import sample from '../../images/sample-form-img.png'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { TbShare2 } from 'react-icons/tb'
-import { AiOutlineEye } from 'react-icons/ai'
+
 import FormUpdateCta from "../FormUpdateCta/FormUpdateCta";
 import { shareLink } from "../../util/util";
 import Modal from "../Modal/Modal";
 import ShareSheet from "../ShareSheet/ShareSheet";
 import ErrorPane from "../ErrorPane/ErrorPane";
+import FormUpdateMsgPane from "../FormUpdateMsgPane/FormUpdateMsgPane";
 
 
 export default function FormCreatePage(props) {
@@ -50,7 +49,6 @@ export default function FormCreatePage(props) {
     const [submitted, setSubmitted] = useState(false);
     const [newFormId, setNewFormId] = useState(null);
     const [restrictedForm, setRestrictedForm] = useState(false);
-    const [showShareModal, setShowShareModal] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
 
     const editForm = useSelector(selectForm(formId));
@@ -91,6 +89,10 @@ export default function FormCreatePage(props) {
             .then((res) => {
                 setNewFormId(res.id);
                 setSubmitted(true);
+                if (!formId) {
+                    const newURL = `${window.location.pathname}/1`;
+                    window.history.pushState(null, '', newURL);
+                }
             })
             .catch((error) => {
                 // console.log(error, "check");
@@ -130,130 +132,42 @@ export default function FormCreatePage(props) {
     }
 
     if (submitted) {
-        // console.log(submitt)
-        return (
-            <div className="fcp-thank-you-wrapper">
-                <div className="fcp-thank-you">
-                    <div className="fcp-header">
-                        {formId ? "You've updated your invite! Remember you can always..." : "You've created an invite! What's next you ask?"}
-                    </div>
-
-                    {/* {showShareModal && <Modal closeModal={closeModals} content={<ShareSheet form={form} closeModal={closeModals}/>}/>} */}
-                    {showShareModal && <Modal closeModal={() => { setShowShareModal(false) }} content={<ShareSheet closeModal={() => { setShowShareModal(false) }} formId={newFormId} />} />}
-
-                    <div className="fcp-combined-cta">
-                        <FormUpdateCta
-                            icon={AiOutlinePlusCircle}
-                            linkText={"Add Questions"}
-                            afterLink={`to your invite`}
-                            path={`/forms/${newFormId}/questions`}
-                        />
-
-                        <FormUpdateCta
-                            icon={TbShare2}
-                            linkText={"Share"}
-                            afterLink={`your invite link`}
-                            path={""}
-                            handleClick={() => { setShowShareModal(true) }}
-                        />
-
-                        {restrictedForm &&
-                            <FormUpdateCta
-                                icon={AiOutlinePlusCircle}
-                                linkText={"Add Guests"}
-                                afterLink={"to your invite"}
-                                path={`/forms/${newFormId}/invite-list`}
-                            />}
-
-                        <FormUpdateCta
-                            icon={AiOutlineEye}
-                            linkText={"View Responses"}
-                            afterLink={"to your invite"}
-                            path={`/forms/${newFormId}/responses`}
-                        />
-                    </div>
-                    {/* <div className="fcp-cta-wrapper">
-                        <Link to="/">
-                            <div className="fcp-icon">
-                                <AiOutlinePlusCircle />
-                            </div>
-                        </Link>
-
-                        <div className="fcp-cta">
-                            <Link>Add Quesions</Link>to your invitation
-                        </div>
-                    </div> */}
-
-                    {/* <div className="fcp-cta-wrapper">
-                        <div className="fcp-cta" onClick={() => {history.push(`/form/configure/${createdFormId}`,{dest:"questions"})}}>
-                            
-                            <div className="fcp-icon"><AiOutlinePlusCircle/></div>
-                            <div><span>Add questions</span> to your invite!</div>
-
-                        </div>
-                        <div className="fcp-cta" onClick={() => {history.push(`/submit/${createdFormId}`)}}>
-                    
-                            <div className="fcp-icon"><TbShare2/></div>
-                            <div><span>Share</span> your invite!</div>
-
-                             
-                        </div>
-                        <div className="fcp-cta" onClick={() => {history.push(`/form/configure/${createdFormId}`)}}>
-                            <div className="fcp-icon"><AiOutlineEye/></div>
-                            <div><span>View</span> responses to your invite!</div>
-                        </div>
-                    </div> */}
-                </div>
-            </div>
-        )
+        return <FormUpdateMsgPane formId={newFormId} restrictedForm={restrictedForm} />
     }
 
     return (
         <>
-            <div className="logged-in-banner-wrapper">
-                <LoggedInBanner />
-            </div>
-            <div className="create-forms-page-wrapper">
-                {showErrorModal && <Modal closeModal={() => { setShowErrorModal(false) }} content={<ErrorPane closeModal={() => { setShowErrorModal(false) }} errors={errors} />} />}
-                <div className="form-mod-wrapper">
-                    <div className="create-pane-wrapper">
-                        <div className="fc-input-pane">
-                            <span className="fc-large">{cta}</span><br />
-                            <span className="fc-small">{tagline}</span>
-                        </div>
-                        {injectImg()}
-                        <div className="fc-input-pane">
-                            <label htmlFor="title">TITLE </label><br />
-                            <input id="title" type='text' value={title} onChange={(e) => { setTitle(e.target.value) }} />
-                        </div>
-                        <div className="fc-input-pane">
-                            <label htmlFor="fc-description">DESCRIPTION </label><br />
+            {showErrorModal && <Modal closeModal={() => { setShowErrorModal(false) }} content={<ErrorPane closeModal={() => { setShowErrorModal(false) }} errors={errors} />} />}
 
-                            <textarea id="fc-description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
-                        </div>
-                        <div className="fc-input-pane">
-                            <label htmlFor="custom-url">CUSTOM URL </label><br />
-                            <input id="custom-url" type='text' value={customUrl} onChange={(e) => { setCustomUrl(e.target.value) }} />
-                        </div>
-                        <div className="fc-check-pane">
-                            <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => { setRestrictedForm((prev) => !prev) }}></input>
-                            <label htmlFor="fc-restricted">Invite Only</label>
-                        </div>
-                        <div className="fc-input-pane">
-                            <label htmlFor="photo">{photoText}</label><br />
-                            <input id="photo" type="file" onChange={handleFile} />
-                        </div>
-                        <div className="fc-input-pane">
-                            <button onClick={handlePhotoTest}>{buttonText}</button>
-                        </div>
-                        <div className="fc-input-pane" id="fc-error-pane">
-                            <div className="form-create-errors">
-                                {/* {errors.map((e, ix) => {
-                            return (<><span key={ix}>{e}</span><br /></>)
-                        })} */}
-                            </div>
-                        </div>
-                    </div>
+            <div className="create-pane-wrapper">
+                <div className="fc-input-pane">
+                    <span className="fc-large">{cta}</span><br />
+                    <span className="fc-small">{tagline}</span>
+                </div>
+                {injectImg()}
+                <div className="fc-input-pane">
+                    <label htmlFor="title">TITLE </label><br />
+                    <input id="title" type='text' value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                </div>
+                <div className="fc-input-pane">
+                    <label htmlFor="fc-description">DESCRIPTION </label><br />
+
+                    <textarea id="fc-description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
+                </div>
+                <div className="fc-input-pane">
+                    <label htmlFor="custom-url">CUSTOM URL </label><br />
+                    <input id="custom-url" type='text' value={customUrl} onChange={(e) => { setCustomUrl(e.target.value) }} />
+                </div>
+                <div className="fc-check-pane">
+                    <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => { setRestrictedForm((prev) => !prev) }}></input>
+                    <label htmlFor="fc-restricted">Invite Only</label>
+                </div>
+                <div className="fc-input-pane">
+                    <label htmlFor="photo">{photoText}</label><br />
+                    <input id="photo" type="file" onChange={handleFile} />
+                </div>
+                <div className="fc-input-pane">
+                    <button onClick={handlePhotoTest}>{buttonText}</button>
                 </div>
             </div>
         </>

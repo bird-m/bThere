@@ -33,9 +33,9 @@ function App() {
           <FormConfigurator />
         </Route>
 
-        <Route path="/form/:formId?">
+        {/* <Route path="/form/:formId?">
           <FormCreatePage />
-        </Route>
+        </Route> */}
 
         <Route exact path="/login">
           <AuthFormPage mode='login' />
@@ -45,7 +45,7 @@ function App() {
           <AuthFormPage mode='signup' />
         </Route>
 
-        <Route path={["/forms/:formId","/forms", "/address-book" ]}>
+        <Route path={["/forms/:formId","/forms", "/address-book", "/form/:formId?" ]}>
           <FormConfigurator />
         </Route>
 

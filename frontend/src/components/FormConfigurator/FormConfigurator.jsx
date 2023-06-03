@@ -14,6 +14,7 @@ import ContactsPage from '../ContactsPage/ContactsPage';
 import BannerNav from '../BannerNav/BannerNav';
 import { FormSummary } from '../FormSummary/FormSummary';
 import FormGrid from '../FormGrid/FormGrid';
+import FormCreatePage from '../FormCreatePage/FormCreatePage';
 
 export default function FormConfigurator() {
 
@@ -97,8 +98,8 @@ export default function FormConfigurator() {
                         <Route path="/forms">
                             <FormGrid />
                         </Route>
-                        <Route path="/form">
-                            <FormGrid />
+                        <Route path="/form/:formId?">
+                            <FormCreatePage/>
                         </Route>
                     </Switch>
                 </div>
