@@ -1,8 +1,10 @@
 .fc-wrapper {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
+    background-color: #F3F4F6;
 }
 
 .fc-banner {
@@ -42,6 +44,12 @@
     height: fit-content;
     box-sizing: border-box;
     padding-bottom: 100px;
+    margin-top: 80px;
+    margin-left: 175px;
+}
+
+.fc-no-left-marg {
+    margin-left: 0px;
 }
 
 @media screen and (max-width: 751px) {
@@ -51,6 +59,7 @@
 
     .fc-alternating-pane {
         width: 100%;
+        margin-left: 0px;
     }
 
     .li-banner-nav-icon {

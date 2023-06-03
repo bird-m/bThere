@@ -7,6 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    z-index: 10;
 }
 
 .logged-in-banner-wrapper img {
@@ -23,6 +25,7 @@
     align-items: flex-end;
     gap: 10px;
     padding-right: 15px;
+    color: #D1D5DB;
 }
 
 .ban-email button {
@@ -62,4 +65,8 @@
 
 .li-banner-nav-icon:hover {
     cursor: pointer;
+}
+
+.banner-logout a {
+    color: #D1D5DB;
 }

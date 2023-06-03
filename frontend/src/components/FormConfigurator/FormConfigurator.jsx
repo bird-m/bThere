@@ -76,7 +76,7 @@ export default function FormConfigurator() {
                 <div className="form-config-panel-wrapper">
                     <FormConfigSidePanel form={form} navOptions={sideNavOptions} />
                 </div>}
-                <div className="fc-alternating-pane" style={{width: (!formId && "100%")}}>
+                <div className={`fc-alternating-pane${formId ? "" : " fc-no-left-marg"}`} style={{width: (!formId && "100%")}}>
                 {formId && <BannerNav form={form} navOptions={sideNavOptions}/>}
                     <Switch>
                         <Route exact path="/forms">
@@ -95,6 +95,9 @@ export default function FormConfigurator() {
                             <ContactsPage />
                         </Route>
                         <Route path="/forms">
+                            <FormGrid />
+                        </Route>
+                        <Route path="/form">
                             <FormGrid />
                         </Route>
                     </Switch>

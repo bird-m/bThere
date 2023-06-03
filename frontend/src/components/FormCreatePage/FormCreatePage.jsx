@@ -98,7 +98,7 @@ export default function FormCreatePage(props) {
                     // debugger;
                     // console.log("here :(")
                     setErrors(data.errors);
-                    
+
                     setShowErrorModal(true);
                 })
             })
@@ -139,7 +139,7 @@ export default function FormCreatePage(props) {
                     </div>
 
                     {/* {showShareModal && <Modal closeModal={closeModals} content={<ShareSheet form={form} closeModal={closeModals}/>}/>} */}
-                    {showShareModal && <Modal closeModal={() => {setShowShareModal(false)}} content={<ShareSheet closeModal={() => {setShowShareModal(false)}} formId={newFormId}/>}/>}
+                    {showShareModal && <Modal closeModal={() => { setShowShareModal(false) }} content={<ShareSheet closeModal={() => { setShowShareModal(false) }} formId={newFormId} />} />}
 
                     <div className="fcp-combined-cta">
                         <FormUpdateCta
@@ -154,7 +154,7 @@ export default function FormCreatePage(props) {
                             linkText={"Share"}
                             afterLink={`your invite link`}
                             path={""}
-                            handleClick={() => {setShowShareModal(true)}}
+                            handleClick={() => { setShowShareModal(true) }}
                         />
 
                         {restrictedForm &&
@@ -209,49 +209,53 @@ export default function FormCreatePage(props) {
     }
 
     return (
-        <div className="create-forms-page-wrapper">
-            {showErrorModal && <Modal closeModal={() => {setShowErrorModal(false)}} content={<ErrorPane closeModal={() => {setShowErrorModal(false)}} errors={errors}/>}/>}
+        <>
             <div className="logged-in-banner-wrapper">
                 <LoggedInBanner />
             </div>
-            <div className="create-pane-wrapper">
-                <div className="fc-input-pane">
-                    <span className="fc-large">{cta}</span><br />
-                    <span className="fc-small">{tagline}</span>
-                </div>
-                {injectImg()}
-                <div className="fc-input-pane">
-                    <label htmlFor="title">TITLE </label><br />
-                    <input id="title" type='text' value={title} onChange={(e) => { setTitle(e.target.value) }} />
-                </div>
-                <div className="fc-input-pane">
-                    <label htmlFor="fc-description">DESCRIPTION </label><br />
+            <div className="create-forms-page-wrapper">
+                {showErrorModal && <Modal closeModal={() => { setShowErrorModal(false) }} content={<ErrorPane closeModal={() => { setShowErrorModal(false) }} errors={errors} />} />}
+                <div className="form-mod-wrapper">
+                    <div className="create-pane-wrapper">
+                        <div className="fc-input-pane">
+                            <span className="fc-large">{cta}</span><br />
+                            <span className="fc-small">{tagline}</span>
+                        </div>
+                        {injectImg()}
+                        <div className="fc-input-pane">
+                            <label htmlFor="title">TITLE </label><br />
+                            <input id="title" type='text' value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                        </div>
+                        <div className="fc-input-pane">
+                            <label htmlFor="fc-description">DESCRIPTION </label><br />
 
-                    <textarea id="fc-description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
-                </div>
-                <div className="fc-input-pane">
-                    <label htmlFor="custom-url">CUSTOM URL </label><br />
-                    <input id="custom-url" type='text' value={customUrl} onChange={(e) => { setCustomUrl(e.target.value) }} />
-                </div>
-                <div className="fc-check-pane">
-                    <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => { setRestrictedForm((prev) => !prev) }}></input>
-                    <label htmlFor="fc-restricted">Invite Only</label>
-                </div>
-                <div className="fc-input-pane">
-                    <label htmlFor="photo">{photoText}</label><br />
-                    <input id="photo" type="file" onChange={handleFile} />
-                </div>
-                <div className="fc-input-pane">
-                    <button onClick={handlePhotoTest}>{buttonText}</button>
-                </div>
-                <div className="fc-input-pane" id="fc-error-pane">
-                    <div className="form-create-errors">
-                        {/* {errors.map((e, ix) => {
+                            <textarea id="fc-description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
+                        </div>
+                        <div className="fc-input-pane">
+                            <label htmlFor="custom-url">CUSTOM URL </label><br />
+                            <input id="custom-url" type='text' value={customUrl} onChange={(e) => { setCustomUrl(e.target.value) }} />
+                        </div>
+                        <div className="fc-check-pane">
+                            <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => { setRestrictedForm((prev) => !prev) }}></input>
+                            <label htmlFor="fc-restricted">Invite Only</label>
+                        </div>
+                        <div className="fc-input-pane">
+                            <label htmlFor="photo">{photoText}</label><br />
+                            <input id="photo" type="file" onChange={handleFile} />
+                        </div>
+                        <div className="fc-input-pane">
+                            <button onClick={handlePhotoTest}>{buttonText}</button>
+                        </div>
+                        <div className="fc-input-pane" id="fc-error-pane">
+                            <div className="form-create-errors">
+                                {/* {errors.map((e, ix) => {
                             return (<><span key={ix}>{e}</span><br /></>)
                         })} */}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
