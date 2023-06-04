@@ -1,3 +1,4 @@
+import { REMOVE_SESSION } from "./session";
 import { RECEIVE_SUBMISSIONS_PAYLOAD } from "./submissionReducer";
 
 export const RECEIVE_RESPONSES = 'RECEIVE_RESPONSES';
@@ -25,7 +26,7 @@ export function receiveResponses(responses) {
 
 export function selectResponsesByForm(formId) {
     return function (state) {
-        if(state && state.responses) {
+        if (state && state.responses) {
             return Object.values(state.responses).filter((r) => (parseInt(r.formId) === parseInt(formId)))
         } else {
             return []
@@ -38,7 +39,7 @@ export function selectResponsesByForm(formId) {
 // export function selectResponsesByQuestionId(submissionId) {
 //     return function(state) {
 //         if(state && state.responses) {
-            
+
 //             const keys = Object.keys(state.responses)
 //             const output = {}
 
@@ -57,14 +58,16 @@ export function selectResponsesByForm(formId) {
 // }
 
 export default function responseReducer(state = {}, action) {
-    switch(action.type) {
+    switch (action.type) {
         case RECEIVE_RESPONSES:
             // console.log("****THIS SHOULD BE DEPRECATED****")
             // because we get responses based on submissions, there are cases in which a submission will not have a response. This is why we have this or
             return (action.responses || state)
         case RECEIVE_SUBMISSIONS_PAYLOAD:
-            return (action.submissionsPayload.responses || state)
-        default: 
+            return (action.submissionsPayload.responses || state);
+        case REMOVE_SESSION:
+            return {};
+        default:
             return state;
     }
 }

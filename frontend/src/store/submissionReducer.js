@@ -2,6 +2,7 @@
 
 import csrfFetch from "./csrf";
 import { receiveResponses } from "./responseReducer";
+import { REMOVE_SESSION } from "./session";
 
 export const RECEIVE_SUBMISSIONS = 'RECEIVE_SUBMISSIONS';
 
@@ -62,6 +63,8 @@ export default function submissionReducer(state = {}, action) {
             return (action.submissions || state);
         case RECEIVE_SUBMISSIONS_PAYLOAD:
             return (action.submissionsPayload.submissions || state);
+        case REMOVE_SESSION:
+            return {};
         default:
             return state;
     }

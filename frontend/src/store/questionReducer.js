@@ -1,9 +1,10 @@
 import csrfFetch from "./csrf";
+import { REMOVE_SESSION } from "./session";
 
 // action constants and methods
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 
-export function receiveQuestions (questions) {
+export function receiveQuestions(questions) {
     // debugger
     return {
         type: RECEIVE_QUESTIONS,
@@ -32,8 +33,8 @@ export function removeQuestion(questionId) {
 //selector
 
 export function selectQuestion(questionId) {
-    return function(state) {
-        if(state && state.questions && state.questions[questionId]) {
+    return function (state) {
+        if (state && state.questions && state.questions[questionId]) {
             return state.questions[questionId];
         } else {
             return null;
@@ -77,12 +78,12 @@ export function postQuestion(question, questionId = "") {
 
         // debugger;
 
-        if(questionId) {
+        if (questionId) {
             path = path + `/${questionId}`;
             verb = 'PATCH';
         }
 
-        const response = await csrfFetch(path,{
+        const response = await csrfFetch(path, {
             method: verb,
             body: JSON.stringify(question)
         });
@@ -94,7 +95,7 @@ export function postQuestion(question, questionId = "") {
 
 export function deleteQuestion(questionId) {
     return async function (dispatch) {
-        let response = await csrfFetch(`/api/questions/${questionId}`,{
+        let response = await csrfFetch(`/api/questions/${questionId}`, {
             method: 'DELETE'
         });
         // let data = await response.json();
@@ -104,7 +105,7 @@ export function deleteQuestion(questionId) {
 }
 
 export function fetchQuestions(formId) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         const response = await csrfFetch(`/api/${formId}/questions`);
         const data = await response.json()
         dispatch(receiveQuestions(data));
@@ -113,7 +114,7 @@ export function fetchQuestions(formId) {
 }
 
 export function fetchQuestion(questionId) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         const response = await csrfFetch(`/api/questions/${questionId}`)
         const data = await response.json();
         dispatch(receiveQuestion(data));
@@ -122,9 +123,9 @@ export function fetchQuestion(questionId) {
 }
 
 export default function questionReducer(state = {}, action) {
-    let nextState = {...state};
+    let nextState = { ...state };
 
-    switch(action.type) {
+    switch (action.type) {
 
         case RECEIVE_QUESTIONS:
             return action.questions || state;
@@ -134,6 +135,8 @@ export default function questionReducer(state = {}, action) {
         case REMOVE_QUESTION:
             delete nextState[action.questionId];
             return nextState;
+        case REMOVE_SESSION:
+            return {};
         default:
             return state;
     }

@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { REMOVE_SESSION } from "./session";
 
 const RECEIVE_CONTACT = 'RECEIVE_CONTACT';
 
@@ -28,7 +29,7 @@ function removeContact(contactId) {
 }
 
 export function selectContacts(state) {
-    if(state && state.contacts) {
+    if (state && state.contacts) {
         return Object.values(state.contacts)
     } else {
         return [];
@@ -37,7 +38,7 @@ export function selectContacts(state) {
 
 export function postInvite(invite) {
     return async function (dispatch) {
-        const response = await csrfFetch(`/api/forms/${invite.formId}/${invite.contactId}`,{
+        const response = await csrfFetch(`/api/forms/${invite.formId}/${invite.contactId}`, {
             method: 'POST'
         });
         const data = await response.json();
@@ -46,8 +47,8 @@ export function postInvite(invite) {
 }
 
 export function deleteInvite(contact) {
-    return async function(dispatch) {
-        const res = await csrfFetch(`/api/invites/${contact.inviteId}`,{
+    return async function (dispatch) {
+        const res = await csrfFetch(`/api/invites/${contact.inviteId}`, {
             method: 'DELETE'
         })
         const data = await res.json()
@@ -69,8 +70,8 @@ export function postContact(contact) {
 }
 
 export function deleteContact(contactId) {
-    return async function(dispatch) {
-        const response = await csrfFetch(`/api/contacts/${contactId}`,{
+    return async function (dispatch) {
+        const response = await csrfFetch(`/api/contacts/${contactId}`, {
             method: 'DELETE'
         })
         dispatch(removeContact(contactId));
@@ -79,7 +80,7 @@ export function deleteContact(contactId) {
 }
 
 export function fetchContacts(formId = null) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         const response = await csrfFetch(`/api/contacts/${formId}`);
         const data = await response.json();
         return dispatch(receiveContacts(data));
@@ -87,7 +88,7 @@ export function fetchContacts(formId = null) {
 }
 
 export default function contactReducer(state = {}, action) {
-    let nextState = {...state}
+    let nextState = { ...state }
 
     switch (action.type) {
         case RECEIVE_CONTACTS:
@@ -99,6 +100,8 @@ export default function contactReducer(state = {}, action) {
         case REMOVE_CONTACT:
             delete nextState[action.contactId];
             return nextState;
+        case REMOVE_SESSION:
+            return {};
         default:
             return state;
     }

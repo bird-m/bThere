@@ -15,6 +15,7 @@ export default function FormGrid() {
     
     useEffect(() => {
         dispatch(fetchForms())
+        window.scrollTo(0, 0);
     }, [])
 
     function closeModal() {

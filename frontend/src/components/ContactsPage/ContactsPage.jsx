@@ -25,6 +25,10 @@ export default function ContactsPage() {
 
     }, [dispatch, formId])
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     const form = useSelector(selectForm(formId));
     const contacts = useSelector(selectContacts);
 

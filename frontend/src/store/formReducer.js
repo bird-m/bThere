@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { REMOVE_SESSION } from "./session";
 
 // action constants and methods
 export const RECEIVE_FORMS = 'RECEIVE_FORMS';
@@ -122,6 +123,8 @@ export default function formReducer(state = {}, action) {
         case REMOVE_FORM:
             delete nextState[action.formId]
             return nextState;
+        case REMOVE_SESSION:
+            return {};
         default:
             return state;
     }
