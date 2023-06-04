@@ -6,14 +6,10 @@ export default function ResponsePane ({question, setRefs, refs}) {
     const [response, setResponse] = useState("");
     const inputRef = useRef();
 
-    // console.log(refs.length, "REFS");
-
     useEffect(()=> {
         setRefs((prevRefs) => ({...prevRefs, [question.id]: inputRef}));
     }, [])
-    
 
-    // debugger;
     return (
         <div className="rpane-wrapper">
             <label htmlFor={question.id}>{question.prompt}</label>

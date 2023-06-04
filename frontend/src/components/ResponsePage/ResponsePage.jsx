@@ -12,7 +12,6 @@ export default function ResponsePage(props) {
 
     const [refs, setRefs] = useState({});
 
-
     const { formId } = useParams()
 
     const dispatch = useDispatch();
@@ -45,7 +44,6 @@ export default function ResponsePage(props) {
     }, [form])
 
     function postResponse() {
-
         if (!attendStatus) {
             setSubmitMsg("Please indicate your attendance!");
             return null;
@@ -54,8 +52,8 @@ export default function ResponsePage(props) {
             return null;
         }
 
+        // get the keys of the 
         const keys = Object.keys(refs);
-
         const submission = {
             submission:
             {
@@ -87,15 +85,14 @@ export default function ResponsePage(props) {
     // }
 
     function listQuestions() {
+        // only list the questions if the user can attend the event and the event host has created supplemental questions
         if (attendStatus === "accept" && questions.length > 0) {
-
             return (
                 <>
                     <div className="ql-header">
                         {questions.length > 0 ? "Amazing! Please answer these event related questions" : null}
                     </div>
                     <div className="ql-added-questions no-gap">
-
                         {questions.map((q) => {
                             return (
                                 <ResponsePane key={q.id} question={q} setRefs={setRefs} refs={refs} />
