@@ -108,15 +108,12 @@ export default function ResponsePage(props) {
 
     async function checkEmail(e) {
         e.preventDefault();
-        console.log(emailPass, "This is email pass");
         if (!emailPass) {
             setGoodAttempt(false);
             setFailedAttempt(emailPass)
         } else {
-            console.log("HERE!");
             const res = await csrfFetch(`/api/check/${formId}/${emailPass}`, { method: "POST", body: JSON.stringify({ email: emailPass }) })
             const passed = await res.json()
-            console.log(passed, "PASS RESULT IS....")
             setRestricted(!passed);
             setGoodAttempt(passed);
             if (!passed) setFailedAttempt(emailPass);
@@ -164,7 +161,6 @@ export default function ResponsePage(props) {
     }
 
     function restriction() {
-        console.log(contactFieldsDisabled, "contactFieldsDisabled");
         if (form && restricted) {
             return (
                 <>

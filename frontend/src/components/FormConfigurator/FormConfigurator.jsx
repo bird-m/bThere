@@ -19,7 +19,7 @@ import FormCreatePage from '../FormCreatePage/FormCreatePage';
 export default function FormConfigurator() {
 
     // get any relevant params
-    const { formId } = useParams();
+    // const { formId } = useParams();
     const params = useParams();
 
     // retrieve data from back end and load it in the store
@@ -29,6 +29,20 @@ export default function FormConfigurator() {
         // dispatch(fetchQuestions(formId));
         dispatch(fetchForms())
     }, [dispatch])
+
+    const [formId, setFormId] = useState();
+    const [newFormId, setNewFormId] = useState();
+
+    useEffect(() => {
+        if(params.formId) {
+            setFormId(params.formId);
+        } else if(newFormId) {
+            setFormId(newFormId);
+        }
+        else {
+            setFormId(null);
+        }
+    }, [formId, params, newFormId])
 
     const form = useSelector(selectForm(formId));
 
@@ -99,7 +113,7 @@ export default function FormConfigurator() {
                             <FormGrid />
                         </Route>
                         <Route path="/form/:formId?">
-                            <FormCreatePage/>
+                            <FormCreatePage newFormId={newFormId} setNewFormId={setNewFormId}/>
                         </Route>
                     </Switch>
                 </div>

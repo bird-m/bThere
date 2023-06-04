@@ -18,7 +18,7 @@ import ErrorPane from "../ErrorPane/ErrorPane";
 import FormUpdateMsgPane from "../FormUpdateMsgPane/FormUpdateMsgPane";
 
 
-export default function FormCreatePage(props) {
+export default function FormCreatePage({newFormId, setNewFormId}) {
     // console.log("IN CREATE");
     const { formId } = useParams();
 
@@ -39,7 +39,6 @@ export default function FormCreatePage(props) {
         photoText = "ADD OPTIONAL PHOTO"
     }
 
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [errors, setErrors] = useState([]);
@@ -47,7 +46,6 @@ export default function FormCreatePage(props) {
     const [photoFile, setPhotoFile] = useState(null);
     const [formPhoto, setFormPhoto] = useState(null);
     const [submitted, setSubmitted] = useState(false);
-    const [newFormId, setNewFormId] = useState(null);
     const [restrictedForm, setRestrictedForm] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
 
@@ -60,6 +58,7 @@ export default function FormCreatePage(props) {
         if (formId) {
             dispatch(fetchForm(formId));
         }
+        return (() => {setNewFormId(null)})
     }, [dispatch])
 
     useEffect(() => {
