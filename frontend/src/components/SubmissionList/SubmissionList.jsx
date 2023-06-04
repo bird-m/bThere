@@ -130,7 +130,7 @@ export default function SubmissionList () {
 
     return (
         <div className="sub-list-wrapper">
-            <div className="sl-download-div"><a download={`${form.title}_response_list.csv`} href={downloadCsv()}><BiDownload/></a></div>
+            <div className="sl-download-div">RESPONSES<a download={`${form.title}_response_list.csv`} href={downloadCsv()}><BiDownload/></a></div>
             <div className="sub-row-wrapper sub-row-header">
                 <div className="sl-cell">SUBMIT DATE</div>
                 <div className="sl-cell">NAME</div>

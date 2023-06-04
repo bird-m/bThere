@@ -17,7 +17,7 @@ export function SplashPage (props) {
         <div className="splash-wrapper">
             <div className="splash-pane hero-pane">
                 <div className="hero-text">Elite event management software for all.<br/> No contract required.</div>
-                <Link to="/signup"><button>Get started for free</button></Link>
+                <Link to="/signup"><button>GET STARTED</button></Link>
             </div>
             <div className="vid-pane splash-pane">
                 <video ref={vidRef} className='video' autoPlay loop muted src={demoVideo}/>

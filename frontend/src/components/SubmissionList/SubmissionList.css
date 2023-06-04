@@ -66,10 +66,14 @@
 
   .sl-download-div {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
   }
 
   .sl-download-div svg {
     color: #0E0A1E;
     height: 30px;
+
   }
