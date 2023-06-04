@@ -42,7 +42,7 @@ export default function FormCreatePage({newFormId, setNewFormId, submitted, setS
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [errors, setErrors] = useState([]);
-    const [customUrl, setCustomUrl] = useState('');
+    // const [customUrl, setCustomUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
     const [formPhoto, setFormPhoto] = useState(null);
     const [restrictedForm, setRestrictedForm] = useState(false);
@@ -64,7 +64,7 @@ export default function FormCreatePage({newFormId, setNewFormId, submitted, setS
         if (editForm) {
             setTitle(editForm.title);
             setDescription(editForm.description);
-            setCustomUrl(editForm.customUrl);
+            // setCustomUrl(editForm.customUrl);
             setFormPhoto(editForm.photo ? editForm.photo : sample)
             setRestrictedForm(editForm.restricted)
         }
@@ -76,7 +76,7 @@ export default function FormCreatePage({newFormId, setNewFormId, submitted, setS
 
         formData.append('form[title]', title)
         formData.append('form[description]', description)
-        formData.append('form[customUrl]', customUrl)
+        // formData.append('form[customUrl]', customUrl)
         formData.append('form[restricted]', restrictedForm)
 
         if (photoFile) {
@@ -153,10 +153,10 @@ export default function FormCreatePage({newFormId, setNewFormId, submitted, setS
 
                     <textarea id="fc-description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
                 </div>
-                <div className="fc-input-pane">
+                {/* <div className="fc-input-pane">
                     <label htmlFor="custom-url">CUSTOM URL </label><br />
                     <input id="custom-url" type='text' value={customUrl} onChange={(e) => { setCustomUrl(e.target.value) }} />
-                </div>
+                </div> */}
                 <div className="fc-check-pane">
                     <input type="checkbox" id="fc-restricted" checked={restrictedForm} onChange={() => { setRestrictedForm((prev) => !prev) }}></input>
                     <label htmlFor="fc-restricted">Invite Only</label>

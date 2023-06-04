@@ -35,7 +35,7 @@ ApplicationRecord.transaction do
   )
 
   puts "Creating form"
-  form1 = Form.create(title: "Taylor's Birthday Party", description: "No need to bring anything, your...presENCE is a present enough ;)", status: "published", user: user, custom_url: "taylor-bday")
+  form1 = Form.create(title: "Taylor's Birthday Party", description: "No need to bring anything, your...presENCE is a present enough ;)", status: "published", user: user)
 
   puts "Creating questions"
   question1 = Question.create(prompt: "Are there any dietary restrictions we should be aware of?", required: true, form: form1)

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
     resources :invites, only: [:destroy]
 
-    get '/forms/:custom_url', to: 'forms#show'
+    # get '/forms/:custom_url', to: 'forms#show'
     post '/forms/:form_id/:contact_id', to: 'invites#create'
     get '/:form_id/questions', to: 'questions#index'
     
