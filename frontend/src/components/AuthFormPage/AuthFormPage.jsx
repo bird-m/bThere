@@ -8,21 +8,18 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import checkLogo from '../../images/check-logo.png'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import Modal from '../Modal/Modal';
+import ErrorPane from '../ErrorPane/ErrorPane';
 
 export default function AuthFormPage (props) {
 
     const {mode} = props;
-    // console.log(mode, "MODE");
-
-    // debugger;
-    // const sessionUser = useSelector((state) => (state.session.user))
     const sessionUser = useSelector(loggedInUser);
-
-    console.log(mode, "MODE");
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const [showErrorModal, setShowErrorModal] = useState(false);
     
     const dispatch = useDispatch();
 
@@ -52,11 +49,13 @@ export default function AuthFormPage (props) {
     function errorHandle(res) {
         res.json().then(data => {
             setErrors(data.errors);
+            setShowErrorModal(true);
         })
     }
 
     return (
         <div className="wrapper">
+            {showErrorModal && <Modal closeModal={() => {setShowErrorModal(false)}} content={<ErrorPane errors={errors} closeModal={() => {setShowErrorModal(false)}}/>} />}
             <div className='auth-body'>
                <div className="auth-pane">
                     <div className="auth-header">
@@ -85,42 +84,9 @@ export default function AuthFormPage (props) {
                         <span className='auth-element'>
                             <button className='auth-button' onClick={() => (handleSubmit(false))}>DEMO USER {mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
                         </span>
-                        <span className='error-msg auth-element'>
-                            {errors.map((e, ix) => {
-                                return (<span key={ix}>{e}</span>)
-                            })}
-                        </span>
                     </div>
                </div>
             </div>
         </div>
     );
 }
-
-
-     // } catch (error) {
-        //     console.log("there was an error");
-        // }
-
-        // let validEmail = isValidEmail(email);
-        // let validPassword = password.length >= 7;
-        // setErrors([]);
-        
-        // if (validEmail && validPassword) {
-        //     if (mode === "login") {
-        //         console.log("logging in")
-        //         dispatch(login(email, password));
-        //     } else if (mode === "signup") {
-        //         console.log("signing in")
-        //         dispatch(signup(email, password));
-        //     } else {
-        //         throw "invalid mode";
-        //     }
-        // } else if (!validEmail && !validPassword) {
-        //     console.log("seconds");
-        //     setErrors(['Please retry with a valid email and a password longer than 6 characters.']);
-        // } else if (!validEmail) {
-        //     setErrors(['Please retry with a valid email.'])
-        // } else if(!validPassword) {
-        //     setErrors(['Please retry with a password longer than 7 characters.']);
-        // }

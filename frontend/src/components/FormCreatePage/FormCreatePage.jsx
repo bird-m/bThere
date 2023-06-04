@@ -91,6 +91,7 @@ export default function FormCreatePage({newFormId, setNewFormId, submitted, setS
                     const newURL = `${window.location.pathname}/1`;
                     window.history.pushState(null, '', newURL);
                 }
+                window.scrollTo(0, 0);
             })
             .catch((error) => {
                 // console.log(error, "check");

@@ -17,7 +17,8 @@ export default function BannerNav({ navOptions, form, setSubmitted}) {
 
     function handleClick(path) {
         setSubmitted && setSubmitted(false);
-        history.push(path)
+        history.push(path);
+        window.scrollTo(0, 0);
     }
 
     // return (null);
