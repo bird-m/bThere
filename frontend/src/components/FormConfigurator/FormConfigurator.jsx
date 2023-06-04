@@ -32,6 +32,7 @@ export default function FormConfigurator() {
 
     const [formId, setFormId] = useState();
     const [newFormId, setNewFormId] = useState();
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         if(params.formId) {
@@ -68,7 +69,8 @@ export default function FormConfigurator() {
         } else if (formId && form) {
             setSideNavOptions({
                 "Responses": `/forms/${formId}/responses`,
-                "Questions": `/forms/${formId}/questions`
+                "Questions": `/forms/${formId}/questions`,
+                "Settings": `/form/${formId}`
             })
         } else {
             setSideNavOptions({});
@@ -84,15 +86,12 @@ export default function FormConfigurator() {
 
             <div className="fc-sub-header" style={{height: (!formId && "100%")}}>
                 
-
-                {/* <div className="fc-contents-wrapper"> */}
-                {/* <div className="fc-question-list"> */}
                 {formId &&
                 <div className="form-config-panel-wrapper">
-                    <FormConfigSidePanel form={form} navOptions={sideNavOptions} />
+                    <FormConfigSidePanel setSubmitted={setSubmitted} form={form} navOptions={sideNavOptions} />
                 </div>}
                 <div className={`fc-alternating-pane${formId ? "" : " fc-no-left-marg"}`} style={{width: (!formId && "100%")}}>
-                {formId && <BannerNav form={form} navOptions={sideNavOptions}/>}
+                {formId && <BannerNav setSubmitted={setSubmitted} form={form} navOptions={sideNavOptions}/>}
                     <Switch>
                         <Route exact path="/forms">
                             <FormGrid />
@@ -113,16 +112,10 @@ export default function FormConfigurator() {
                             <FormGrid />
                         </Route>
                         <Route path="/form/:formId?">
-                            <FormCreatePage newFormId={newFormId} setNewFormId={setNewFormId}/>
+                            <FormCreatePage submitted={submitted} setSubmitted={setSubmitted} newFormId={newFormId} setNewFormId={setNewFormId}/>
                         </Route>
                     </Switch>
                 </div>
-                {/* </div> */}
-                {/* </div> */}
             </div>
-            {/* <div className="fc-side-panel">
-                
-            </div> */}
-
         </div>)
 }

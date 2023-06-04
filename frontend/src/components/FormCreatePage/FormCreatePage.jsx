@@ -18,7 +18,7 @@ import ErrorPane from "../ErrorPane/ErrorPane";
 import FormUpdateMsgPane from "../FormUpdateMsgPane/FormUpdateMsgPane";
 
 
-export default function FormCreatePage({newFormId, setNewFormId}) {
+export default function FormCreatePage({newFormId, setNewFormId, submitted, setSubmitted}) {
     // console.log("IN CREATE");
     const { formId } = useParams();
 
@@ -45,7 +45,6 @@ export default function FormCreatePage({newFormId, setNewFormId}) {
     const [customUrl, setCustomUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
     const [formPhoto, setFormPhoto] = useState(null);
-    const [submitted, setSubmitted] = useState(false);
     const [restrictedForm, setRestrictedForm] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
 

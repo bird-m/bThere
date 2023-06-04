@@ -1,12 +1,18 @@
 import { Link, useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './FormConfigSidePanel.css'
 import checkLogo from '../../images/check-logo.png'
+import { useEffect } from 'react';
 
-export default function FormConfigSidePanel({ navOptions, form }) {
+export default function FormConfigSidePanel({ navOptions, form, setSubmitted }) {
 
     const history = useHistory();
 
     const location = useLocation();
+
+    useEffect(() => {
+
+        console.log(location.pathname, "PATHNAME");
+    }, [location])
 
 
     function assignNavClass(pathname) {
@@ -15,6 +21,11 @@ export default function FormConfigSidePanel({ navOptions, form }) {
         } else {
             return "sp-nav-div"
         }
+    }
+
+    function handleClick(path) {
+        setSubmitted && setSubmitted(false);
+        history.push(path)
     }
 
     return (
@@ -28,7 +39,7 @@ export default function FormConfigSidePanel({ navOptions, form }) {
 
             {form && Object.entries(navOptions).map(([viewableLink, path]) => {
                 return (
-                    <div key={viewableLink} onClick={() => { history.push(path) }} className={assignNavClass(path)}>{viewableLink}</div>
+                    <div key={viewableLink} onClick={() => {handleClick(path)}} className={assignNavClass(path)}>{viewableLink}</div>
                 )
             })}
         </>
