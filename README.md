@@ -164,7 +164,8 @@ export default function ContactsPage() {
 ```
 That header is utilized to render the head of the table.
 ```js
-return (...
+return (
+    ...
         <TableRow rowContent={header} />
         {contacts.map((c) => {
             return (
@@ -267,4 +268,21 @@ This single template can handle all contact requests, regardless of whether they
         json.extract! contact, :id, :email, :name, :form_id, :invite_id
     end
 end
+```
+
+Therefore the front end stats appears as follows when the user is on the global contacts page
+```js
+//state at /address-book
+contacts: {
+    1: {id: 1, email: 'johnsmith@gmail.com', name: 'John Smith', inviteId: null},
+    2: {id: 2, email: 'janesmith@gmail.com', name: 'Jane Smith', inviteId: null}
+}
+```
+The state updates to populate inviteId when the user is on the invite list, with a value of -1 denoting they are not invited. This is used instead of null, as a null value suppresses the generation of an invite column on the page.
+```js
+//state at /forms/invite-list
+contacts: {
+    1: {id: 1, email: 'johnsmith@gmail.com', name: 'John Smith', inviteId: -1},
+    1: {id: 2, email: 'janesmith@gmail.com', name: 'Jane Smith', inviteId: -1}
+}
 ```
