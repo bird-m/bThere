@@ -36,8 +36,7 @@ bThere's end to end event management capabilities enables you to:
 - view and download responses to csv format
 - manage events on desktop and mobile, due to its **responsive** design
 
-
-## Challenges
+## Technical Feats
 ### Dynamic I/O Processing
 bThere's invitation configurator allows the user to create an arbitrary number of short answer questions later rendered to, and answered by, guests. Breaking the traditional paradigm of a form collecting a pre-determined set of inputs.
 
@@ -131,9 +130,141 @@ function postResponse() {
     }
 ```
 
-## Data Management
-Event management software involves many interrelated assets, including a form with dynamic questions, corresponding submitters, along with their own responses.
+### Highly Versatile Components
+bThere places an outsized emphasis on highly versatile components, allowing for more streamlined, flexible, maintainable code. Several components can each render distinct pages with their own capabilities. For example:
+- the AuthFormPage component powers both the login and signup pages
+- the FormCreatePage component powers both the form create and login pages
+- the ContactsPage component powers both the Address Book and Invite List pages
+- the TableRow component is responsible for rendering tables of arbitrary length with a consistent design across several components
+Creating these highly versatile components involved a higher degree of up front work, that now pays dividends in terms of maintanability. The ContactsPage was particularly challenging to design given the significant differences in data availability between the Address Book and Invite List pages.
 
-## CSV Output
-The CSV input feature involves bringing together several slices of state into a singular backage, requiring significant processing on the front end.
+The Address Book allows the user to manage a singular contact list associated with their account. The Invite List similarly displays the user's contact list, but within the context of a **specific event**, allowing the user to invite or disinvite that contact from the event.
 
+Enabling a single component to power both of these distinct use cases involved designing a highly flexible back end controllers paired with an equally flexible back end.
+
+The ContactsPage first checks the params for a formId, which would indicate the user is viewing the contact list in the context of an invitation, rather than the global list of contacts. It then sets the headers of the table to be rendered accordingly, including an "INVITED" column if there is an invitation and it is also a private event.
+```js
+export default function ContactsPage() {
+
+    const { formId } = useParams();
+    const form = useSelector(selectForm(formId));
+    
+    const [header, setHeader] = useState([])
+    
+    useEffect(() => {
+        if (form && form.restricted) {
+            setHeader(["INVITED", "NAME", "EMAIL","MODIFY"
+            ])
+        } else {
+            setHeader(["NAME","EMAIL","MODIFY"
+            ])
+        }
+    }, [form])
+    ...
+```
+That header is utilized to render the head of the table.
+```js
+return (...
+        <TableRow rowContent={header} />
+        {contacts.map((c) => {
+            return (
+                <ContactModifier key={c.id} contact={c} form={form} />
+            )
+        })}
+    ...
+}
+```
+The ContactModifier component generates and populates the table contents, determining whether to include an invitation column based on the presence of an invite only form. A click of the invitation checkbox triggers either the deletion or creation of an invitation.
+```js
+export default function ContactModifier({ contact, form }) {
+
+    const dispatch = useDispatch();
+    let rowContent;
+
+    if (form && form.restricted) {
+        rowContent = [
+            <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />,
+            contact.name,
+            contact.email,
+            <div className="contact-delete-icon" onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
+        ]
+    } else {
+        rowContent = [
+            contact.name,
+            contact.email,
+            <div className="contact-delete-icon" onClick={() => { dispatch(deleteContact(contact.id)) }}><AiFillDelete /></div>
+        ]
+    }
+
+    function handleInviteChange(e) {
+        if (e.target.checked) {
+            const newInvite = {
+                formId: form.id,
+                contactId: contact.id
+            }
+            dispatch((postInvite(newInvite)))
+        } else {
+            dispatch(deleteInvite(contact))
+        }
+    }
+
+    function invited(contact) {
+        if (contact.formId) {
+            return (contact.formId.toString() === form.id.toString())
+        } else {
+            return false
+        }
+    }
+
+    return (
+        <TableRow rowContent={rowContent} />
+    )
+}
+```
+This front end experience presents challenges for the back end, as contacts and invites involve distinct tables and a single contact can be associated with MANY events. Rather than create separate custom routes, with duplicative code, the single Contact index route handles both types of requests by toggling the ActiveRecord query based on the presence of a form.
+
+In the case of a form, the query performs a join between the contacts and invitations tables, filtering out non-matching forms.
+If there is no form, the query inserts null values for invite related information so a single view template can handle the rendering.
+```rb
+# Contacts Controller, Index action
+def index
+...
+    if(form)
+      if (form.user_id == current_user.id)
+        get_invitation = true;
+
+        query = <<-SQL
+        select
+        c.*,
+        i.form_id,
+        coalesce(i.id, -1) as invite_id
+        from contacts as c
+        left join invites as i on i.contact_id = c.id
+        where i.form_id = ? OR i.form_id IS null
+        and c.user_id = ?
+        SQL
+
+        @contacts = Contact.find_by_sql([query, form_id, current_user.id])
+    else
+      query = <<-SQL
+        select
+        c.*,
+        case when true then null end as form_id,
+        case when true then null end as invite_id
+        from contacts as c
+        where c.user_id = ?
+      SQL
+      @contacts = Contact.find_by_sql([query, current_user.id])
+    end
+    render '/api/contacts/index'
+  end
+```
+This single template can handle all contact requests, regardless of whether they involve invitations.
+```rb
+# contacts > index.json.jbuiler
+@contacts.each do |contact|
+    json.set! contact.id do
+        json.extract! contact, :id, :email, :name, :form_id, :invite_id
+    end
+end
+```
