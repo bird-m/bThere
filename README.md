@@ -269,7 +269,7 @@ This single template can handle all contact requests, regardless of whether they
 end
 ```
 
-Therefore the front end stats appears as follows when the user is on the global contacts page
+Therefore the front end stats appears as follows when the user is on the global contacts page. The null inviteId value indicates that an invitation column with add/delete capabilities should not be rendered.
 ```js
 //state at /address-book
 contacts: {
@@ -277,7 +277,7 @@ contacts: {
     2: {id: 2, email: 'janesmith@gmail.com', name: 'Jane Smith', inviteId: null}
 }
 ```
-The state updates to populate inviteId when the user is on the invite list, with a value of -1 denoting they are not invited. This is used instead of null, as a null value suppresses the generation of an invite column on the page.
+On the invitation page, the state updates to populate the InviteId with a value of -1 denoting the contact is not invited and their invitation ID otherwise.
 ```js
 //state at /forms/invite-list
 contacts: {
@@ -285,3 +285,4 @@ contacts: {
     1: {id: 2, email: 'janesmith@gmail.com', name: 'Jane Smith', inviteId: -1}
 }
 ```
+Though this data flow involved more up front design, it enables a single pair of front and back end interfaces to power multiple pages with distinct capabilities.
