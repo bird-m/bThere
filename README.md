@@ -231,7 +231,6 @@ If there is no form, the query inserts null values for invite related informatio
 def index
 ...
     if(form)
-      if (form.user_id == current_user.id)
         get_invitation = true;
 
         query = <<-SQL
