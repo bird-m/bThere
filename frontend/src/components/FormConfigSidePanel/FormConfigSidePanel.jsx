@@ -9,12 +9,6 @@ export default function FormConfigSidePanel({ navOptions, form, setSubmitted }) 
 
     const location = useLocation();
 
-    useEffect(() => {
-
-        console.log(location.pathname, "PATHNAME");
-    }, [location])
-
-
     function assignNavClass(pathname) {
         if(pathname === location.pathname) {
             return "sp-nav-div sp-nav-div-selected"

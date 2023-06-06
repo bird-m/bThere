@@ -76,10 +76,10 @@ export function QuestionList() {
         <div className="ql-list">
 
             <div className="ql-header">
-                Required Questions
+                Supplemental Questions
             </div>
 
-            <SubmitterInputPane disabled={true} radioDisabled={true}/>
+            {/* <SubmitterInputPane disabled={true} radioDisabled={true}/> */}
 
 
             {showQpane ? null : <button onClick={() => { setShowQpane(true) }}>Add Question</button>}

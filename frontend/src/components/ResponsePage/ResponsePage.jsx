@@ -52,7 +52,6 @@ export default function ResponsePage(props) {
             return null;
         }
 
-        // get the keys of the 
         const keys = Object.keys(refs);
         const submission = {
             submission:
@@ -79,10 +78,6 @@ export default function ResponsePage(props) {
             setSubmitted(true);
         })
     }
-
-    // if(Object.values(refs).length >=2) {
-    //     debugger;
-    // }
 
     function listQuestions() {
         // only list the questions if the user can attend the event and the event host has created supplemental questions

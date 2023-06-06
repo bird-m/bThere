@@ -10,7 +10,6 @@ export default function ContactModifier({ contact, form }) {
     const dispatch = useDispatch();
     let rowContent;
 
-
     if (form && form.restricted) {
         rowContent = [
             <input type="checkbox" checked={invited(contact)} onChange={handleInviteChange} />,
@@ -26,15 +25,12 @@ export default function ContactModifier({ contact, form }) {
         ]
     }
 
-
     function handleInviteChange(e) {
-
         if (e.target.checked) {
             const newInvite = {
                 formId: form.id,
                 contactId: contact.id
             }
-
             dispatch((postInvite(newInvite)))
         } else {
             dispatch(deleteInvite(contact))
