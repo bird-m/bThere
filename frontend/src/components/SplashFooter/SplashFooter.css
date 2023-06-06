@@ -13,9 +13,7 @@
 }
 
 .footer-contents {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 50px;
+    padding: 50px;
 }
 
 .footer-contents img {
@@ -37,6 +35,17 @@
     padding-bottom: 10px;
     color: #FFFFFF;
     font-size: 16px;
+}
+
+@media screen and (min-width: 1200px) {
+    .tagline {
+        font-size: 22px;
+        padding-bottom: 20px;
+    }
+
+    .footer-contents img {
+        height: 60px;
+    }
 }
 
 /* white text: FFFFFF 
