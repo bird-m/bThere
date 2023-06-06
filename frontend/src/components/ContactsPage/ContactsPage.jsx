@@ -13,41 +13,30 @@ import { fetchForm, selectForm } from '../../store/formReducer';
 
 export default function ContactsPage() {
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     const { formId } = useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(formId) {
+        if (formId) {
             dispatch(fetchForm(formId))
         }
-
         dispatch(fetchContacts(formId))
-
     }, [dispatch, formId])
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [])
 
     const form = useSelector(selectForm(formId));
     const contacts = useSelector(selectContacts);
 
     const [header, setHeader] = useState([])
-
     useEffect(() => {
         if (form && form.restricted) {
-            setHeader([
-                "INVITED",
-                "NAME",
-                "EMAIL",
-                "MODIFY"
+            setHeader(["INVITED", "NAME", "EMAIL","MODIFY"
             ])
         } else {
-            setHeader([
-                "NAME",
-                "EMAIL",
-                "MODIFY"
-            ])
+            setHeader(["NAME","EMAIL","MODIFY"])
         }
     }, [form])
 
@@ -57,27 +46,23 @@ export default function ContactsPage() {
         setShowContactModal(false);
     }
 
-    if((formId && !form) || !contacts) {
+    if ((formId && !form) || !contacts) {
         return (
             <h1>Loading...</h1>
         )
     }
 
-    return (
-        <div className="contact-show" style={{paddingTop: !formId && "50px"}}>
-            {showContactModal && <Modal closeModal={closeContactModal} content={<ContactEntry closeModal={closeContactModal} />} />}
-            <div className="contacts-header">
-                <div className="contacts-title">{formId ? "INVITES" : "CONTACTS"}</div>
-                <button className='svg-button dark-grey' onClick={() => { setShowContactModal(true) }} ><AiOutlinePlusCircle /></button>
-            </div>
-
-            <TableRow rowContent={header} />
-
-            {contacts.map((c) => {
-                return (
-                    <ContactModifier key={c.id} contact={c} form={form} />
-                )
-            })}
+    return (<div className="contact-show" style={{ paddingTop: !formId && "50px" }}>
+        {showContactModal && <Modal closeModal={closeContactModal} content={<ContactEntry closeModal={closeContactModal} />} />}
+        <div className="contacts-header">
+            <div className="contacts-title">{formId ? "INVITES" : "CONTACTS"}</div>
+            <button className='svg-button dark-grey' onClick={() => { setShowContactModal(true) }} ><AiOutlinePlusCircle /></button>
         </div>
-    )
+        <TableRow rowContent={header} />
+        {contacts.map((c) => {
+            return (
+                <ContactModifier key={c.id} contact={c} form={form} />
+            )
+        })}
+    </div>)
 }

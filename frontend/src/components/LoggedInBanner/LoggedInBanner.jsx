@@ -20,10 +20,18 @@ export function LoggedInBanner({ setTab }) {
         history.push("/")
     }
 
+    function setWidth() {
+        if ((!formId && page === "forms") || page === "address-book") {
+            return "75px";
+        } else {
+            return "";
+        }
+    }
+
     return (
         <div className="logged-in-banner-wrapper">
             <div className="li-banner-nav">
-                <div className="li-banner-nav-icon" style={{ width: ((!formId || page === "form") && "75px") }}>
+                <div className="li-banner-nav-icon" style={{ width: setWidth() }}>
                     <Link to="/">
                         <img src={checkLogo} />
                     </Link>
