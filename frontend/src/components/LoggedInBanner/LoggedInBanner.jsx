@@ -20,12 +20,8 @@ export function LoggedInBanner({ setTab }) {
         history.push("/")
     }
 
-    console.log(formId, "formid");
-    console.log(page, "page");
-
     function setWidth() {
         if ((!formId && page === "forms") || page === "address-book") {
-            console.log("in here");
             return "75px";
         } else {
             return "";
