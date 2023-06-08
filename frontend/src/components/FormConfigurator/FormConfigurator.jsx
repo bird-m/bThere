@@ -15,6 +15,7 @@ import BannerNav from '../BannerNav/BannerNav';
 import { FormSummary } from '../FormSummary/FormSummary';
 import FormGrid from '../FormGrid/FormGrid';
 import FormCreatePage from '../FormCreatePage/FormCreatePage';
+import ShareSheet from '../ShareSheet/ShareSheet';
 
 export default function FormConfigurator() {
 
@@ -64,13 +65,15 @@ export default function FormConfigurator() {
                 "Responses": `/forms/${formId}/responses`,
                 "Questions": `/forms/${formId}/questions`,
                 "Invite List": `/forms/${formId}/invite-list`,
-                "Settings": `/form/${formId}`
+                "Settings": `/form/${formId}`,
+                "Send": `/forms/${formId}/share`,
             })
         } else if (formId && form) {
             setSideNavOptions({
                 "Responses": `/forms/${formId}/responses`,
                 "Questions": `/forms/${formId}/questions`,
-                "Settings": `/form/${formId}`
+                "Settings": `/form/${formId}`,
+                "Send": `/forms/${formId}/share`,
             })
         } else {
             setSideNavOptions({});
@@ -107,6 +110,9 @@ export default function FormConfigurator() {
                         </Route>
                         <Route path="/forms/:formId/invite-list">
                             <ContactsPage />
+                        </Route>
+                        <Route path="/forms/:formId/share">
+                            <ShareSheet />
                         </Route>
                         <Route path="/forms">
                             <FormGrid />
