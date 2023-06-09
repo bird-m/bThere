@@ -27,6 +27,9 @@ div {
     font-family: 'Arial', sans-serif;
 }
   
+input[type="checkbox"]:hover {
+    cursor: pointer;
+}
 
 /* body {
     width: 100vw;
