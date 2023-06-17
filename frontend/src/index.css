@@ -23,7 +23,7 @@ button, input[type="submit"] {
     padding-bottom: 10px;
 }
 
-div {
+div, textarea {
     font-family: 'Arial', sans-serif;
 }
   
