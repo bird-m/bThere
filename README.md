@@ -1,7 +1,7 @@
 # bThere - [Live Site](https://b-there.herokuapp.com/)
 Create events, send customized invitation forms, and track responses with bThere, an RSVPify inspired full stack event management suite powered by Rails, React/Redux, PostgreSQL, AWS, HTML5, and CSS3.
 
-<img width="250" src="./frontend/public/forms.png" />&nbsp;&nbsp;&nbsp;<img width="250" src="./frontend/public/submissions.png" />&nbsp;&nbsp;&nbsp;<img width="250" src="./frontend/public/responses.png" />
+<img width="230" src="./frontend/public/forms.png" />&nbsp;&nbsp;&nbsp;<img width="230" src="./frontend/public/submissions.png" />&nbsp;&nbsp;&nbsp;<img width="230" src="./frontend/public/responses.png" />
  
 ## Getting Started
 ### Create Event
