@@ -44,7 +44,7 @@ export default function AuthFormPage(props) {
         } else if (mode === 'signup') {
             e.preventDefault();
             // console.log("attempting signup");
-            dispatch(signup(email, password)).catch(errorHandle);
+            dispatch(signup(email, password, phone)).catch(errorHandle);
         }
 
     }

@@ -6,6 +6,7 @@ class Api::UsersController < ApplicationController
 
     email = params[:email]
     password = params[:password]
+    phone = params[:phone]
 
     @user = User.new(email: email, password: password)
 

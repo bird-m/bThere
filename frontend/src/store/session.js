@@ -88,11 +88,11 @@ export function storeCurrentUser(user) {
     }
 }
 
-export function signup (email, password) {
+export function signup (email, password, phone) {
     return async function (dispatch) {
         const response = await csrfFetch('/api/users',{
             method: 'POST',
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password, phone})
         });
 
         const data = await response.json();
