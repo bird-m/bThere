@@ -8,6 +8,8 @@ class Api::UsersController < ApplicationController
     password = params[:password]
     phone = params[:phone]
 
+    debugger
+
     @user = User.new(email: email, password: password)
 
     if (@user.save)
@@ -17,11 +19,4 @@ class Api::UsersController < ApplicationController
       render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity
     end
   end
-
-
-  # private
-
-  # def user_params
-  #   params.require(:user).permit(:email, :password)
-  # end
 end

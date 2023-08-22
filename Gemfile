@@ -37,6 +37,8 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 gem "faker"
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'twilio-ruby'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
