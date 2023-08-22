@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     delete '/contacts/:id', to: 'contacts#destroy'
     post '/contacts', to: 'contacts#create'
     post '/check/:form_id/:ignore', to: 'contacts#check'
+
+    post '/send', to: 'otps#send'
   end
 
   # post 'api/test', to: 'application#test'

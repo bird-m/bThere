@@ -102,6 +102,18 @@ export function signup (email, password, phone) {
     }
 }
 
+export function send(phone) {
+    return async function(dispatch) {
+        const response = await csrfFetch('/api/send', {
+            method: 'POST',
+            body: JSON.stringify({phone})
+        });
+
+        const data = await response.json();
+        return data;
+    }
+}
+
 // Reducer
 
 const initialState = JSON.parse(sessionStorage.getItem('currentUser'));
