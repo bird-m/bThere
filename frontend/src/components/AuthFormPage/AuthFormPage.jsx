@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './AuthFormPage.css'
 import { useEffect, useState } from 'react';
 import { isValidEmail, logIt } from '../../util/util'
-import { loggedInUser, login, signup } from '../../store/session';
+import { loggedInUser, login, send, signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
@@ -35,6 +35,11 @@ export default function AuthFormPage(props) {
         if (!e) {
             // console.log("fake login");
             dispatch(login('demo@user.io', 'password'));
+        }
+        else if (!emailEntry) {
+            e.preventDefault();
+            debugger;
+            dispatch(send(phone)).catch(errorHandle);
         }
         else if (mode === 'login') {
             e.preventDefault();
