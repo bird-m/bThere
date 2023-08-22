@@ -31,7 +31,8 @@ Rails.application.routes.draw do
     post '/contacts', to: 'contacts#create'
     post '/check/:form_id/:ignore', to: 'contacts#check'
 
-    post '/send', to: 'otps#send'
+    post '/otps/send', to: 'otps#send_otp'
+    post '/otps/verify', to: 'otps#verify_otp'
   end
 
   # post 'api/test', to: 'application#test'

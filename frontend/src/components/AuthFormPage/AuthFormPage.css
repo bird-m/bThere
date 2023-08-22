@@ -95,7 +95,7 @@
     align-items: center;
   }
 
-  #email, #password, #phone {
+  #email, #password, #phone, #otp {
     margin-top: 5px;
     height: 25px;
     padding-left: 10px;

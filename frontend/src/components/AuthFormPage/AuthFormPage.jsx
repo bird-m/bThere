@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './AuthFormPage.css'
 import { useEffect, useState } from 'react';
 import { isValidEmail, logIt } from '../../util/util'
-import { loggedInUser, login, send, signup } from '../../store/session';
+import { loggedInUser, login, sendOtp, signup, verifyOtp } from '../../store/session';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
@@ -23,6 +23,8 @@ export default function AuthFormPage(props) {
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [emailEntry, setEmailEntry] = useState(true);
     const [phone, setPhone] = useState('');
+    const [lastSubmittedPhone, setLastSubmittedPhone] = useState(false);
+    const [code, setCode] = useState("");
 
     const dispatch = useDispatch();
 
@@ -35,23 +37,37 @@ export default function AuthFormPage(props) {
         if (!e) {
             // console.log("fake login");
             dispatch(login('demo@user.io', 'password'));
+            return;
+        } else {
+            e.preventDefault();
+        }
+
+        if (!emailEntry && lastSubmittedPhone) {
+            debugger;
+            dispatch(verifyOtp(lastSubmittedPhone, code))
         }
         else if (!emailEntry) {
-            e.preventDefault();
-            debugger;
-            dispatch(send(phone)).catch(errorHandle);
+            // debugger;
+            dispatch(sendOtp(phone))
+                .then(getSubmittedPhone)
+                .catch(errorHandle);
         }
         else if (mode === 'login') {
-            e.preventDefault();
             // console.log("attempting login");
             dispatch(login(email, password)).catch(errorHandle)
             // .catch((res) => res.json()).then((data) => {console.log(data)});
         } else if (mode === 'signup') {
-            e.preventDefault();
             // console.log("attempting signup");
             dispatch(signup(email, password, phone)).catch(errorHandle);
         }
 
+    }
+
+    function getSubmittedPhone(res) {
+        res.json().then(data => {
+            console.log(data, 'DATA!')
+            setLastSubmittedPhone(data['phone']);
+        })
     }
 
     function errorHandle(res) {
@@ -62,7 +78,16 @@ export default function AuthFormPage(props) {
     }
 
     function toggleEntry(e) {
-        setEmailEntry((prev) => !prev)
+        setEmailEntry((prev) => {
+            const toEmail = !prev;
+
+            if(toEmail) {
+                setLastSubmittedPhone(false);
+                setPhone('');
+            }
+
+            return toEmail;
+        })
     }
 
     return (
@@ -105,7 +130,7 @@ export default function AuthFormPage(props) {
                                 {!emailEntry && <span>
                                     <span className='auth-element'>
                                         <label htmlFor='phone'>US PHONE NUMBER</label>
-                                        
+
                                         <PhoneInput
                                             id="phone"
                                             value={phone}
@@ -115,10 +140,20 @@ export default function AuthFormPage(props) {
                                             placeholder="enter US phone number"
                                         />
                                     </span>
+                                    {lastSubmittedPhone &&
+                                        <span className='auth-element'>
+                                            <label htmlFor="otp">ENTER CODE:</label>
+
+                                            <input required type="text" id="otp" name="otp" placeholder="e.g., 123456" value={code} onChange={(e) => {setCode(e.target.value)}}/>
+                                        </span>
+                                    }
                                     <span className='auth-element'>
                                         <button className='auth-button'>{mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
                                     </span>
-                                </span>}
+                                </span>
+
+
+                                }
                             </div>
                         </form>
                         <span className='auth-element'>

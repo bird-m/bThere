@@ -102,15 +102,25 @@ export function signup (email, password, phone) {
     }
 }
 
-export function send(phone) {
+export function sendOtp(phone) {
     return async function(dispatch) {
-        const response = await csrfFetch('/api/send', {
+        console.log(phone, "THIS IS PHONE");
+        const response = await csrfFetch('/api/otps/send', {
             method: 'POST',
             body: JSON.stringify({phone})
         });
+        return response;
+    }
+}
 
-        const data = await response.json();
-        return data;
+export function verifyOtp(phone, code) {
+    return async function(dispatch) {
+        const response = await csrfFetch('/api/otps/verify', {
+            method: 'POST',
+            body: JSON.stringify({phone, code})
+        });
+
+        return response;
     }
 }
 
