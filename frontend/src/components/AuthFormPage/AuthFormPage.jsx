@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import checkLogo from '../../images/check-logo.png'
+import PhoneInput from 'react-phone-number-input/input';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Modal from '../Modal/Modal';
 import ErrorPane from '../ErrorPane/ErrorPane';
@@ -21,6 +22,7 @@ export default function AuthFormPage(props) {
     const [errors, setErrors] = useState([]);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [emailEntry, setEmailEntry] = useState(true);
+    const [phone, setPhone] = useState('');
 
     const dispatch = useDispatch();
 
@@ -75,24 +77,43 @@ export default function AuthFormPage(props) {
                             <div className="form-fields">
                                 <span className='auth-element'>
                                     {mode === "login" ? "Login" : "Sign up"} with...
-                                    <br/><br/>
+                                    <br /><br />
                                     <div className="toggle-div" onClick={toggleEntry}>
-                                    <div id='emailToggle' className={`toggle-option ${emailEntry && 'toggled'}`}>
+                                        <div id='emailToggle' className={`toggle-option ${emailEntry && 'toggled'}`}>
                                             Email & Password</div>
                                         <div id='smsToggle' className={`toggle-option ${!emailEntry && 'toggled'}`}>SMS</div>
                                     </div>
                                 </span>
-                                <span className='auth-element'>
-                                    <label htmlFor='email'>EMAIL ADDRESS</label>
-                                    <input type='email' id='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                                </span>
-                                <span className='auth-element'>
-                                    <label htmlFor='password'>PASSWORD</label>
-                                    <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                                </span>
-                                <span className='auth-element'>
-                                    <button className='auth-button'>{mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
-                                </span>
+                                {emailEntry && <span>
+                                    <span className='auth-element'>
+                                        <label htmlFor='email'>EMAIL ADDRESS</label>
+                                        <input type='email' id='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    </span>
+                                    <span className='auth-element'>
+                                        <label htmlFor='password'>PASSWORD</label>
+                                        <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    </span>
+                                    <span className='auth-element'>
+                                        <button className='auth-button'>{mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
+                                    </span>
+                                </span>}
+                                {!emailEntry && <span>
+                                    <span className='auth-element'>
+                                        <label htmlFor='phone'>US PHONE NUMBER</label>
+                                        
+                                        <PhoneInput
+                                            id="phone"
+                                            value={phone}
+                                            onChange={setPhone}
+                                            defaultCountry="US"
+                                            countries={['US']} // Only allow the United States
+                                            placeholder="enter US phone number"
+                                        />
+                                    </span>
+                                    <span className='auth-element'>
+                                        <button className='auth-button'>{mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
+                                    </span>
+                                </span>}
                             </div>
                         </form>
                         <span className='auth-element'>
