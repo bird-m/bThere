@@ -20,6 +20,7 @@ export default function AuthFormPage(props) {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
     const [showErrorModal, setShowErrorModal] = useState(false);
+    const [emailEntry, setEmailEntry] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -53,6 +54,10 @@ export default function AuthFormPage(props) {
         })
     }
 
+    function toggleEntry(e) {
+        setEmailEntry((prev) => !prev)
+    }
+
     return (
         <div className="wrapper">
             {showErrorModal && <Modal closeModal={() => { setShowErrorModal(false) }} content={<ErrorPane errors={errors} closeModal={() => { setShowErrorModal(false) }} />} />}
@@ -70,6 +75,12 @@ export default function AuthFormPage(props) {
                             <div className="form-fields">
                                 <span className='auth-element'>
                                     {mode === "login" ? "Login" : "Sign up"} with...
+                                    <br/><br/>
+                                    <div className="toggle-div" onClick={toggleEntry}>
+                                    <div id='emailToggle' className={`toggle-option ${emailEntry && 'toggled'}`}>
+                                            Email & Password</div>
+                                        <div id='smsToggle' className={`toggle-option ${!emailEntry && 'toggled'}`}>SMS</div>
+                                    </div>
                                 </span>
                                 <span className='auth-element'>
                                     <label htmlFor='email'>EMAIL ADDRESS</label>

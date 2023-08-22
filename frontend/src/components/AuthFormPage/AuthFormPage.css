@@ -111,3 +111,42 @@
     margin-top: 20px;
     color: #e3414a;
   }
+
+  .toggle-div {
+    border: solid black 1px;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    border-radius: 2em;
+    font-weight: 100;
+  }
+
+  .toggle-option {
+    border-radius: 2em 0 0 2em; /* top-left and top-right corners rounded */
+    width: 50%;
+    text-align: center;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .toggle-option:hover {
+    cursor: pointer;
+  }
+
+  .toggled {
+    background-color: #45286B;
+    color: #E7E4EC;
+  }
+
+  .toggle-div .toggled:first-child {
+    /* Your styles for the first .selected-class element here */
+    border-radius: 2em 0 0 2em; /* top-left and top-right corners rounded */
+  }
+
+  .toggle-div .toggled:last-child {
+    /* Your styles for the first .selected-class element here */
+    border-radius: 0 2em 2em 0; /* top-left and top-right corners rounded */
+  }
