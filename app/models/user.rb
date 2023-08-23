@@ -3,21 +3,35 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
-#  email           :string           not null
-#  password_digest :string           not null
+#  email           :string
+#  password_digest :string
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  phone           :string
 #
 class User < ApplicationRecord
   has_secure_password
 
   before_validation :ensure_session_token
 
-  validates :email, :session_token, :password_digest, presence: true
+  # validates :email, :session_token, :password_digest, presence: true
+  validates :session_token, presence: true
+  validate :credential_present
+
   validates :email, :session_token, uniqueness: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
   validates :password, length: {minimum: 7}, allow_nil: true
+
+  def credential_present
+    if (email.blank? && phone.blank?)
+      errors.add(:base, "Either email or phone must be present")
+    elsif(email.present? && phone.present?)
+      errors.add(:base, "User cannot have both email and password")
+    elsif (email.present? && password.blank?)
+      errors.add(:base, "Password must be provided with email")
+    end
+  end
 
   has_many :forms,
     foreign_key: :user_id,
@@ -55,6 +69,10 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token ||= self.gen_session_token
+
+    if(phone.present?)
+      self.password = "1234567890"
+    end
   end
 
   def gen_session_token

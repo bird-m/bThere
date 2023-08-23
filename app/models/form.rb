@@ -9,7 +9,7 @@
 #  user_id     :bigint           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  custom_url  :string           not null
+#  custom_url  :string
 #  restricted  :boolean          default(FALSE)
 #
 class Form < ApplicationRecord

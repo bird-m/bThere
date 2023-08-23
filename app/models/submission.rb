@@ -6,9 +6,9 @@
 #  form_id    :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :string           not null
-#  name       :string           not null
-#  email      :string           not null
+#  status     :string           default("maybe"), not null
+#  name       :string           default("Doe"), not null
+#  email      :string           default("doe@unknown.com"), not null
 #
 class Submission < ApplicationRecord
 
