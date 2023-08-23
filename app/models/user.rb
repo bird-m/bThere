@@ -50,10 +50,19 @@ class User < ApplicationRecord
     inverse_of: :user,
     dependent: :destroy
 
-  def self.find_by_credentials(email, password)
-    user = User.find_by(email: email)
+  def self.find_by_credentials(email, password, phone, code)
     
-    if (user && user.authenticate(password))
+    user = nil;
+
+    if(email.present?)
+      user = User.find_by(email: email)
+    elsif (phone.present?)
+      user = User.find_by(phone: phone)
+    end
+    
+    if (user && user.email.present? && user.authenticate(password))
+      return user
+    elsif (user && user.phone.present? && user.verify_otp(code))
       return user
     else
       return nil
@@ -68,6 +77,27 @@ class User < ApplicationRecord
 
   def code=(code)
     @code = code
+  end
+
+  def verify_otp(check_code)
+    begin
+      debugger
+
+      client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
+
+      debugger
+
+      verification_check = client.verify
+      .v2
+      .services(ENV['twilio_bThere_verify_service_sid'])
+      .verification_checks
+      .create(to: phone, code: check_code)
+
+      debugger
+      return verification_check.status == 'approved'
+    rescue Twilio::REST::TwilioError => e
+      return false
+    end
   end
 
   private
@@ -91,7 +121,7 @@ class User < ApplicationRecord
   end
 
   def check_code
-    if(code.present? && !verify_otp)
+    if(code.present? && !verify_otp(code))
       errors.add(:base, "Invalid code")
     end
   end
@@ -101,27 +131,6 @@ class User < ApplicationRecord
       errors.add(:base, "Password must be provided with email")
     elsif (phone.present? && code.blank?)
       errors.add(:base, "Code must be provided with phone")
-    end
-  end
-
-  def verify_otp
-    begin
-      debugger
-
-      client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
-
-      debugger
-
-      verification_check = client.verify
-      .v2
-      .services(ENV['twilio_bThere_verify_service_sid'])
-      .verification_checks
-      .create(to: phone, code: code)
-
-      debugger
-      return verification_check.status == 'approved'
-    rescue Twilio::REST::TwilioError => e
-      return false
     end
   end
 

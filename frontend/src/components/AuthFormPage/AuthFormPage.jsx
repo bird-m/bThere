@@ -32,6 +32,7 @@ export default function AuthFormPage(props) {
     if (sessionUser) return <Redirect to="/forms" />;
 
     function handleSubmit(e) {
+        
         setErrors([]);
         // e.preventDefault(); 
         // console.log(mode, "MODE!");
@@ -44,23 +45,24 @@ export default function AuthFormPage(props) {
         }
 
         // if (!emailEntry && lastSubmittedPhone) {
-        //     debugger;
+        //     
         //     dispatch(verifyOtp(lastSubmittedPhone, code))
         // }
         
         if (!emailEntry && !phoneDisabled) { //this means that the user is not on the email entry page and since the phone is editable, they have not gotten a code yet in which case they should receive a code
-            // debugger;
+            
             dispatch(sendOtp(phone))
                 .then(getSubmittedPhone)
                 .catch(errorHandle);
         }
         // the remainder should be agnostic to email or phone login as we will give it all to them and let the model parse
         else if (mode === 'login') {
+            
             // console.log("attempting login");
-            dispatch(login(email, password)).catch(errorHandle)
+            dispatch(login(email, password, phone, code)).catch(errorHandle)
             // .catch((res) => res.json()).then((data) => {console.log(data)});
         } else if (mode === 'signup') {
-            debugger;
+            
             // console.log("attempting signup");
             dispatch(signup(email, password, phone, code)).catch(errorHandle);
         }

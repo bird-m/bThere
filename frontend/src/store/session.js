@@ -42,12 +42,12 @@ export function loggedInUser(state) {
 
 // thunk actions
 
-export function login(email, password) {
+export function login(email, password, phone, code) {
     return async function (dispatch) {
 
         const response = await csrfFetch('/api/session',{
             method: 'POST',
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password, phone, code})
         });
         // debugger
         const data = await response.json();

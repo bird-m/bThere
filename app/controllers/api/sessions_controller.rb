@@ -19,8 +19,12 @@ class Api::SessionsController < ApplicationController
     # debugger
     email = params[:email]
     password = params[:password]
+    phone = params[:phone]
+    code = params[:code]
 
-    @user = User.find_by_credentials(email, password)
+    debugger
+
+    @user = User.find_by_credentials(email, password, phone, code)
     
     if(@user)
       login!(@user)
