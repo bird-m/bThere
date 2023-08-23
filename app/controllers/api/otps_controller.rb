@@ -29,33 +29,33 @@ class Api::OtpsController < ApplicationController
     end
   end
 
-  def verify_otp
+  # def verify_otp
 
-    if params[:phone].length != 12
-      render json: { errors: ['Invalid phone number'] }, status: :unprocessable_entity
-      return
-    end
+  #   if params[:phone].length != 12
+  #     render json: { errors: ['Invalid phone number'] }, status: :unprocessable_entity
+  #     return
+  #   end
 
-    debugger
+  #   debugger
 
-    client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
+  #   client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
 
-    verification_check = client.verify
-    .v2
-    .services(ENV['twilio_bThere_verify_service_sid'])
-    .verification_checks
-    .create(to: params[:phone], code: params[:code])
+  #   verification_check = client.verify
+  #   .v2
+  #   .services(ENV['twilio_bThere_verify_service_sid'])
+  #   .verification_checks
+  #   .create(to: params[:phone], code: params[:code])
 
-    debugger
+  #   debugger
 
-    if verification_check.status == 'approved'
-      # we would create a new user here and log them in
-      debugger
-      render json: { message: 'OTP verification successful' }, status: :ok
-    else
-      render json: { errors: ['Code not recognized'] }, status: :unprocessable_entity
-    end
-  end
+  #   if verification_check.status == 'approved'
+  #     # we would create a new user here and log them in
+  #     debugger
+  #     render json: { message: 'OTP verification successful' }, status: :ok
+  #   else
+  #     render json: { errors: ['Code not recognized'] }, status: :unprocessable_entity
+  #   end
+  # end
 
   private
 

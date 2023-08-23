@@ -7,12 +7,16 @@ class Api::UsersController < ApplicationController
     email = params[:email]
     password = params[:password]
     phone = params[:phone]
+    code = params[:code]
 
     debugger
 
-    @user = User.new(email: email, password: password)
+    @user = User.new(email: email, password: password, phone: phone, code: code)
+
+    debugger
 
     if (@user.save)
+      debugger
       login!(@user)
       render 'api/users/show'
     else

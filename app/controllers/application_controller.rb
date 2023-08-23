@@ -16,6 +16,7 @@ class ApplicationController < ActionController::API
     end
 
     def login!(user)
+        debugger
         session[:session_token] = user.reset_session_token!
     end
 

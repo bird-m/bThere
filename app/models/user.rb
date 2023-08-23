@@ -13,14 +13,17 @@
 class User < ApplicationRecord
   has_secure_password
 
+  attr_reader :code
   before_validation :ensure_session_token
 
   # validates :email, :session_token, :password_digest, presence: true
   validates :session_token, presence: true
   validate :credential_present
+  validate :check_code, on: :create
+  validate :cred_provided, on: :create
 
   validates :email, :session_token, uniqueness: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
+  # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
   validates :password, length: {minimum: 7}, allow_nil: true
 
   def credential_present
@@ -28,8 +31,6 @@ class User < ApplicationRecord
       errors.add(:base, "Either email or phone must be present")
     elsif(email.present? && phone.present?)
       errors.add(:base, "User cannot have both email and password")
-    elsif (email.present? && password.blank?)
-      errors.add(:base, "Password must be provided with email")
     end
   end
 
@@ -65,6 +66,10 @@ class User < ApplicationRecord
     return self.session_token
   end
 
+  def code=(code)
+    @code = code
+  end
+
   private
 
   def ensure_session_token
@@ -83,6 +88,41 @@ class User < ApplicationRecord
     end
 
     return token
+  end
+
+  def check_code
+    if(code.present? && !verify_otp)
+      errors.add(:base, "Invalid code")
+    end
+  end
+
+  def cred_provided
+    if (email.present? && password.blank?)
+      errors.add(:base, "Password must be provided with email")
+    elsif (phone.present? && code.blank?)
+      errors.add(:base, "Code must be provided with phone")
+    end
+  end
+
+  def verify_otp
+    begin
+      debugger
+
+      client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
+
+      debugger
+
+      verification_check = client.verify
+      .v2
+      .services(ENV['twilio_bThere_verify_service_sid'])
+      .verification_checks
+      .create(to: phone, code: code)
+
+      debugger
+      return verification_check.status == 'approved'
+    rescue Twilio::REST::TwilioError => e
+      return false
+    end
   end
 
 end

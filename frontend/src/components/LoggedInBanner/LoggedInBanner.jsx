@@ -42,7 +42,7 @@ export function LoggedInBanner({ setTab }) {
             </div>
             <div className="ban-email">
 
-                {sessionUser.email}
+                {sessionUser.email || sessionUser.phone}
                 <span className="banner-logout">
                     <Link to="#" onClick={(e) => { handleClick(e) }} >Log Out</Link></span>
             </div>

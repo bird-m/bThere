@@ -25,6 +25,7 @@ export default function AuthFormPage(props) {
     const [phone, setPhone] = useState('');
     const [lastSubmittedPhone, setLastSubmittedPhone] = useState(false);
     const [code, setCode] = useState("");
+    const [phoneDisabled, setphoneDisabled] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -42,23 +43,26 @@ export default function AuthFormPage(props) {
             e.preventDefault();
         }
 
-        if (!emailEntry && lastSubmittedPhone) {
-            debugger;
-            dispatch(verifyOtp(lastSubmittedPhone, code))
-        }
-        else if (!emailEntry) {
+        // if (!emailEntry && lastSubmittedPhone) {
+        //     debugger;
+        //     dispatch(verifyOtp(lastSubmittedPhone, code))
+        // }
+        
+        if (!emailEntry && !phoneDisabled) { //this means that the user is not on the email entry page and since the phone is editable, they have not gotten a code yet in which case they should receive a code
             // debugger;
             dispatch(sendOtp(phone))
                 .then(getSubmittedPhone)
                 .catch(errorHandle);
         }
+        // the remainder should be agnostic to email or phone login as we will give it all to them and let the model parse
         else if (mode === 'login') {
             // console.log("attempting login");
             dispatch(login(email, password)).catch(errorHandle)
             // .catch((res) => res.json()).then((data) => {console.log(data)});
         } else if (mode === 'signup') {
+            debugger;
             // console.log("attempting signup");
-            dispatch(signup(email, password, phone)).catch(errorHandle);
+            dispatch(signup(email, password, phone, code)).catch(errorHandle);
         }
 
     }
@@ -67,6 +71,7 @@ export default function AuthFormPage(props) {
         res.json().then(data => {
             console.log(data, 'DATA!')
             setLastSubmittedPhone(data['phone']);
+            setphoneDisabled(true);
         })
     }
 
@@ -84,6 +89,7 @@ export default function AuthFormPage(props) {
             if(toEmail) {
                 setLastSubmittedPhone(false);
                 setPhone('');
+                setphoneDisabled(false);
             }
 
             return toEmail;
@@ -138,6 +144,7 @@ export default function AuthFormPage(props) {
                                             defaultCountry="US"
                                             countries={['US']} // Only allow the United States
                                             placeholder="enter US phone number"
+                                            disabled={phoneDisabled}
                                         />
                                     </span>
                                     {lastSubmittedPhone &&
