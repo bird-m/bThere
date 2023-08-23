@@ -14,18 +14,22 @@ class Api::OtpsController < ApplicationController
     #   return
     # end
 
-    client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
+    begin
+      client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
 
-    verification = client.verify
-    .v2
-    .services(ENV['twilio_bThere_verify_service_sid'])
-    .verifications
-    .create(to: params[:phone], channel: 'sms')
+      verification = client.verify
+      .v2
+      .services(ENV['twilio_bThere_verify_service_sid'])
+      .verifications
+      .create(to: params[:phone], channel: 'sms')
 
-    if verification.status == 'pending'
-      render json: { phone: params[:phone] }, status: :ok
-    else
-      render json: { errors: ['Twilio SMS service error'] }, status: :unprocessable_entity
+      if verification.status == 'pending'
+        render json: { phone: params[:phone] }, status: :ok
+      else
+        render json: { errors: ['Twilio SMS service error'] }, status: :unprocessable_entity
+      end
+    rescue StandardError => e
+      render json: { errors: ["The text message service provider (Twilio) was unable to process the request"] }, status: :unprocessable_entity
     end
   end
 

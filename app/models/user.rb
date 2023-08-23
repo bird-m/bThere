@@ -19,12 +19,16 @@ class User < ApplicationRecord
   # validates :email, :session_token, :password_digest, presence: true
   validates :session_token, presence: true
   validate :credential_present
-  validate :check_code, on: :create
   validate :cred_provided, on: :create
-
-  validates :email, :session_token, uniqueness: true
-  # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
+  
+  validates :session_token, uniqueness: true
+  validates :email, uniqueness: true, if: -> { email.present? }
+  validates :phone, uniqueness: true, if: -> { phone.present? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :password, length: {minimum: 7}, allow_nil: true
+  
+  # want the code to be checked last
+  validate :check_code, on: :create
 
   def credential_present
     if (email.blank? && phone.blank?)
@@ -81,11 +85,11 @@ class User < ApplicationRecord
 
   def verify_otp(check_code)
     begin
-      debugger
+      # debugger
 
       client = Twilio::REST::Client.new(ENV['twilio_account_sid'], ENV['twilio_auth_token'])
 
-      debugger
+      # debugger
 
       verification_check = client.verify
       .v2
@@ -93,9 +97,9 @@ class User < ApplicationRecord
       .verification_checks
       .create(to: phone, code: check_code)
 
-      debugger
+      # debugger
       return verification_check.status == 'approved'
-    rescue Twilio::REST::TwilioError => e
+    rescue StandardError => e
       return false
     end
   end
@@ -121,7 +125,9 @@ class User < ApplicationRecord
   end
 
   def check_code
-    if(code.present? && !verify_otp(code))
+    # debugger
+    return unless errors.empty?
+    if(phone.present? && code.present? && !verify_otp(code))
       errors.add(:base, "Invalid code")
     end
   end

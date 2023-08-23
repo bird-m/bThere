@@ -22,7 +22,7 @@ class Api::SessionsController < ApplicationController
     phone = params[:phone]
     code = params[:code]
 
-    debugger
+    # debugger
 
     @user = User.find_by_credentials(email, password, phone, code)
     

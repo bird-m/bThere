@@ -91,6 +91,7 @@ export default function AuthFormPage(props) {
             if(toEmail) {
                 setLastSubmittedPhone(false);
                 setPhone('');
+                setCode('');
                 setphoneDisabled(false);
             }
 
