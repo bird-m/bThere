@@ -102,12 +102,12 @@ export function signup (email, password, phone, code) {
     }
 }
 
-export function sendOtp(phone) {
+export function sendOtp(phone, signup) {
     return async function(dispatch) {
         console.log(phone, "THIS IS PHONE");
         const response = await csrfFetch('/api/otps/send', {
             method: 'POST',
-            body: JSON.stringify({phone})
+            body: JSON.stringify({phone, signup})
         });
         return response;
     }

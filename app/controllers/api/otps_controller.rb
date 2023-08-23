@@ -7,6 +7,12 @@ class Api::OtpsController < ApplicationController
     if params[:phone].length != 12
       render json: { errors: ['Invalid phone number'] }, status: :unprocessable_entity
       return
+    elsif (params[:signup] && User.find_by(phone: params[:phone]))
+      render json: { errors: ['Phone number already taken'] }, status: :unprocessable_entity
+      return
+    elsif(!params[:signup] && !User.find_by(phone: params[:phone]))
+      render json: { errors: ['No account exists with that phone number'] }, status: :unprocessable_entity
+      return
     end
 
     # if true
@@ -29,6 +35,7 @@ class Api::OtpsController < ApplicationController
         render json: { errors: ['Twilio SMS service error'] }, status: :unprocessable_entity
       end
     rescue StandardError => e
+      puts e.message
       render json: { errors: ["The text message service provider (Twilio) was unable to process the request"] }, status: :unprocessable_entity
     end
   end

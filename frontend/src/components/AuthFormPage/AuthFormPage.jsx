@@ -51,7 +51,7 @@ export default function AuthFormPage(props) {
         
         if (!emailEntry && !phoneDisabled) { //this means that the user is not on the email entry page and since the phone is editable, they have not gotten a code yet in which case they should receive a code
             
-            dispatch(sendOtp(phone))
+            dispatch(sendOtp(phone, mode === 'signup'))
                 .then(getSubmittedPhone)
                 .catch(errorHandle);
         }
