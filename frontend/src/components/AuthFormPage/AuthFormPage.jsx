@@ -99,6 +99,14 @@ export default function AuthFormPage(props) {
         })
     }
 
+    function actionButton() {
+        if (!emailEntry && !phoneDisabled) {
+            return (`TEXT ME A ${mode === 'login' ? "LOGIN" : "SIGNUP"} CODE`)
+        } else {
+            return (mode === "login" ? "SIGN IN" : "SIGN UP")
+        }
+    }
+
     return (
         <div className="wrapper">
             {showErrorModal && <Modal closeModal={() => { setShowErrorModal(false) }} content={<ErrorPane errors={errors} closeModal={() => { setShowErrorModal(false) }} />} />}
@@ -109,7 +117,7 @@ export default function AuthFormPage(props) {
                         <span className='cta'>
                             {mode === "login" ? "Sign in to your account" : "Sign up to create your event."}
                         </span> <br />
-                        {mode === "login" ? <a href='/signup'>Or sign up here</a> : ""}
+                        {mode === "login" ? <span>Don't have an account? <a href='/signup'>Sign up here</a></span>  : <span>Already have an account? <a href='/login'>Login here</a></span>}
                     </div>
                     <div className="auth-form">
                         <form onSubmit={handleSubmit} >
@@ -119,7 +127,7 @@ export default function AuthFormPage(props) {
                                     <br /><br />
                                     <div className="toggle-div" onClick={toggleEntry}>
                                         <div id='emailToggle' className={`toggle-option ${emailEntry && 'toggled'}`}>
-                                            Email & Password</div>
+                                            EMAIL & PASSWORD</div>
                                         <div id='smsToggle' className={`toggle-option ${!emailEntry && 'toggled'}`}>SMS</div>
                                     </div>
                                 </span>
@@ -152,13 +160,12 @@ export default function AuthFormPage(props) {
                                     </span>
                                     {lastSubmittedPhone &&
                                         <span className='auth-element'>
-                                            <label htmlFor="otp">ENTER CODE:</label>
-
+                                            <label htmlFor="otp">ENTER THE CODE WE TEXTED YOU:</label>
                                             <input required type="text" id="otp" name="otp" placeholder="e.g., 123456" value={code} onChange={(e) => {setCode(e.target.value)}}/>
                                         </span>
                                     }
                                     <span className='auth-element'>
-                                        <button className='auth-button'>{mode === "login" ? "SIGN IN" : "SIGN UP"}</button>
+                                        <button className='auth-button'>{actionButton()}</button>
                                     </span>
                                 </span>
 
